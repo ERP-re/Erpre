@@ -1,9 +1,20 @@
 header { background-color: #0058A3; padding: 14px; color: white; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); position: relative; flex-shrink: 0; padding: 13px 18px; } 
-.header-container { display: flex; justify-content: space-between; align-items: center; margin: 0 auto; margin-right: 30px; } 
+.header-container { display: flex; justify-content: space-between; align-items: center; margin: 0 auto; margin-right: 15px; }
 .logo a { display: flex; font-size: 14px; display: flex; align-items: flex-end; color: #fbd914; gap: 5px; letter-spacing: -0.1px; } 
 .logo img { height: 23px; transition: transform 0.3s ease; } 
-.logo img:hover { transform: scale(1.05); } 
-.header-right { display: flex; align-items: center; gap: 15px; } 
+.logo img:hover { transform: scale(1.05); }
+/* 상단 아이콘 */
+.header-icons { display: flex; gap: 28px; }
+.header-icon { font-size: 28px; cursor:pointer; transition: color 0.3s ease;}
+.header-icon:hover { color: rgb(251, 217, 20); }
+.header-right { display: flex; align-items: center; gap: 15px; }
+/* 메신저 슬라이드 패널*/
+.messenger-panel { position: fixed; top: 0; right: -300px; width: 300px; height: 100%; background-color:#fff; box-shadow: -2px  0 5px rgba(0, 0, 0, 0.2); transition: right 0.3s ease; z-index: 1000; }
+.messenger-panel.open { right: 0; }
+.messenger-header { height: 53.98px; display: flex; justify-content: center; align-items: center; padding: 10px; background-color: #0058a3; color: #fff; position: relative;}
+.messenger-header .messenger-close { position: absolute; right: 20px; cursor: pointer; color: #fff; font-size: 20px;}
+.messenger-content { padding: 10px; overflow-y: auto; height: calc(100% - 50px)}
+/**/
 .notifications { position: relative; display: none; } 
 .profile { display: flex; align-items: flex-start; flex-direction: column; display: none; } 
 .profile-pic { width: 40px; height: 40px; border-radius: 50%; border: 2px solid #ffcc00; transition: border-color 0.3s ease; } 
