@@ -107,3 +107,69 @@ create table m_employee (
     employee_delete_date   timestamp        null,     -- 삭제 일시
     primary key (employee_id) -- 기본 키 설정
 );
+
+-- 8. 쪽지 (발신)
+CREATE TABLE "m_message" (
+    "message_no" SERIAL PRIMARY KEY,
+    "message_sender_id" VARCHAR(50) NOT NULL REFERENCES "m_employee" ("employee_id"),
+    "message_content" TEXT NOT NULL,
+    "message_send_date" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "message_update_date" TIMESTAMP,
+    "message_delete_yn" VARCHAR(10) NOT NULL DEFAULT 'n',
+    "message_delete_date" TIMESTAMP,
+    "message_recall_yn" VARCHAR(10) NOT NULL DEFAULT 'n',
+    "message_recall_date" TIMESTAMP
+);
+
+-- 9. 쪽지 수신
+CREATE TABLE "m_message_recipient" (
+    "message_no" INT NOT NULL REFERENCES "m_message" ("message_no"),
+    "recipient_id" VARCHAR(50) NOT NULL REFERENCES "m_employee" ("employee_id"),
+    "recipient_read_yn" VARCHAR(10) NOT NULL DEFAULT 'n',
+    "recipient_read_date" TIMESTAMP,
+    "recipient_delete_yn" VARCHAR(10) NOT NULL DEFAULT 'n',
+    "recipient_delete_date" TIMESTAMP,
+    PRIMARY KEY ("message_no", "recipient_id")
+);
+
+-- 10. 채팅방
+CREATE TABLE "m_chat" (
+    "chat_no" SERIAL PRIMARY KEY,
+    "chat_create_id" VARCHAR(50) NOT NULL REFERENCES "m_employee" ("employee_id"),
+    "chat_title" VARCHAR(50) NOT NULL,
+    "chat_create_date" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "chat_update_date" TIMESTAMP,
+    "chat_delete_yn" VARCHAR(10) NOT NULL DEFAULT 'n',
+    "chat_delete_date" TIMESTAMP
+);
+
+-- 11. 채팅방 참여자
+CREATE TABLE "m_chat_participant" (
+    "chat_no" INT NOT NULL REFERENCES "m_chat" ("chat_no"),
+    "participant_id" VARCHAR(50) NOT NULL REFERENCES "m_employee" ("employee_id"),
+    "participant_join_date" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "participant_delete_yn" VARCHAR(10) NOT NULL DEFAULT 'n',
+    "participant_delete_date" TIMESTAMP,
+    "participant_exit_date" TIMESTAMP,
+    PRIMARY KEY ("chat_no", "participant_id")
+);
+
+-- 12. 채팅 메세지 (발신)
+CREATE TABLE "m_chat_message" (
+    "chat_message_no" SERIAL PRIMARY KEY,
+    "chat_no" INT NOT NULL REFERENCES "m_chat" ("chat_no"),
+    "chat_sender_id" VARCHAR(50) NOT NULL REFERENCES "m_employee" ("employee_id"),
+    "chat_message_content" TEXT NOT NULL,
+    "chat_send_date" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "chat_message_delete_yn" VARCHAR(10) NOT NULL DEFAULT 'n',
+    "chat_message_delete_date" TIMESTAMP
+);
+
+-- 13. 채팅 메세지 수신
+CREATE TABLE "m_chat_message_read" (
+    "chat_message_no" INT NOT NULL REFERENCES "m_chat_message" ("chat_message_no"),
+    "chat_message_recipient_id" VARCHAR(50) NOT NULL REFERENCES "m_employee" ("employee_id"),
+    "chat_message_read_yn" VARCHAR(10) NOT NULL DEFAULT 'n',
+    "chat_message_read_date" TIMESTAMP,
+    PRIMARY KEY ("chat_message_no", "chat_message_recipient_id")
+);
