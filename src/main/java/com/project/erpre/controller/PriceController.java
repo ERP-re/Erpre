@@ -1,7 +1,7 @@
 package com.project.erpre.controller;
 
-import com.project.erpre.model.Price;
-import com.project.erpre.model.PriceDTO;
+import com.project.erpre.model.entity.Price;
+import com.project.erpre.model.dto.PriceDTO;
 import com.project.erpre.service.PriceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,9 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/price")

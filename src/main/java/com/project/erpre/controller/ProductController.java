@@ -1,8 +1,7 @@
 package com.project.erpre.controller;
 
-import com.project.erpre.model.CategoryDTO;
-import com.project.erpre.model.ProductDTO;
-import com.project.erpre.repository.ProductRepositoryImpl;
+import com.project.erpre.model.dto.CategoryDTO;
+import com.project.erpre.model.dto.ProductDTO;
 import com.project.erpre.service.CategoryService;
 import com.project.erpre.service.ProductService;
 import org.slf4j.Logger;
@@ -13,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.transaction.Transactional;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;

@@ -1,11 +1,10 @@
 package com.project.erpre.service;
-import com.project.erpre.model.Category;
-import com.project.erpre.model.CategoryDTO;
-import com.project.erpre.model.Product;
-import com.project.erpre.model.ProductDTO;
+import com.project.erpre.model.entity.Category;
+import com.project.erpre.model.dto.CategoryDTO;
+import com.project.erpre.model.entity.Product;
+import com.project.erpre.model.dto.ProductDTO;
 import com.project.erpre.repository.CategoryRepository;
 import com.project.erpre.repository.ProductRepository;
-import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -17,9 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class ProductService {

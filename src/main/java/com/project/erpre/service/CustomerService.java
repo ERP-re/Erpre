@@ -1,13 +1,12 @@
 package com.project.erpre.service;
 
-import com.project.erpre.model.Customer;
-import com.project.erpre.model.CustomerDTO;
+import com.project.erpre.model.entity.Customer;
+import com.project.erpre.model.dto.CustomerDTO;
 import com.project.erpre.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 

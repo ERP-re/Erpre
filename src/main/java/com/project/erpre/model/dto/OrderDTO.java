@@ -1,8 +1,10 @@
-package com.project.erpre.model;
+package com.project.erpre.model.dto;
 
+import com.project.erpre.model.entity.Customer;
+import com.project.erpre.model.entity.Employee;
+import com.project.erpre.model.entity.Product;
 import lombok.*;
 
-import javax.persistence.Column;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;

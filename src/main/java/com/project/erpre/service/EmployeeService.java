@@ -1,7 +1,7 @@
 package com.project.erpre.service;
 
-import com.project.erpre.model.Employee;
-import com.project.erpre.model.EmployeeDTO;
+import com.project.erpre.model.entity.Employee;
+import com.project.erpre.model.dto.EmployeeDTO;
 import com.project.erpre.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,8 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service

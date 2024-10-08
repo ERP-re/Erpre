@@ -1,6 +1,6 @@
 package com.project.erpre.repository;
 
-import com.project.erpre.model.ProductDTO;
+import com.project.erpre.model.dto.ProductDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

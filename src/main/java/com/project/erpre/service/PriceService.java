@@ -1,7 +1,7 @@
 package com.project.erpre.service;
 
-import com.project.erpre.model.Price;
-import com.project.erpre.model.PriceDTO;
+import com.project.erpre.model.entity.Price;
+import com.project.erpre.model.dto.PriceDTO;
 import com.project.erpre.repository.CustomerRepository;
 import com.project.erpre.repository.PriceRepository;
 import com.project.erpre.repository.ProductRepository;

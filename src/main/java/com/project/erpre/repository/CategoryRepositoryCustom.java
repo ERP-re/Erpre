@@ -1,6 +1,6 @@
 package com.project.erpre.repository;
 
-import com.project.erpre.model.CategoryDTO;
+import com.project.erpre.model.dto.CategoryDTO;
 
 import java.util.List;
 

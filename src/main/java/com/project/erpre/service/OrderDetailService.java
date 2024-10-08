@@ -1,9 +1,8 @@
 package com.project.erpre.service;
 
-import com.project.erpre.model.Order;
-import com.project.erpre.model.OrderDetail;
-import com.project.erpre.model.OrderDetailDTO;
-import com.project.erpre.model.Product;
+import com.project.erpre.model.entity.Order;
+import com.project.erpre.model.entity.OrderDetail;
+import com.project.erpre.model.dto.OrderDetailDTO;
 import com.project.erpre.repository.OrderDetailRepository;
 import com.project.erpre.repository.OrderRepository;
 import com.project.erpre.repository.ProductRepository;
