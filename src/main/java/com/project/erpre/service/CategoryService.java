@@ -1,13 +1,12 @@
 package com.project.erpre.service;
 
 import com.project.erpre.controller.CategoryController;
-import com.project.erpre.model.Category;
-import com.project.erpre.model.CategoryDTO;
+import com.project.erpre.model.entity.Category;
+import com.project.erpre.model.dto.CategoryDTO;
 import com.project.erpre.repository.CategoryRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;

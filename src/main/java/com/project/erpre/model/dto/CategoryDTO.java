@@ -1,10 +1,8 @@
-package com.project.erpre.model;
+package com.project.erpre.model.dto;
 
 import lombok.*;
 
-import javax.persistence.Column;
 import java.sql.Timestamp;
-import java.util.List;
 
 @Data
 @AllArgsConstructor

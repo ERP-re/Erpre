@@ -1,6 +1,6 @@
 package com.project.erpre.controller;
-import com.project.erpre.model.Category;
-import com.project.erpre.model.CategoryDTO;
+import com.project.erpre.model.entity.Category;
+import com.project.erpre.model.dto.CategoryDTO;
 import com.project.erpre.service.CategoryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

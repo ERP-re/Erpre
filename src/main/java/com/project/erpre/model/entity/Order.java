@@ -1,10 +1,5 @@
-package com.project.erpre.model;
+package com.project.erpre.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.project.erpre.model.Customer;
-import com.project.erpre.model.Employee;
 import lombok.*;
 
 import javax.persistence.*;

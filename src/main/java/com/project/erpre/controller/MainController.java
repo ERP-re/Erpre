@@ -1,6 +1,6 @@
 package com.project.erpre.controller;
 
-import com.project.erpre.model.Employee;
+import com.project.erpre.model.entity.Employee;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

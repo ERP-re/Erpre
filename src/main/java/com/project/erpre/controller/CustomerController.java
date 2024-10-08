@@ -1,6 +1,6 @@
 package com.project.erpre.controller;
 
-import com.project.erpre.model.Customer;
+import com.project.erpre.model.entity.Customer;
 import com.project.erpre.service.CustomerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

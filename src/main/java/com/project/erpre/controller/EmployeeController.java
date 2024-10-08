@@ -1,7 +1,7 @@
 package com.project.erpre.controller;
 
-import com.project.erpre.model.Employee;
-import com.project.erpre.model.EmployeeDTO;
+import com.project.erpre.model.entity.Employee;
+import com.project.erpre.model.dto.EmployeeDTO;
 import com.project.erpre.repository.EmployeeRepository;
 import com.project.erpre.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

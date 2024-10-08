@@ -1,7 +1,7 @@
 package com.project.erpre.repository;
 
 import com.project.erpre.model.*;
-import com.project.erpre.service.ProductService;
+import com.project.erpre.model.dto.ProductDTO;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.OrderSpecifier;
@@ -15,7 +15,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
-import java.math.BigDecimal;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;

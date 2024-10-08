@@ -1,6 +1,8 @@
 package com.project.erpre.controller;
 
-import com.project.erpre.model.*;
+import com.project.erpre.model.dto.OrderDTO;
+import com.project.erpre.model.dto.OrderDetailDTO;
+import com.project.erpre.model.entity.*;
 import com.project.erpre.repository.CustomerRepository;
 import com.project.erpre.repository.EmployeeRepository;
 import com.project.erpre.service.OrderService;

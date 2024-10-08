@@ -1,13 +1,11 @@
-package com.project.erpre.model;
+package com.project.erpre.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
 import java.sql.Timestamp;
-import java.util.List;
 
 @Data
 @AllArgsConstructor

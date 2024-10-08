@@ -1,4 +1,4 @@
-package com.project.erpre.model;
+package com.project.erpre.model.dto;
 
 import lombok.*;
 
