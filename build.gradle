@@ -49,6 +49,10 @@ dependencies {
 	//쿼리DSL
 	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
 	implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
+	// Spring Security 5버전 (Spring Boot 2버전)
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5' // 타임리프에서 사용
+	testImplementation 'org.springframework.security:spring-security-test' // 테스트
 }
 
 tasks.named('test') {
