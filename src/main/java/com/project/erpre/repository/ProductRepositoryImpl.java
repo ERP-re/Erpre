@@ -1,7 +1,9 @@
 package com.project.erpre.repository;
 
-import com.project.erpre.model.*;
 import com.project.erpre.model.dto.ProductDTO;
+import com.project.erpre.model.entity.QCategory;
+import com.project.erpre.model.entity.QPrice;
+import com.project.erpre.model.entity.QProduct;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.OrderSpecifier;
@@ -22,12 +24,12 @@ import java.util.Arrays;
 import java.util.List;
 import javax.persistence.EntityManager;
 
-import static com.project.erpre.model.QCategory.category;
-import static com.project.erpre.model.QCustomer.customer;
-import static com.project.erpre.model.QEmployee.employee;
-import static com.project.erpre.model.QOrder.order;
-import static com.project.erpre.model.QOrderDetail.orderDetail;
-import static com.project.erpre.model.QProduct.product;
+import static com.project.erpre.model.entity.QCategory.category;
+import static com.project.erpre.model.entity.QCustomer.customer;
+import static com.project.erpre.model.entity.QEmployee.employee;
+import static com.project.erpre.model.entity.QOrder.order;
+import static com.project.erpre.model.entity.QOrderDetail.orderDetail;
+import static com.project.erpre.model.entity.QProduct.product;
 
 public class ProductRepositoryImpl implements ProductRepositoryCustom {
 

@@ -1,7 +1,7 @@
 package com.project.erpre.repository;
 
 import com.project.erpre.model.dto.CategoryDTO;
-import com.project.erpre.model.QCategory;
+import com.project.erpre.model.entity.QCategory;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
