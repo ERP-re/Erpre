@@ -19,7 +19,6 @@ function Login() {
             };
             document.body.appendChild(script);
         };
-
         loadRecaptchaScript();
     }, []);
 
@@ -41,21 +40,20 @@ function Login() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ employeeId: id, employeePw: pw }),
-                credentials: 'include'  // 쿠키를 서버에 전송
             });
 
             console.log('Response status:', response.status); // 디버깅용 로그
 
             const result = await response.json();
 
-            if (response.ok) {
-                console.log('Login successful:', result); // 디버깅용 로그
-                // 현재 시간 저장
-                localStorage.setItem('loginTime', new Date().toLocaleString());
+            if (response.ok && result.token) {
+                console.log('Login successful:', result); // 디버깅용 로그;
+                localStorage.setItem('token', result.token); // JWT 토큰 저장
+                localStorage.setItem('issuedAt', result.issuedAt);
+                localStorage.setItem('expiration', result.expiration);
                 location.href = "/main";
             } else {
-                console.log('Login failed:', result); // 디버깅용 로그
-                setError(result.message || '로그인에 실패했습니다.');
+                setError(result || '로그인에 실패했습니다.');
             }
         } catch (err) {
             console.error('로그인 중 오류 발생:', err);
@@ -68,7 +66,7 @@ function Login() {
             <div className="login-box">
                 <div className="login-header">
                     <img src="/img/logo3.png" alt="IKEA 로고" className="logo" />
-                    <h1>IKEA ERP 관리자 시스템</h1>
+                    <h1>ERPRE ERP 관리자 시스템</h1>
                 </div>
                 <form className="login-form" onSubmit={handleLogin}>
                     <div className="input-group">
@@ -103,8 +101,8 @@ function Login() {
                 </form>
                 <div className="login-footer">
                     <a href="#">비밀번호 초기화</a> | <a href="#">2단계 인증 안내</a>
-                    <p>본 시스템은 IKEA의 자산으로 인가된 사용자만 접근 가능합니다.</p>
-                    <p>COPYRIGHT © IKEA. ALL RIGHTS RESERVED.</p>
+                    <p>본 시스템은 ERPRE의 자산으로 인가된 사용자만 접근 가능합니다.</p>
+                    <p>COPYRIGHT © ERPRE. ALL RIGHTS RESERVED.</p>
                 </div>
             </div>
         </div>

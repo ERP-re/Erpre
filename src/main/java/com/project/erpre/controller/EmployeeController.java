@@ -25,30 +25,30 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    // 로그인 엔드포인트
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Map<String, String> loginRequest, HttpSession session) {
-        String employeeId = loginRequest.get("employeeId");
-        String employeePw = loginRequest.get("employeePw");
-
-        // 리캡차 응답을 받지만 검증하지 않음
-        String recaptchaResponse = loginRequest.get("recaptchaResponse");
-        // 아이디와 비밀번호 검증
-        Employee employee = employeeRepository.findByEmployeeIdAndEmployeePw(employeeId, employeePw).orElse(null);
-
-        if (employee != null) {
-            session.setAttribute("employee", employee);
-
-            // 로그인 성공 시 사용자 정보와 함께 응답
-            Map<String, Object> response = new HashMap<>();
-            response.put("message", "로그인 성공");
-            response.put("employee", employee); // 사용자 정보 포함
-
-            return ResponseEntity.ok(response);
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "아이디 또는 비밀번호가 올바르지 않습니다."));
-        }
-    }
+//    // 로그인 엔드포인트
+//    @PostMapping("/login")
+//    public ResponseEntity<?> login(@RequestBody Map<String, String> loginRequest, HttpSession session) {
+//        String employeeId = loginRequest.get("employeeId");
+//        String employeePw = loginRequest.get("employeePw");
+//
+//        // 리캡차 응답을 받지만 검증하지 않음
+//        String recaptchaResponse = loginRequest.get("recaptchaResponse");
+//        // 아이디와 비밀번호 검증
+//        Employee employee = employeeRepository.findByEmployeeIdAndEmployeePw(employeeId, employeePw).orElse(null);
+//
+//        if (employee != null) {
+//            session.setAttribute("employee", employee);
+//
+//            // 로그인 성공 시 사용자 정보와 함께 응답
+//            Map<String, Object> response = new HashMap<>();
+//            response.put("message", "로그인 성공");
+//            response.put("employee", employee); // 사용자 정보 포함
+//
+//            return ResponseEntity.ok(response);
+//        } else {
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "아이디 또는 비밀번호가 올바르지 않습니다."));
+//        }
+//    }
 
     // 로그아웃 엔드포인트
     @PostMapping("/logout")

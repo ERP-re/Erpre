@@ -1,14 +1,14 @@
 /* src/main/resources/static/css/common/Layout.css */
 /* 🔴 폰트 */
-@font-face { font-family: 'Pretendard'; font-weight: 100; font-style: normal; src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Thin.woff') format('woff'); font-display: swap; } 
-@font-face { font-family: 'Pretendard'; font-weight: 200; font-style: normal; src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-ExtraLight.woff') format('woff'); font-display: swap; } 
-@font-face { font-family: 'Pretendard'; font-weight: 300; font-style: normal; src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Light.woff') format('woff'); font-display: swap; } 
-@font-face { font-family: 'Pretendard'; font-weight: 400; font-style: normal; src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Regular.woff') format('woff'); font-display: swap; } 
-@font-face { font-family: 'Pretendard'; font-weight: 500; font-style: normal; src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Medium.woff') format('woff'); font-display: swap; } 
-@font-face { font-family: 'Pretendard'; font-weight: 600; font-style: normal; src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-SemiBold.woff') format('woff'); font-display: swap; } 
-@font-face { font-family: 'Pretendard'; font-weight: 700; font-style: normal; src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Bold.woff') format('woff'); font-display: swap; } 
-@font-face { font-family: 'Pretendard'; font-weight: 800; font-style: normal; src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-ExtraBold.woff') format('woff'); font-display: swap; } 
-@font-face { font-family: 'Pretendard'; font-weight: 900; font-style: normal; src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Black.woff') format('woff'); font-display: swap; } 
+@font-face { font-family: 'Pretendard'; font-weight: 100; font-style: normal; src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Thin.woff') format('woff'); font-display: swap; }
+@font-face { font-family: 'Pretendard'; font-weight: 200; font-style: normal; src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-ExtraLight.woff') format('woff'); font-display: swap; }
+@font-face { font-family: 'Pretendard'; font-weight: 300; font-style: normal; src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Light.woff') format('woff'); font-display: swap; }
+@font-face { font-family: 'Pretendard'; font-weight: 400; font-style: normal; src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff'); font-display: swap; }
+@font-face { font-family: 'Pretendard'; font-weight: 500; font-style: normal; src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Medium.woff') format('woff'); font-display: swap; }
+@font-face { font-family: 'Pretendard'; font-weight: 600; font-style: normal; src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-SemiBold.woff') format('woff'); font-display: swap; }
+@font-face { font-family: 'Pretendard'; font-weight: 700; font-style: normal; src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff') format('woff'); font-display: swap; }
+@font-face { font-family: 'Pretendard'; font-weight: 800; font-style: normal; src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-ExtraBold.woff') format('woff'); font-display: swap; }
+@font-face { font-family: 'Pretendard'; font-weight: 900; font-style: normal; src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Black.woff') format('woff'); font-display: swap; }
 /* 🔴 css 초기화 */
 html, body { font-family: "Pretendard", sans-serif; height: 100%; margin: 0; padding: 0; overflow: hidden; /* body에서 스크롤이 생기지 않도록 설정 */ } 
 * { margin: 0; padding: 0; box-sizing: border-box; } 
