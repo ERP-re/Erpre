@@ -1,4 +1,4 @@
-# ERP 시스템123
+# ERP 시스템
 
 ## Release Notes
 
