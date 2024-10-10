@@ -12,19 +12,13 @@ import javax.servlet.http.HttpSession;
 public class MainController {
 
     @GetMapping("/")
-    public String home(HttpSession session) {
-        if (session.getAttribute("employee") == null) {
-            return "login";
-        }
-        return "redirect:/main";
+    public String home() {
+        return "login";
     }
 
-    @GetMapping("/login")
-    public String login(HttpSession session) {
-        if (session.getAttribute("employee") != null) {
-            return "redirect:/main";
-        }
-        return "login";
+    @GetMapping("/main")
+    public String main() {
+        return "main";
     }
 
     @GetMapping("/{pageName}")
