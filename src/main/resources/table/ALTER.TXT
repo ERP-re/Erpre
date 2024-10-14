@@ -31,3 +31,25 @@ ALTER TABLE m_order_d
 ADD CONSTRAINT fk_product_cd
 FOREIGN KEY (product_cd) REFERENCES m_product(product_cd);
 
+-- department_id와 job_id 칼럼을 추가
+ALTER TABLE m_employee
+ADD COLUMN department_id integer NOT NULL,  -- 부서 ID 추가 (NOT NULL)
+ADD COLUMN job_id integer NOT NULL;         -- 직급 ID 추가 (NOT NULL)
+
+-- 직급 추가로 인한 직원권한칼럼 삭제
+ALTER TABLE m_employee
+DROP COLUMN employee_role;
+
+-- department_id 칼럼에 외래키 제약조건 추가
+ALTER TABLE m_employee
+ADD CONSTRAINT fk_employee_department
+FOREIGN KEY (department_id) REFERENCES m_department(department_id);
+
+
+-- job_id 칼럼에 외래키 제약조건 추가
+ALTER TABLE m_employee
+ADD CONSTRAINT fk_employee_job
+FOREIGN KEY (job_id) REFERENCES m_job(job_id);
+
+
+
