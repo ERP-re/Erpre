@@ -42,7 +42,7 @@ public class Email {
     private String emailStatus = "nr";
 
     // 첨부파일 리스트
-    @OneToMany(mappedBy= "email", cascade = CascadeType.ALL, orphanRemoval = true) // 이메일 삭제 시 첨부파일 삭제
+    @OneToMany(mappedBy= "emailNm", cascade = CascadeType.ALL, orphanRemoval = true) // 이메일 삭제 시 첨부파일 삭제
     private List<EmailFile> emailFile;
 
 

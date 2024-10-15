@@ -58,18 +58,18 @@ public class Employee {
     @JsonIgnore
     private List<Order> order;
 
-    //이메일
-    //발신된 이메일
-    @ToString.Exclude
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<Email> sentEmail; // 직원이 발신한 이메일 목록
-
-    //수신된 이메일
-    @ToString.Exclude
-    @OneToMany(mappedBy = "recipient", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<Email> receivedEmail;
+//    //이메일
+//    //발신된 이메일
+//    @ToString.Exclude
+//    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+//    @JsonIgnore
+//    private List<Email> sentEmail; // 직원이 발신한 이메일 목록
+//
+//    //수신된 이메일
+//    @ToString.Exclude
+//    @OneToMany(mappedBy = "recipient", cascade = CascadeType.ALL)
+//    @JsonIgnore
+//    private List<Email> receivedEmail;
 
 
 
