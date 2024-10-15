@@ -199,3 +199,25 @@ CREATE TABLE m_department (
     department_delete_yn  varchar(1) NOT NULL DEFAULT 'N',  -- 부서 삭제 여부 ('N' 기본값)
     department_delete_date timestamp NULL           -- 부서 삭제 일시
 );
+
+-- 16. 이메일
+create table "m_email" (
+	"email_nm" serial not null, -- 이메일 고유 번호 (pk)
+	"employee_id" varchar(50) not null, -- 발신자 id (직원 id, 외래 키 참조)
+	"email_addr_get" varchar(50) not null, -- 수신자 이메일 주소
+	"email_subject" varchar(255) not null, -- 이메일 제목
+	"email_content" text not null, -- 이메일 내용
+	"email_send_date" timestamp default current_timestamp not null, -- 이메일 전송 시간 (기본값: 현재 시각)
+	"email_status" varchar(2) default 'nr' not null check ("email_status" in ('nr', 'r', 'nd', 'd')), -- 이메일 상태 (기본값: 'nr') - 읽지 않음/삭제되지 않음
+	primary key ("email_nm") -- 이메일 고유 번호를 기본 키로 설정
+);
+
+-- 17. 이메일 첨부파일
+create table "m_email_file" (
+	"email_attachment_nm" serial not null, -- 첨부파일 고유 번호 (pk)
+	"email_nm" int not null, -- 이메일 고유 번호 (외래 키 참조)
+	"email_file_name" varchar(255) not null, -- 첨부파일 이름
+	"email_file_url" varchar(255) not null, -- 첨부파일 저장 경로
+	primary key ("email_attachment_nm"), -- 첨부파일 고유 번호를 기본 키로 설정
+	foreign key ("email_nm") references "m_email" ("email_nm") -- 이메일 테이블과 외래 키 관계 설정
+);
