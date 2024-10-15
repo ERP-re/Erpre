@@ -52,11 +52,26 @@ public class Employee {
     private Timestamp employeeDeleteDate; // 삭제 일시
 
 
-    // 하나의 직원이 여러 개의 주문을 가질 수 있따
+    // 하나의 직원이 여러 개의 주문을 가질 수 있다
     @ToString.Exclude
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Order> order;
+
+    //이메일
+    //발신된 이메일
+    @ToString.Exclude
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Email> sentEmail; // 직원이 발신한 이메일 목록
+
+    //수신된 이메일
+    @ToString.Exclude
+    @OneToMany(mappedBy = "recipient", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Email> receivedEmail;
+
+
 
     @PrePersist
     protected void onCreate() {
