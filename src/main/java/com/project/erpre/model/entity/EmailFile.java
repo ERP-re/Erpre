@@ -28,4 +28,5 @@ public class EmailFile {
     @ManyToOne(fetch = FetchType.LAZY) // (지연로딩)
     @JoinColumn(name = "email_nm", nullable = false)
     private Email emailNm;
+
 }

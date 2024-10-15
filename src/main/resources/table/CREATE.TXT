@@ -221,3 +221,40 @@ create table "m_email_file" (
 	primary key ("email_attachment_nm"), -- 첨부파일 고유 번호를 기본 키로 설정
 	foreign key ("email_nm") references "m_email" ("email_nm") -- 이메일 테이블과 외래 키 관계 설정
 );
+
+-- 18. 물류창고
+CREATE TABLE "m_warehouse" (
+	"warehouse__no"	SERIAL		NOT NULL,
+	"warehouse__name"	VARCHAR(100)		NOT NULL,
+	"warehouse__tel"	VARCHAR(20)		NULL,
+	"warehouse_representative_name"	VARCHAR(50)		NULL,
+	"warehouse__business_reg_no"	VARCHAR(20)		NOT NULL,
+	"warehouse_addr"	VARCHAR(200)		NULL,
+	"warehouse__fax_no"	VARCHAR(50)		NULL,
+	"warehouse__manager_name"	VARCHAR(50)		NULL,
+	"warehouse__manager_email"	VARCHAR(100)		NULL,
+	"warehouse__manager_tel"	VARCHAR(20)		NULL,
+	"warehouse__inventory"	VARCHAR(20)		NULL,
+	"warehouse_handled_items"	VARCHAR(500)		NULL,
+	"warehouse_e_tax_invoice_yn"	VARCHAR(10)		NULL,
+	"warehouse_transaction_start_date"	timestamp		NULL,
+	"warehouse_transaction_end_date"	timestamp		NULL,
+	"warehouse_insert_date"	timestamp	DEFAULT CURRENT_TIMESTAMP	NOT NULL,
+	"warehouse_update_date"	timestamp		NULL,
+	"warehouse_delete_yn"	VARCHAR(10)	DEFAULT 'n'	NULL,
+	"warehouse_delete_date"	timestamp		NULL
+);
+
+-- 19. QR코드
+CREATE TABLE "m_qrcode" (
+	"qrcode_no"	SERIAL		NOT NULL,
+	"qrcode_data"	VARCHAR(100)		NOT NULL,
+	"qrcode_type"	VARCHAR(50)		NULL,
+	"qrcode_notes"	VARCHAR(20)		NOT NULL,
+	"qrcode_usage_purpose"	VARCHAR(200)		NULL,
+	"qrcode_expiration_date"	timestamp		NULL,
+	"qrcode_insert_date"	timestamp	DEFAULT CURRENT_TIMESTAMP	NOT NULL,
+	"qrcode_update_date"	timestamp		NULL,
+	"qrcode_delete_yn"	VARCHAR(10)	DEFAULT 'n'	NULL,
+	"qrcode_delete_date"	timestamp		NULL
+);
