@@ -53,12 +53,44 @@ FOREIGN KEY (job_id) REFERENCES m_job(job_id);
 
 
 -- 이메일
--- 직원 테이블과 이메일 테이블 간의 외래 키 관계 설정
-alter table "m_email"
-ADD CONSTRAINT "fk_m_employee_to_m_email_1"
-foreign key ("employee_id")
-references "m_employee" ("employee_id");
--- 발신자 id를 직원 테이블의 직원 id와 외래 키로 연결
+
+alter table "m_email_send" add constraint "pk_m_email_send" primary key (
+    "email_nm_s"
+);
+alter table "m_email_file_send" add constraint "pk_m_email_file_send" primary key (
+    "email_file_nm_s"
+);
+alter table "m_email_receive" add constraint "pk_m_email_receive" primary key (
+    "email_nm_r"
+);
+alter table "m_email_file_receive" add constraint "pk_m_email_file_receive" primary key (
+    "email_file_nm_r"
+);
+alter table "m_email_send" add constraint "fk_m_employee_to_m_email_send_1" foreign key (
+    "email_id_s"
+)
+references "m_employee" (
+    "employee_id"
+);
+alter table "m_email_file_send" add constraint "fk_m_email_send_to_m_email_file_send_1" foreign key (
+    "email_nm_s"
+)
+references "m_email_send" (
+    "email_nm_s"
+);
+alter table "m_email_receive" add constraint "fk_m_employee_to_m_email_receive_1" foreign key (
+    "email_id_r"
+)
+references "m_employee" (
+    "employee_id"
+);
+alter table "m_email_file_receive" add constraint "fk_m_email_receive_to_m_email_file_receive_1" foreign key (
+    "email_nm_r"
+)
+references "m_email_receive" (
+    "email_nm_r"
+);
+
 
 
 -- 물류창고 테이블과 주문 테이블 간의 외래 키 관계 설정

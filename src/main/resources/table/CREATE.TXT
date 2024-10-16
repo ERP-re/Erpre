@@ -227,25 +227,48 @@ CREATE TABLE m_department (
 );
 
 -- 18. 이메일
-create table "m_email" (
-	"email_nm" serial not null, -- 이메일 고유 번호 (pk)
-	"employee_id" varchar(50) not null, -- 발신자 id (직원 id, 외래 키 참조)
-	"email_addr_get" varchar(50) not null, -- 수신자 이메일 주소
-	"email_subject" varchar(255) not null, -- 이메일 제목
-	"email_content" text not null, -- 이메일 내용
-	"email_send_date" timestamp default current_timestamp not null, -- 이메일 전송 시간 (기본값: 현재 시각)
-	"email_status" varchar(2) default 'nr' not null check ("email_status" in ('nr', 'r', 'nd', 'd')), -- 이메일 상태 (기본값: 'nr') - 읽지 않음/삭제되지 않음
-	primary key ("email_nm") -- 이메일 고유 번호를 기본 키로 설정
+--발신
+create table "m_email_send" (
+    "email_nm_s" serial not null,
+    "email_id_s" varchar(50) not null,
+    "email_addr_receive_s" varchar(50) not null,
+    "email_subject_s" varchar(255) not null,
+    "email_content_s" text not null,
+    "email_date_s" timestamp default current_timestamp not null,
+    "email_status_s" varchar(10) default 'nr' not null
+);
+--수신
+create table "m_email_receive" (
+    "email_nm_r" serial not null,
+    "email_id_r" varchar(50) not null,
+    "email_addr_send_r" varchar(50) not null,
+    "email_subject_r" varchar(255) not null,
+    "email_content_r" text not null,
+    "email_date_r" timestamp default current_timestamp not null,
+    "email_status_r" varchar(10) default 'nr' not null
 );
 
 -- 19. 이메일 첨부파일
-create table "m_email_file" (
-	"email_attachment_nm" serial not null, -- 첨부파일 고유 번호 (pk)
-	"email_nm" int not null, -- 이메일 고유 번호 (외래 키 참조)
-	"email_file_name" varchar(255) not null, -- 첨부파일 이름
-	"email_file_url" varchar(255) not null, -- 첨부파일 저장 경로
-	primary key ("email_attachment_nm"), -- 첨부파일 고유 번호를 기본 키로 설정
-	foreign key ("email_nm") references "m_email" ("email_nm") -- 이메일 테이블과 외래 키 관계 설정
+--발신
+create table "m_email_file_send" (
+    "email_file_nm_s" serial not null,
+    "email_nm_s" integer not null,
+    "email_file_name_s" varchar(255) not null,
+    "email_file_url_s" varchar(255) not null,
+    "email_file_size_s" bigint null,
+    "email_file_type_s" varchar(50) null,
+    "email_file_del_yn_s" varchar(10) default 'n' not null,
+    "email_file_del_date_s" timestamp null
+);
+--수신
+create table "m_email_receive" (
+    "email_nm_r" serial not null,
+    "email_id_r" varchar(50) not null,
+    "email_addr_send_r" varchar(50) not null,
+    "email_subject_r" varchar(255) not null,
+    "email_content_r" text not null,
+    "email_date_r" timestamp default current_timestamp not null,
+    "email_status_r" varchar(10) default 'nr' not null
 );
 
 -- 20. 물류창고
