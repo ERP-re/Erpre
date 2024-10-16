@@ -183,6 +183,8 @@ CREATE TABLE m_chat_message_read (
     chat_message_recipient_id VARCHAR(50) NOT NULL REFERENCES m_employee (employee_id),
     chat_message_read_yn VARCHAR(10) NOT NULL DEFAULT 'n',
     chat_message_read_date TIMESTAMP,
+    chat_message_read_delete_yn VARCHAR(10) NOT NULL DEFAULT 'n',
+    chat_message_read_delete_date TIMESTAMP
     PRIMARY KEY (chat_message_no, chat_message_recipient_id)
 );
 
