@@ -8,6 +8,8 @@ import javax.persistence.Id;
 
 import javax.persistence.*;
 import java.math.BigInteger;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "m_message_file")
@@ -41,5 +43,15 @@ public class MessageFile {
 
     @Column(name = "message_file_type", length = 50)
     private String messageFileType;
+
+    @Column(nullable = false, length=10)
+    private String messageFileDeleteYn = "n";
+
+    private LocalDateTime messageFileDeleteDate;
+
+    @ToString.Exclude
+    @JsonIgnore
+    @OneToMany(mappedBy = "messageFile", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MessageRecipientFile> messageRecipientFiles;
 
 }

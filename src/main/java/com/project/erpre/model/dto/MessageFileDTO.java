@@ -3,6 +3,7 @@ package com.project.erpre.model.dto;
 import lombok.*;
 
 import java.math.BigInteger;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -19,6 +20,8 @@ public class MessageFileDTO {
     private String messageFileUrl;
     private BigInteger messageFileSize;
     private String messageFileType;
+    private String messageFileDeleteYn;
+    private LocalDateTime messageFileDeleteDate;
 
 
 }

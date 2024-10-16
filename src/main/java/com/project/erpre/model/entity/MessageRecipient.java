@@ -1,9 +1,11 @@
 package com.project.erpre.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "m_message_recipient")
@@ -37,5 +39,11 @@ public class MessageRecipient {
     private String recipientDeleteYn = "n";
 
     private LocalDateTime recipientDeleteDate;
+
+    @ToString.Exclude
+    @JsonIgnore
+    @OneToMany(mappedBy = "massageRecipient", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MessageRecipientFile> messageRecipientFiles;
+
 }
 
