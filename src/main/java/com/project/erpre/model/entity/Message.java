@@ -48,4 +48,9 @@ public class Message {
     @ToString.Exclude
     private List<MessageRecipient> messageRecipientList;
 
+    @JsonIgnore
+    @ToString.Exclude
+    @OneToMany(mappedBy = "message", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<MessageFile> messageFiles;
+
 }

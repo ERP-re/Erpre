@@ -43,6 +43,11 @@ public class ChatMessage {
     @OneToMany(mappedBy = "chatMessage")
     @JsonIgnore
     @ToString.Exclude
-    private List<ChatMessageRead> chatMessageReadList;
+    private List<ChatMessageRead> chatMessageReads;
+
+    @OneToMany(mappedBy = "chatMessage")
+    @JsonIgnore
+    @ToString.Exclude
+    private List<ChatFile> chatFiles;
 
 }

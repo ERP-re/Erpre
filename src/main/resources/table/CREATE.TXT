@@ -132,19 +132,35 @@ CREATE TABLE m_message_recipient (
     PRIMARY KEY (message_no, recipient_id)
 );
 
--- 10. 쪽지 첨부파일
+-- 10. 쪽지 첨부파일 (발신)
 CREATE TABLE M_MESSAGE_FILE (
     message_attachment_id SERIAL PRIMARY KEY,
-    message_no INT NOT NULL,
+    message_no INTEGER NOT NULL,
     message_file_name VARCHAR(255),
     message_file_url VARCHAR(255) NOT NULL,
     message_file_size BIGINT,
     message_file_type VARCHAR(50),
+    message_file_delete_yn VARCHAR(10) NOT NULL DEFAULT 'n',
+    message_file_delete_date TIMESTAMP,
     CONSTRAINT FK_M_MESSAGE_TO_M_MESSAGE_FILE_1 FOREIGN KEY (message_no)
     REFERENCES M_MESSAGE (message_no)
 );
 
--- 11. 채팅방
+-- 11. 쪽지 첨부파일 (수신)
+CREATE TABLE M_MESSAGE_RECIPIENT_FILE (
+    message_no INTEGER NOT NULL,
+    recipient_id VARCHAR(50) NOT NULL,
+    message_attachment_id INTEGER NOT NULL,
+    message_recipient_file_delete_yn VARCHAR(10) NOT NULL DEFAULT 'n',
+    message_recipient_file_delete_date TIMESTAMP NULL,
+    PRIMARY KEY (message_no, recipient_id, message_attachment_id),
+    FOREIGN KEY (message_no, recipient_id)
+        REFERENCES M_MESSAGE_RECIPIENT (message_no, recipient_id),
+    FOREIGN KEY (message_attachment_id)
+        REFERENCES M_MESSAGE_FILE (message_attachment_id)
+);
+
+-- 12. 채팅방
 CREATE TABLE m_chat (
     chat_no SERIAL PRIMARY KEY,
     chat_create_id VARCHAR(50) NOT NULL REFERENCES m_employee (employee_id),
@@ -155,9 +171,9 @@ CREATE TABLE m_chat (
     chat_delete_date TIMESTAMP
 );
 
--- 12. 채팅방 참여자
+-- 13. 채팅방 참여자
 CREATE TABLE m_chat_participant (
-    chat_no INT NOT NULL REFERENCES m_chat (chat_no),
+    chat_no INTEGER NOT NULL REFERENCES m_chat (chat_no),
     participant_id VARCHAR(50) NOT NULL REFERENCES m_employee (employee_id),
     participant_join_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     participant_delete_yn VARCHAR(10) NOT NULL DEFAULT 'n',
@@ -166,7 +182,7 @@ CREATE TABLE m_chat_participant (
     PRIMARY KEY (chat_no, participant_id)
 );
 
--- 13. 채팅 메세지 (발신)
+-- 14. 채팅 메세지 (발신)
 CREATE TABLE m_chat_message (
     chat_message_no SERIAL PRIMARY KEY,
     chat_no INT NOT NULL REFERENCES m_chat (chat_no),
@@ -177,7 +193,7 @@ CREATE TABLE m_chat_message (
     chat_message_delete_date TIMESTAMP
 );
 
--- 14. 채팅 메세지 수신
+-- 15. 채팅 메세지 수신
 CREATE TABLE m_chat_message_read (
     chat_message_no INT NOT NULL REFERENCES m_chat_message (chat_message_no),
     chat_message_recipient_id VARCHAR(50) NOT NULL REFERENCES m_employee (employee_id),
@@ -188,19 +204,36 @@ CREATE TABLE m_chat_message_read (
     PRIMARY KEY (chat_message_no, chat_message_recipient_id)
 );
 
--- 15. 채팅 첨부파일
-CREATE TABLE M_MESSAGE_FILE (
-    message_attachment_id SERIAL PRIMARY KEY,
-    message_no INT NOT NULL,
-    message_file_name VARCHAR(255),
-    message_file_url VARCHAR(255) NOT NULL,
-    message_file_size BIGINT,
-    message_file_type VARCHAR(50),
-    CONSTRAINT FK_M_MESSAGE_TO_M_MESSAGE_FILE_1 FOREIGN KEY (message_no)
-    REFERENCES M_MESSAGE (message_no)
+-- 16. 채팅 첨부파일 (발신)
+CREATE TABLE M_CHAT_FILE (
+    chat_attachment_id SERIAL PRIMARY KEY,
+    chat_message_no INT NOT NULL,
+    chat_file_name VARCHAR(255),
+    chat_file_url VARCHAR(255) NOT NULL,
+    chat_file_size BIGINT,
+    chat_file_type VARCHAR(50),
+    chat_file_delete_yn VARCHAR(10) NOT NULL DEFAULT 'n',
+    chat_file_delete_date TIMESTAMP,
+    CONSTRAINT FK_M_CHAT_MESSAGE_TO_M_CHAT_FILE_1 FOREIGN KEY (chat_message_no)
+    REFERENCES M_CHAT_MESSAGE (chat_message_no)
 );
 
--- 16. 직급
+-- 17. 채팅 첨부파일 (수신)
+CREATE TABLE M_CHAT_MESSAGE_READ_FILE (
+    chat_message_no INTEGER NOT NULL,
+    chat_message_recipient_id VARCHAR(50) NOT NULL,
+    chat_attachment_id INTEGER NOT NULL,
+    chat_message_read_file_delete_yn VARCHAR(10) NOT NULL DEFAULT 'n',
+    chat_message_read_file_delete_date TIMESTAMP NULL,
+    PRIMARY KEY (chat_message_no, chat_message_recipient_id, chat_attachment_id),
+    FOREIGN KEY (chat_message_no, chat_message_recipient_id)
+        REFERENCES M_CHAT_MESSAGE_READ (chat_message_no, chat_message_recipient_id),
+    FOREIGN KEY (chat_attachment_id)
+        REFERENCES M_CHAT_FILE (chat_attachment_id)
+);
+
+
+-- 18. 직급
 CREATE TABLE m_job (
     job_id               serial PRIMARY KEY,       -- 직급 ID (자동 증가)
     job_name             varchar(50) NOT NULL,     -- 직급 이름 (CEO(대표이사), Executive(임원), Director(부장), Manager(팀장), Assistant Manager(대리), Senior Staff(계장), Staff(일반사원))
@@ -214,7 +247,7 @@ CREATE TABLE m_job (
     job_delete_date      timestamp NULL            -- 직급 삭제 일시
 );
 
--- 17. 부서
+-- 19. 부서
 CREATE TABLE m_department (
     department_id         serial PRIMARY KEY,       -- 부서 ID (자동 증가)
     department_name       varchar(50) NOT NULL,     -- 부서 이름 (CEO Office(대표이사비서실), Executive Office(대표비서실, 임원비서실), HR Department(인사부), Sales Department(영업부), IT Department(IT부서), Legal Department(법무부서), Marketing Department(마케팅부), Accounting Department(회계부서), TBD(미정))
@@ -226,7 +259,7 @@ CREATE TABLE m_department (
     department_delete_date timestamp NULL           -- 부서 삭제 일시
 );
 
--- 18. 이메일
+-- 20. 이메일
 create table "m_email" (
 	"email_nm" serial not null, -- 이메일 고유 번호 (pk)
 	"employee_id" varchar(50) not null, -- 발신자 id (직원 id, 외래 키 참조)
@@ -238,7 +271,7 @@ create table "m_email" (
 	primary key ("email_nm") -- 이메일 고유 번호를 기본 키로 설정
 );
 
--- 19. 이메일 첨부파일
+-- 21. 이메일 첨부파일
 create table "m_email_file" (
 	"email_attachment_nm" serial not null, -- 첨부파일 고유 번호 (pk)
 	"email_nm" int not null, -- 이메일 고유 번호 (외래 키 참조)
@@ -248,7 +281,7 @@ create table "m_email_file" (
 	foreign key ("email_nm") references "m_email" ("email_nm") -- 이메일 테이블과 외래 키 관계 설정
 );
 
--- 20. 물류창고
+-- 22. 물류창고
 CREATE TABLE "m_warehouse" (
 	"warehouse__no"	SERIAL		NOT NULL,
 	"warehouse__name"	VARCHAR(100)		NOT NULL,
@@ -271,7 +304,7 @@ CREATE TABLE "m_warehouse" (
 	"warehouse_delete_date"	timestamp		NULL
 );
 
--- 21. QR코드
+-- 23. QR코드
 CREATE TABLE "m_qrcode" (
 	"qrcode_no"	SERIAL		NOT NULL,
 	"qrcode_data"	VARCHAR(100)		NOT NULL,

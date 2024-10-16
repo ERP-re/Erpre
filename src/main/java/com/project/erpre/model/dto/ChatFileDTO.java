@@ -3,6 +3,7 @@ package com.project.erpre.model.dto;
 import lombok.*;
 
 import java.math.BigInteger;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -19,4 +20,6 @@ public class ChatFileDTO {
     private String chatFileUrl;
     private BigInteger chatFileSize;
     private String chatFileType;
+    private String chatFileDeleteYn;
+    private LocalDateTime chatFileDeleteDate;
 }

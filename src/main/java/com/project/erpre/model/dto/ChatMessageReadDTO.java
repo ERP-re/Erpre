@@ -16,7 +16,6 @@ public class ChatMessageReadDTO {
     private Long chatMessageNo;
     private String chatMessageRecipientId;
     private String chatMessageReadYn;
-    private LocalDateTime chatMessageReadDate;
     private String chatMessageDeleteYn;
     private LocalDateTime chatMessageDeleteDate;
 
