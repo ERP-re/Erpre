@@ -33,4 +33,8 @@ public class ChatMessageRead {
 
     private LocalDateTime chatMessageReadDate;
 
+    @Column(nullable = false, length=10)
+    private String chatMessageDeleteYn = "n";
+
+    private LocalDateTime chatMessageDeleteDate;
 }
