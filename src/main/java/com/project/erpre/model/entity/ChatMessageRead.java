@@ -4,21 +4,19 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Table(name = "m_chat_message_read")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class ChatMessageRead {
 
     @EmbeddedId
-    private ChatMessageReadId id;
+    private ChatMessageReadId chatMessageReadId;
 
     @ManyToOne
     @MapsId("chatMessageNo")
@@ -36,10 +34,9 @@ public class ChatMessageRead {
     @Column(nullable = false, length=10)
     private String chatMessageDeleteYn = "n";
 
-    private LocalDateTime chatMessageDeleteDate;
-
-    @ToString.Exclude
+    @ToString.Exclude // 순환참조방지
     @JsonIgnore
     @OneToMany(mappedBy = "chatMessageRead", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ChatMessageReadFile> ChatMessageReadFiles;
+    private List<ChatMessageReadFile> chatMessageReadFiles;
+
 }

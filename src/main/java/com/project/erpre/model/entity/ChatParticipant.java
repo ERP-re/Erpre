@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "m_chat_participant")
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -16,7 +15,7 @@ import java.time.LocalDateTime;
 public class ChatParticipant {
 
     @EmbeddedId
-    private ChatParticipantId id;
+    private ChatParticipantId chatParticipantId;
 
     @ManyToOne
     @MapsId("chatNo")
@@ -33,8 +32,6 @@ public class ChatParticipant {
 
     @Column(nullable = false, length = 10)
     private String participantDeleteYn = "n";
-
-    private LocalDateTime participantDeleteDate;
 
     private LocalDateTime participantExitDate;
 }

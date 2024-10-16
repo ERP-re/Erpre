@@ -13,7 +13,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "m_message_file")
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

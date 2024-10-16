@@ -7,13 +7,15 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "m_chat_message_read_file")
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
+@ToString
 public class ChatMessageReadFile {
 
     @EmbeddedId
-    private ChatMessageReadFileId id;
+    private ChatMessageReadFileId chatMessageReadFileId;
 
     @ToString.Exclude
     @MapsId("chatMessageReadId")
@@ -27,11 +29,9 @@ public class ChatMessageReadFile {
     @MapsId("chatAttachmentId")
     @ManyToOne
     @JoinColumn(name = "chat_attachment_id", referencedColumnName = "chat_attachment_id", nullable = false)
-    private ChatFile chatAttachment;
+    private ChatFile chatFile;
 
     @Column(name = "chat_message_read_file_delete_yn", nullable = false, length = 10)
     private String deleteYn;
 
-    @Column(name = "chat_message_read_file_delete_date")
-    private LocalDateTime deleteDate;
 }

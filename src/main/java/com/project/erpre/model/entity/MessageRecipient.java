@@ -9,7 +9,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "m_message_recipient")
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -20,11 +19,13 @@ public class MessageRecipient {
     @EmbeddedId
     private MessageRecipientId messageRecipientId;
 
+    @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("messageNo")
     @JoinColumn(name = "message_no", nullable = false)
     private Message message;
 
+    @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("recipientId")
     @JoinColumn(name = "recipient_id", nullable = false)
@@ -42,7 +43,7 @@ public class MessageRecipient {
 
     @ToString.Exclude
     @JsonIgnore
-    @OneToMany(mappedBy = "massageRecipient", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "messageRecipient", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MessageRecipientFile> messageRecipientFiles;
 
 }
