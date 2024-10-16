@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class ChatFileDTO {
 
-    private Integer chatAttachmentId;
+    private Long chatAttachmentId;
     private Long chatMessageNo;
     private String chatFileName;
     private String chatFileUrl;

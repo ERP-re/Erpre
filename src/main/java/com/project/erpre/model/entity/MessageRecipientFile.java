@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "m_message_recipient_file")
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -16,17 +15,15 @@ import java.time.LocalDateTime;
 public class MessageRecipientFile {
 
     @EmbeddedId
-    private MessageRecipientFileId id;
+    private MessageRecipientFileId messageRecipientFileId;
 
     @ManyToOne
-    @MapsId("messageNo")
-    @JoinColumn(name = "message_no", nullable = false)
-    private MessageRecipient messageNo;
-
-    @ManyToOne
-    @MapsId("recipientId")
-    @JoinColumn(name = "recipient_id", nullable = false)
-    private Employee recipientId;
+    @MapsId("messageRecipientId")
+    @JoinColumns({
+            @JoinColumn(name = "message_no", nullable = false),
+            @JoinColumn(name = "recipient_id", nullable = false)
+    })
+    private MessageRecipient messageRecipient;
 
     @ManyToOne
     @MapsId("messageAttachmentId")
@@ -36,6 +33,4 @@ public class MessageRecipientFile {
     @Column(name = "message_recipient_file_delete_yn", nullable = false, length = 10)
     private String deleteYn;
 
-    @Column(name = "message_recipient_file_delete_date")
-    private LocalDateTime deleteDate;
 }

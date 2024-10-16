@@ -6,18 +6,13 @@ import java.time.LocalDateTime;
 
 @Data
 @Builder
-@Getter
-@Setter
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class MessageRecipientFileDTO {
 
-    private Integer messageNo;
+    private Long messageNo;
     private String recipientId;
-    private Integer messageAttachmentId;
+    private Long messageAttachmentId;
     private String deleteYn;
-    private LocalDateTime deleteDate;
-
 
 }

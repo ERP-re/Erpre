@@ -6,9 +6,6 @@ import java.time.LocalDateTime;
 
 @Data
 @Builder
-@Getter
-@Setter
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class ChatMessageReadDTO {
@@ -17,6 +14,5 @@ public class ChatMessageReadDTO {
     private String chatMessageRecipientId;
     private String chatMessageReadYn;
     private String chatMessageDeleteYn;
-    private LocalDateTime chatMessageDeleteDate;
 
 }

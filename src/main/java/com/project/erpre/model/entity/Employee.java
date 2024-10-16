@@ -12,7 +12,9 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "m_employee")
-@Data
+@ToString
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -82,5 +84,35 @@ public class Employee {
     protected void onUpdate() {
         this.employeeUpdateDate = Timestamp.valueOf(LocalDateTime.now());
     }
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "employee")
+    @JsonIgnore
+    private List<MessageRecipient> messageRecipients;
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "employee")
+    @JsonIgnore
+    private List<Message> Messages;
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "employee")
+    @JsonIgnore
+    private List<ChatParticipant> chatParticipants;
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "employee")
+    @JsonIgnore
+    private List<Chat> chats;
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "employee")
+    @JsonIgnore
+    private List<ChatMessage> chatMessages;
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "employee")
+    @JsonIgnore
+    private List<ChatMessageRead> chatMessageReads;
 
 }

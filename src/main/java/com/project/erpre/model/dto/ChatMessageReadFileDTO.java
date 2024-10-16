@@ -13,9 +13,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class ChatMessageReadFileDTO {
 
-    private Integer chatMessageNo;
+    private Long chatMessageNo;
     private String recipientId;
-    private Integer chatAttachmentId;
+    private Long chatAttachmentId;
     private String deleteYn;
-    private LocalDateTime deleteDate;
 }

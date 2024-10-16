@@ -17,6 +17,5 @@ public class ChatParticipantDTO {
     private String participantId;
     private LocalDateTime participantJoinDate;
     private String participantDeleteYn;
-    private LocalDateTime participantDeleteDate;
     private LocalDateTime participantExitDate;
 }

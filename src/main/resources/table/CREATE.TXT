@@ -152,7 +152,6 @@ CREATE TABLE M_MESSAGE_RECIPIENT_FILE (
     recipient_id VARCHAR(50) NOT NULL,
     message_attachment_id INTEGER NOT NULL,
     message_recipient_file_delete_yn VARCHAR(10) NOT NULL DEFAULT 'n',
-    message_recipient_file_delete_date TIMESTAMP NULL,
     PRIMARY KEY (message_no, recipient_id, message_attachment_id),
     FOREIGN KEY (message_no, recipient_id)
         REFERENCES M_MESSAGE_RECIPIENT (message_no, recipient_id),
@@ -177,7 +176,6 @@ CREATE TABLE m_chat_participant (
     participant_id VARCHAR(50) NOT NULL REFERENCES m_employee (employee_id),
     participant_join_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     participant_delete_yn VARCHAR(10) NOT NULL DEFAULT 'n',
-    participant_delete_date TIMESTAMP,
     participant_exit_date TIMESTAMP,
     PRIMARY KEY (chat_no, participant_id)
 );
@@ -200,7 +198,6 @@ CREATE TABLE m_chat_message_read (
     chat_message_read_yn VARCHAR(10) NOT NULL DEFAULT 'n',
     chat_message_read_date TIMESTAMP,
     chat_message_read_delete_yn VARCHAR(10) NOT NULL DEFAULT 'n',
-    chat_message_read_delete_date TIMESTAMP
     PRIMARY KEY (chat_message_no, chat_message_recipient_id)
 );
 
@@ -224,7 +221,6 @@ CREATE TABLE M_CHAT_MESSAGE_READ_FILE (
     chat_message_recipient_id VARCHAR(50) NOT NULL,
     chat_attachment_id INTEGER NOT NULL,
     chat_message_read_file_delete_yn VARCHAR(10) NOT NULL DEFAULT 'n',
-    chat_message_read_file_delete_date TIMESTAMP NULL,
     PRIMARY KEY (chat_message_no, chat_message_recipient_id, chat_attachment_id),
     FOREIGN KEY (chat_message_no, chat_message_recipient_id)
         REFERENCES M_CHAT_MESSAGE_READ (chat_message_no, chat_message_recipient_id),
