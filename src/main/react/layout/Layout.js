@@ -5,14 +5,19 @@ import Sidebar from './Sidebar';
 import '../../resources/static/css/common/Layout.css';
 import Toast from '../components/common/Toast'; // 토스트 컴포넌트
 import ConfirmCustom from '../components/common/ConfirmCustom'; // confirm 모달 컴포넌트
+import { useLocation } from 'react-router-dom';
+import EmailSidebar from './EmailSidebar';
 
-function Layout({currentMenu, children}) {
+function Layout({ currentMenu, children }) {
+
+    const location = useLocation();
 
     return (
         <div className="container">
-            <Header/>
+            <Header />
             <div className="main-container">
-                <Sidebar currentMenu={currentMenu}/>
+                {location.pathname === "/email" ? <EmailSidebar currentMenu={currentMenu} /> : <Sidebar currentMenu={currentMenu} />}
+
                 {children}
                 <Toast /> {/* Toast 메세지 */}
                 <ConfirmCustom /> {/* confirm 모달 */}

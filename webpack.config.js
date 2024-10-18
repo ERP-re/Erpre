@@ -7,6 +7,7 @@ const pricePath = './components/price/';
 const productPath = './components/product/';
 const customerPath = './components/customer/';
 const hrPath = './components/hr/';
+const email = './components/conversation/';
 
 module.exports = {
     context: path.resolve(__dirname, 'src/main/react'), // 기본 디렉토리 설정
@@ -30,6 +31,10 @@ module.exports = {
         // HR 관련 엔트리 포인트
         employeeList: `${hrPath}EmployeeList.js`, // 직원 목록
         employeeRegister: `${hrPath}EmployeeRegister.js`, // 직원 등록
+
+        // email 관련 엔트리 포인트
+        email: `${email}Email.js`, // 이메일 
+
     },
     devtool: 'sourcemaps', // 소스 맵 생성 설정
     cache: true, // 캐싱 활성화
