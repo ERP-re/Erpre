@@ -18,6 +18,9 @@
 .submenu li { margin-bottom: 8px; } 
 .submenu a { padding: 12px; padding-left: 31px; border-radius: 4px; display: block; text-decoration: none; color: #777; font-weight: 500; font-size: 16px; } 
 .submenu a:hover { background-color: #f4f4f4; } 
+.mail-write { display: block; margin-bottom: 10px; font-size: 16px; font-weight: 500; color: #888;  } 
+.mail-write:hover { background-color: #f4f4f4; } 
+.mail-write-span {background-color: #007CC1;}
 /* 단일 메뉴 */
 .submenu.one a { padding-left: 12px; } 
 /* 서브메뉴 활성화 상태 or 메인 화면인 경우 */

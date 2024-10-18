@@ -9,6 +9,10 @@ function Header() {
         setMessengerOpen(!isMessengerOpen); // isMessengerOpen의 현재 값 반전
     };
 
+    const handleEmailClick = () => {
+        window.location.replace = '/email';
+    }
+
     return (
         <header>
             <div className="header-container">
@@ -16,7 +20,7 @@ function Header() {
                     <a href="/"><img src="/img/logo2.png" alt="IKEA Logo"/><span>Erpenterprise Resource  Planning</span></a>
                 </div>
                 <div className="header-icons">
-                    <FaEnvelope className="header-icon mail" title="메일" />
+                    <FaEnvelope className="header-icon mail" title="메일" onClick={handleEmailClick}/>
                     <FaCommentDots className="header-icon messenger" title="메신저" onClick={toggleMessenger}/>
                     <FaBell className="header-icon alarm" title="알림" />
                 </div>
