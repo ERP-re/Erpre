@@ -87,9 +87,11 @@ function EmailSidebar({ currentMenu }) {
             <ul className={`menu ${currentMenu}`}>
                 <li>
 
-                    <span className='mail-write-span'>
-                        <a className="mail-write" href="#" onClick={() => handleSubMenuClick('order', '/order')}><i className="bi bi-pencil-square"></i>메일 작성</a>
+                    <span className='mail-write-span' onClick={() => handleSubMenuClick('order', '/order')}>
+                        <a className="mail-write" href="#" ><i className="bi bi-pencil-square"></i>메일 작성</a>
                     </span>
+
+                    <hr className='mail-line' />
 
                     <span className={currentMenu.startsWith('order') ? 'active' : ''}>
                         <i className="bi bi-piggy-bank"></i>메일함
@@ -118,29 +120,18 @@ function EmailSidebar({ currentMenu }) {
                         <li className={currentMenu === 'productList' ? 'active' : ''}>
                             <a href="#" onClick={() => handleSubMenuClick('productList', '/productList')}>휴지통</a>
                         </li>
-                        {/* <li className={currentMenu === 'productPrice' ? 'active' : ''}>
-                            <a href="#" onClick={() => handleSubMenuClick('productPrice', '/productPrice')}>고객사별 상품 가격</a>
-                        </li> */}
                     </ul>
                 </li>
-                {/* <li>
-                    <ul className="submenu one">
-                        <li className={currentMenu === 'customer' ? 'active' : ''}>
-                            <a href="#" onClick={() => handleSubMenuClick('customerList', '/customerList')}>
-                                <i className="bi bi-people-fill"></i>고객 관리
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+
                 <li>
                     <ul className="submenu one">
                         <li className={currentMenu === 'employee' ? 'active' : ''}>
                             <a href="#" onClick={() => handleSubMenuClick('employeeList', '/employeeList')}>
-                                <i className="bi bi-person-vcard"></i>직원 관리
+                                <i className="bi bi-arrow-return-left"></i>메인메뉴 이동
                             </a>
                         </li>
                     </ul>
-                </li> */}
+                </li>
             </ul>
         </aside>
     );
