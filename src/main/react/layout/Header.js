@@ -10,7 +10,7 @@ function Header() {
     };
 
     const handleEmailClick = () => {
-        window.location.replace = '/email';
+        window.location.href = '/email';
     }
 
     return (
