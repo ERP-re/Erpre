@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "job")
+@Table(name = "m_job")
 @Getter
 @Setter
 @ToString
@@ -25,26 +25,26 @@ public class Job {
     @Column(name = "job_name", length = 50, nullable = false)
     private String jobName;
 
-    @Column(name = "min_years_of_service")
+    @Column(name = "min_years_of_service", nullable = false)
     private Integer minYearsOfService;
 
-    @Column(name = "min_salary")
+    @Column(name = "min_salary", nullable = false)
     private Integer minSalary;
 
-    @Column(name = "incentive_rate", precision = 5, scale = 2)
-    private BigDecimal incentiveRate;
+    @Column(name = "grade_incentive_rate", precision = 5, scale = 2, nullable = false)
+    private BigDecimal gradeIncentiveRate;
 
     @Column(name = "job_role", length = 20, nullable = false)
     private String jobRole;
 
-    @Column(name = "job_insert_date", nullable = false)
-    private LocalDateTime jobInsertDate;
+    @Column(name = "job_insert_date", nullable = false, updatable = false)
+    private LocalDateTime jobInsertDate;  // 기본값 설정
 
     @Column(name = "job_update_date")
     private LocalDateTime jobUpdateDate;
 
-    @Column(name = "job_delete_yn", length = 1, nullable = false)
-    private String jobDeleteYn;
+    @Column(name = "job_delete_yn", length = 1, nullable = false, columnDefinition = "VARCHAR(1) DEFAULT 'N'")
+    private String jobDeleteYn;  // 기본값 설정
 
     @Column(name = "job_delete_date")
     private LocalDateTime jobDeleteDate;
@@ -53,6 +53,4 @@ public class Job {
     @JsonIgnore
     @ToString.Exclude
     private List<Employee> employees;
-
-
 }
