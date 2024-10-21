@@ -130,11 +130,18 @@ function Sidebar({ currentMenu }) {
                     </ul>
                 </li>
                 <li>
-                    <ul className="submenu one">
-                        <li className={currentMenu === 'employee' ? 'active' : ''}>
-                            <a href="#" onClick={() => handleSubMenuClick('employeeList', '/employeeList')}>
-                                <i className="bi bi-person-vcard"></i>직원 관리
-                            </a>
+                    <span className={currentMenu.startsWith('employee') ? 'active' : ''}>
+                        <i className="bi bi-cart-check"></i>인사 관리
+                    </span>
+                    <ul className="submenu">
+                        <li className={currentMenu === 'employeeList' ? 'active' : ''}>
+                            <a href="#" onClick={() => handleSubMenuClick('employeeList', '/employeeList')}>직원 관리</a>
+                        </li>
+                        <li className={currentMenu === 'employeeAttend' ? 'active' : ''}>
+                            <a href="#" onClick={() => handleSubMenuClick('employeeAttend', '/employeeAttend')}>근태 관리</a>
+                        </li>
+                        <li className={currentMenu === 'employeeSalary' ? 'active' : ''}>
+                            <a href="#" onClick={() => handleSubMenuClick('employeeSalary', '/employeeSalary')}>급여 관리</a>
                         </li>
                     </ul>
                 </li>

@@ -19,6 +19,7 @@ public class EmployeeDTO {
     private String employeeEmail;
     private String employeeTel;
     private Integer jobId;
+    private Integer departmentId;
     private Timestamp employeeInsertDate;
     private Timestamp employeeUpdateDate;
     private String employeeDeleteYn; // 삭제 여부 기본값 'N'

@@ -51,10 +51,29 @@ public class Employee {
     private Timestamp employeeDeleteDate; // 삭제 일시
 
     @ManyToOne
-    @JsonManagedReference
-    @JoinColumn(name = "job_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    @JoinColumn(name = "job_id", nullable = false)
     @JsonIgnore
     private Job job;
+
+    @ManyToOne
+    @JoinColumn(name = "department_id", nullable = false)  // 외래키 설정
+    @JsonIgnore
+    private Department department;
+
+    // 급여와의 관계 (하나의 직원은 여러 급여 내역을 가질 수 있음)
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Salary> salaries;
+
+    // 근태와의 관계 (하나의 직원은 여러 근태 기록을 가질 수 있음)
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Attendance> attendances;
+
+    // @ManyToOne
+    // @JoinColumn(name = "department_id")
+    // @JsonIgnore
+    // private Department department;
 
     // 하나의 직원이 여러 개의 주문을 가질 수 있다
     @ToString.Exclude
