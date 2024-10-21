@@ -32,13 +32,13 @@ ADD CONSTRAINT fk_product_cd
 FOREIGN KEY (product_cd) REFERENCES m_product(product_cd);
 
 -- department_id와 job_id 칼럼을 추가
-ALTER TABLE m_employee
-ADD COLUMN department_id integer NOT NULL,  -- 부서 ID 추가 (NOT NULL)
-ADD COLUMN job_id integer NOT NULL;         -- 직급 ID 추가 (NOT NULL)
+--ALTER TABLE m_employee
+--ADD COLUMN department_id integer NOT NULL,  -- 부서 ID 추가 (NOT NULL)
+--ADD COLUMN job_id integer NOT NULL;         -- 직급 ID 추가 (NOT NULL)
 
 -- 직급 추가로 인한 직원권한칼럼 삭제
-ALTER TABLE m_employee
-DROP COLUMN employee_role;
+--ALTER TABLE m_employee
+--DROP COLUMN employee_role;
 
 -- department_id 칼럼에 외래키 제약조건 추가
 ALTER TABLE m_employee
@@ -111,3 +111,18 @@ ALTER TABLE "m_qrcode"
 ADD CONSTRAINT "fk_qrcode_to_employee"
 FOREIGN KEY ("employee_id")
 REFERENCES "m_employee" ("employee_id");
+
+-- 급여테이블과 직원테이블과의 외래키 관계 설정
+ALTER TABLE m_salary
+ADD CONSTRAINT fk_salary_employee
+FOREIGN KEY (employee_id) REFERENCES m_employee(employee_id);
+
+-- 근태테이블과 직원테이블과의 외래키 관계 설정
+ALTER TABLE m_attendance
+ADD CONSTRAINT fk_attendance_employee
+FOREIGN KEY (employee_id) REFERENCES m_employee(employee_id);
+
+-- 승인자(결재자)와의 외래키 관계 설정
+ALTER TABLE m_attendance
+ADD CONSTRAINT fk_approver_employee
+FOREIGN KEY (approver_id) REFERENCES m_employee(employee_id);
