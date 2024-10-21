@@ -8,28 +8,28 @@ function Login() {
     const [pw, setPw] = useState('');
     const [error, setError] = useState('');
 
-    useEffect(() => {
-        const loadRecaptchaScript = () => {
-            const script = document.createElement('script');
-            script.src = 'https://www.google.com/recaptcha/api.js';
-            script.async = true;
-            script.defer = true;
-            script.onload = () => {
-                console.log('reCAPTCHA script loaded');
-            };
-            document.body.appendChild(script);
-        };
-        loadRecaptchaScript();
-    }, []);
+    // useEffect(() => {
+    //     const loadRecaptchaScript = () => {
+    //         const script = document.createElement('script');
+    //         script.src = 'https://www.google.com/recaptcha/api.js';
+    //         script.async = true;
+    //         script.defer = true;
+    //         script.onload = () => {
+    //             console.log('reCAPTCHA script loaded');
+    //         };
+    //         document.body.appendChild(script);
+    //     };
+    //     loadRecaptchaScript();
+    // }, []);
 
     const handleLogin = async (e) => {
         e.preventDefault(); // 폼 제출 방지
 
-        const captchaToken = window.grecaptcha.getResponse(); // reCAPTCHA 토큰을 받아옴
-        if (!captchaToken) {
-            setError('CAPTCHA를 풀어야 합니다.');
-            return;
-        }
+        // const captchaToken = window.grecaptcha.getResponse(); // reCAPTCHA 토큰을 받아옴
+        // if (!captchaToken) {
+        //     setError('CAPTCHA를 풀어야 합니다.');
+        //     return;
+        // }
 
         try {
             console.log('로그인 시도:', { employeeId: id, employeePw: pw }); 
@@ -40,20 +40,17 @@ function Login() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ employeeId: id, employeePw: pw }),
+                credentials: 'include' // 쿠키를 포함하여 서버로 전송
             });
 
-            console.log('응답 상태:', response.status); // 디버깅용 로그
-
-            const result = await response.json();
-
-            if (response.ok && result.token) {
-                console.log('Login successful:', result); // 디버깅용 로그;
-                localStorage.setItem('token', result.token); // JWT 토큰 저장
-                localStorage.setItem('issuedAt', result.issuedAt);
-                localStorage.setItem('expiration', result.expiration);
-                location.href = "/main";
+            if (response.ok) {
+                const result = await response.json();
+                console.log('로그인 성공:', result); // 디버깅용 로그
+                location.href = "/main"; // 메인 페이지로 리다이렉트
             } else {
-                setError(result || '로그인에 실패했습니다.');
+                const result = await response.json();
+                console.log('로그인 실패', result)
+                setError(result.message || '로그인에 실패했습니다.');
             }
         } catch (err) {
             console.error('로그인 중 오류 발생:', err);
@@ -94,9 +91,9 @@ function Login() {
 
                     {error && <p className="error-message">{error}</p>}
 
-                    <div className="recaptcha-container">
-                        <div className="g-recaptcha" data-sitekey="6Lf6TlAqAAAAAD4ezvbWZJj2TGc8_WusXNm9D2f7"></div>
-                    </div>
+                    {/*<div className="recaptcha-container">*/}
+                    {/*    <div className="g-recaptcha" data-sitekey="6Lf6TlAqAAAAAD4ezvbWZJj2TGc8_WusXNm9D2f7"></div>*/}
+                    {/*</div>*/}
                         <button type="submit" className="login-btn">로그인</button>
                 </form>
                 <div className="login-footer">

@@ -15,12 +15,10 @@ import org.springframework.stereotype.Service;
 public class CustomUserDetailsService implements UserDetailsService {
 
     private final EmployeeRepository employeeRepository;
-    private final JobRepository jobRepository;
 
 
-    public CustomUserDetailsService(EmployeeRepository employeeRepository, JobRepository jobRepository) {
+    public CustomUserDetailsService(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
-        this.jobRepository = jobRepository;
     }
 
     @Override
@@ -34,7 +32,7 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("직원의 역할을 찾을 수 없습니다: " + employee.getEmployeeId());
         }
 
-        String role = job.getJobRole();
+        String role = (job != null) ? job.getJobRole() : "ROLE_USER";
 
         return User.builder()
                 .username(employee.getEmployeeId()) // employeeId를 username으로 사용
