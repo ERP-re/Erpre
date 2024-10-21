@@ -17,7 +17,7 @@ create table m_customer (
 	customer_transaction_end_date	timestamp	NULL, -- 거래 종료일
 	customer_insert_date	timestamp	NOT NULL	DEFAULT CURRENT_TIMESTAMP, -- 등록일시
 	customer_update_date	timestamp	NULL, -- 수정일시
-	customer_delete_yn	VARCHAR(20)	NOT NULL DEFAULT 'N', -- 삭제 여부 기본값 'N'
+	customer_delete_yn	VARCHAR(1)	NOT NULL DEFAULT 'N', -- 삭제 여부 기본값 'N'
 	customer_delete_date	timestamp	NULL, -- 삭제 일시
 	primary key (customer_no) -- 기본 키 설정
 );
@@ -30,7 +30,7 @@ create table m_product (
     product_price          decimal(15, 2)   not null, -- 제품 가격
     product_insert_date    timestamp        not null default current_timestamp, -- 제품 등록 일시
     product_update_date    timestamp        null,     -- 제품 수정 일시
-    product_delete_yn      varchar(20)      not null default 'N', -- 삭제 여부 기본값 'N'
+    product_delete_yn      varchar(1)      not null default 'N', -- 삭제 여부 기본값 'N'
     product_delete_date    timestamp        null,     -- 삭제 일시
     primary key (product_cd) -- 기본 키 설정
 );
@@ -45,7 +45,7 @@ create table m_price (
     price_end_date         date             null,     -- 가격 적용 종료 일자
     price_insert_date      timestamp        not null default current_timestamp, -- 가격 등록 일시
     price_update_date      timestamp        null,     -- 가격 수정 일시
-    price_delete_yn        varchar(20)      not null default 'N', -- 삭제 여부 기본값 'N'
+    price_delete_yn        varchar(1)      not null default 'N', -- 삭제 여부 기본값 'N'
     price_delete_date      timestamp        null,     -- 삭제 일시
     primary key (price_no) -- 기본 키 설정
 );
@@ -58,7 +58,7 @@ create table m_category (
     category_nm            varchar(100)     not null, -- 카테고리 이름
     category_insert_date   timestamp        not null default current_timestamp, -- 카테고리 등록 일시
     category_update_date   timestamp        null,     -- 카테고리 수정 일시
-    category_delete_yn     varchar(20)      not null default 'N', -- 삭제 여부 기본값 'N'
+    category_delete_yn     varchar(1)      not null default 'N', -- 삭제 여부 기본값 'N'
     category_delete_date   timestamp        null,     -- 삭제 일시
     primary key (category_no) -- 기본 키 설정
 );
@@ -72,7 +72,7 @@ create table m_order_h (
     order_h_status         varchar(10)      null,     -- 주문 상태(ing, approved, denied)
     order_h_insert_date    timestamp        not null default current_timestamp, -- 주문 등록 일시
     order_h_update_date    timestamp        null,     -- 주문 수정 일시
-    order_h_delete_yn      varchar(20)      not null default 'N', -- 삭제 여부 기본값 'N'
+    order_h_delete_yn      varchar(1)      not null default 'N', -- 삭제 여부 기본값 'N'
     order_h_delete_date    timestamp        null,     -- 삭제 일시
     primary key (order_h_no) -- 기본 키 설정
 );
@@ -88,7 +88,7 @@ create table m_order_d (
     order_d_delivery_request_date timestamp null,     -- 납품 요청 일자
     order_d_insert_date    timestamp        not null default current_timestamp, -- 주문 상세 등록 일시
     order_d_update_date    timestamp        null,     -- 주문 상세 수정 일시
-    order_d_delete_yn      varchar(20)      not null default 'N', -- 삭제 여부 기본값 'N'
+    order_d_delete_yn      varchar(1)      not null default 'N', -- 삭제 여부 기본값 'N'
     order_d_delete_date    timestamp        null,     -- 삭제 일시
     primary key (order_d_no) -- 기본 키 설정
 );
@@ -100,11 +100,14 @@ create table m_employee (
     employee_name          varchar(50)      not null,  -- 직원 이름
     employee_email         varchar(30)      null,     -- 직원 이메일
     employee_tel           varchar(20)      not null, -- 직원 연락처
-    employee_role          varchar(20)      not null, -- 직원 권한(staff, manager, admin)
     employee_insert_date   timestamp        not null default current_timestamp, -- 직원 등록 일시
     employee_update_date   timestamp        null,     -- 직원 수정 일시
-    employee_delete_yn     varchar(20)      not null default 'N', -- 삭제 여부 기본값 'N'
+    employee_delete_yn     varchar(1)      not null default 'N', -- 삭제 여부 기본값 'N'
     employee_delete_date   timestamp        null,     -- 삭제 일시
+    employee_status        varchar(20)      null default 'offline',
+    employee_status_update_time   timestamp null default current_timestamp,
+    department_id          int              not null, -- 부서 아이디
+    job_id                 int              not null  -- 직급 아이디
     primary key (employee_id) -- 기본 키 설정
 );
 
@@ -115,9 +118,9 @@ CREATE TABLE m_message (
     message_content TEXT NOT NULL,
     message_send_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     message_update_date TIMESTAMP,
-    message_delete_yn VARCHAR(10) NOT NULL DEFAULT 'n',
+    message_delete_yn VARCHAR(1) NOT NULL DEFAULT 'N',
     message_delete_date TIMESTAMP,
-    message_recall_yn VARCHAR(10) NOT NULL DEFAULT 'n',
+    message_recall_yn VARCHAR(1) NOT NULL DEFAULT 'N',
     message_recall_date TIMESTAMP
 );
 
@@ -125,33 +128,33 @@ CREATE TABLE m_message (
 CREATE TABLE m_message_recipient (
     message_no INT NOT NULL REFERENCES m_message (message_no),
     recipient_id VARCHAR(50) NOT NULL REFERENCES m_employee (employee_id),
-    recipient_read_yn VARCHAR(10) NOT NULL DEFAULT 'n',
+    recipient_read_yn VARCHAR(1) NOT NULL DEFAULT 'N',
     recipient_read_date TIMESTAMP,
-    recipient_delete_yn VARCHAR(10) NOT NULL DEFAULT 'n',
+    recipient_delete_yn VARCHAR(1) NOT NULL DEFAULT 'N',
     recipient_delete_date TIMESTAMP,
     PRIMARY KEY (message_no, recipient_id)
 );
 
 -- 10. 쪽지 첨부파일 (발신)
-CREATE TABLE M_MESSAGE_FILE (
-    message_attachment_id SERIAL PRIMARY KEY,
+CREATE TABLE m_message_file (
+    message_attachment_id SERIAL PRIMARY KEY
     message_no INTEGER NOT NULL,
     message_file_name VARCHAR(255),
     message_file_url VARCHAR(255) NOT NULL,
     message_file_size BIGINT,
     message_file_type VARCHAR(50),
-    message_file_delete_yn VARCHAR(10) NOT NULL DEFAULT 'n',
+    message_file_delete_yn VARCHAR(1) NOT NULL DEFAULT 'N',
     message_file_delete_date TIMESTAMP,
     CONSTRAINT FK_M_MESSAGE_TO_M_MESSAGE_FILE_1 FOREIGN KEY (message_no)
     REFERENCES M_MESSAGE (message_no)
 );
 
 -- 11. 쪽지 첨부파일 (수신)
-CREATE TABLE M_MESSAGE_RECIPIENT_FILE (
+CREATE TABLE m_message_rectpient_file (
     message_no INTEGER NOT NULL,
     recipient_id VARCHAR(50) NOT NULL,
     message_attachment_id INTEGER NOT NULL,
-    message_recipient_file_delete_yn VARCHAR(10) NOT NULL DEFAULT 'n',
+    message_recipient_file_delete_yn VARCHAR(1) NOT NULL DEFAULT 'N',
     PRIMARY KEY (message_no, recipient_id, message_attachment_id),
     FOREIGN KEY (message_no, recipient_id)
         REFERENCES M_MESSAGE_RECIPIENT (message_no, recipient_id),
@@ -166,7 +169,7 @@ CREATE TABLE m_chat (
     chat_title VARCHAR(50) NOT NULL,
     chat_create_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     chat_update_date TIMESTAMP,
-    chat_delete_yn VARCHAR(10) NOT NULL DEFAULT 'n',
+    chat_delete_yn VARCHAR(1) NOT NULL DEFAULT 'N',
     chat_delete_date TIMESTAMP
 );
 
@@ -175,7 +178,7 @@ CREATE TABLE m_chat_participant (
     chat_no INTEGER NOT NULL REFERENCES m_chat (chat_no),
     participant_id VARCHAR(50) NOT NULL REFERENCES m_employee (employee_id),
     participant_join_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    participant_delete_yn VARCHAR(10) NOT NULL DEFAULT 'n',
+    participant_delete_yn VARCHAR(1) NOT NULL DEFAULT 'N',
     participant_exit_date TIMESTAMP,
     PRIMARY KEY (chat_no, participant_id)
 );
@@ -187,7 +190,7 @@ CREATE TABLE m_chat_message (
     chat_sender_id VARCHAR(50) NOT NULL REFERENCES m_employee (employee_id),
     chat_message_content TEXT NOT NULL,
     chat_send_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    chat_message_delete_yn VARCHAR(10) NOT NULL DEFAULT 'n',
+    chat_message_delete_yn VARCHAR(1) NOT NULL DEFAULT 'N',
     chat_message_delete_date TIMESTAMP
 );
 
@@ -195,9 +198,9 @@ CREATE TABLE m_chat_message (
 CREATE TABLE m_chat_message_read (
     chat_message_no INT NOT NULL REFERENCES m_chat_message (chat_message_no),
     chat_message_recipient_id VARCHAR(50) NOT NULL REFERENCES m_employee (employee_id),
-    chat_message_read_yn VARCHAR(10) NOT NULL DEFAULT 'n',
+    chat_message_read_yn VARCHAR(1) NOT NULL DEFAULT 'N',
     chat_message_read_date TIMESTAMP,
-    chat_message_read_delete_yn VARCHAR(10) NOT NULL DEFAULT 'n',
+    chat_message_read_delete_yn VARCHAR(1) NOT NULL DEFAULT 'N',
     PRIMARY KEY (chat_message_no, chat_message_recipient_id)
 );
 
@@ -209,7 +212,7 @@ CREATE TABLE M_CHAT_FILE (
     chat_file_url VARCHAR(255) NOT NULL,
     chat_file_size BIGINT,
     chat_file_type VARCHAR(50),
-    chat_file_delete_yn VARCHAR(10) NOT NULL DEFAULT 'n',
+    chat_file_delete_yn VARCHAR(1) NOT NULL DEFAULT 'N',
     chat_file_delete_date TIMESTAMP,
     CONSTRAINT FK_M_CHAT_MESSAGE_TO_M_CHAT_FILE_1 FOREIGN KEY (chat_message_no)
     REFERENCES M_CHAT_MESSAGE (chat_message_no)
@@ -220,7 +223,7 @@ CREATE TABLE M_CHAT_MESSAGE_READ_FILE (
     chat_message_no INTEGER NOT NULL,
     chat_message_recipient_id VARCHAR(50) NOT NULL,
     chat_attachment_id INTEGER NOT NULL,
-    chat_message_read_file_delete_yn VARCHAR(10) NOT NULL DEFAULT 'n',
+    chat_message_read_file_delete_yn VARCHAR(1) NOT NULL DEFAULT 'N',
     PRIMARY KEY (chat_message_no, chat_message_recipient_id, chat_attachment_id),
     FOREIGN KEY (chat_message_no, chat_message_recipient_id)
         REFERENCES M_CHAT_MESSAGE_READ (chat_message_no, chat_message_recipient_id),
@@ -235,7 +238,7 @@ CREATE TABLE m_job (
     job_name             varchar(50) NOT NULL,     -- 직급 이름 (CEO(대표이사), Executive(임원), Director(부장), Manager(팀장), Assistant Manager(대리), Senior Staff(계장), Staff(일반사원))
     min_years_of_service integer NOT NULL,         -- 최소 근속 연수
     min_salary           integer NOT NULL,         -- 최소 연봉
-    incentive_rate       decimal(5, 2) NOT NULL,   -- 연봉에 추가될 수 있는 인센티브 비율 (decimal(5, 2): 총 5자리 중 소수점 이하 2자리, 예: 5.00은 5%)
+    grade_incentive_rate       decimal(5, 2) NOT NULL,   -- (직급에 따른)연봉에 추가될 수 있는 인센티브 비율 (decimal(5, 2): 총 5자리 중 소수점 이하 2자리, 예: 5.00은 5%)
     job_role             varchar(20) NOT NULL,     -- 권한 (Admin(관리자), Executive(임원), Director(부장), Manager(팀장), Assistant Manager(대리), Staff(일반사원))
     job_insert_date      timestamp NOT NULL DEFAULT current_timestamp,  -- 직급 등록 일시
     job_update_date      timestamp NULL,           -- 직급 수정 일시
@@ -286,18 +289,19 @@ create table "m_email_file_send" (
     "email_file_url_s" varchar(255) not null,
     "email_file_size_s" bigint null,
     "email_file_type_s" varchar(50) null,
-    "email_file_del_yn_s" varchar(10) default 'n' not null,
+    "email_file_del_yn_s" varchar(1) default 'N' not null,
     "email_file_del_date_s" timestamp null
 );
 --수신
-create table "m_email_receive" (
-    "email_nm_r" serial not null,
-    "email_id_r" varchar(50) not null,
-    "email_addr_send_r" varchar(50) not null,
-    "email_subject_r" varchar(255) not null,
-    "email_content_r" text not null,
-    "email_date_r" timestamp default current_timestamp not null,
-    "email_status_r" varchar(10) default 'nr' not null
+create table "m_email_file_receive" (
+	"email_file_nm_r" serial not null,
+	"email_nm_r" integer not null,
+	"email_file_name_r" varchar(255) not null,
+	"email_file_url_r" varchar(255) not null,
+	"email_file_size_r" bigint null,
+	"email_file_type_r" varchar(50) null,
+	"email_file_del_yn_r" varchar(1) default 'N' not null,
+	"email_file_del_date_r" timestamp null
 );
 
 -- 22. 출고창고
@@ -338,3 +342,35 @@ create table m_qr_code (
 --create table m_qr_code (
       qr_code_id uuid primary key default gen_random_uuid(),
 
+
+-- 24. 급여
+CREATE TABLE m_salary (
+    salary_id            serial PRIMARY KEY,      -- 급여 ID (자동 증가)
+    employee_id          varchar(50) NOT NULL,    -- 직원 ID (외래키)
+    base_salary          integer NOT NULL,        -- 기본 급여
+    bonus                integer DEFAULT 0,       -- 보너스 (선택적)
+    performance_incentive_rate decimal(5, 2) DEFAULT 0.00, -- 실적 기반 인센티브 비율 (영업 실적에 따른 인센티브)
+    total_salary         integer NOT NULL,        -- 총 급여 (기본금 + (기본금*실적인센) + (기본금*직급인센) + 보너스)
+    salary_date          date NOT NULL,           -- 급여 지급일(매달10일로 할 예정)
+    salary_status        varchar(20) NOT NULL DEFAULT 'Pending',  -- 급여 상태 (Pending , Paid)
+    salary_insert_date   timestamp NOT NULL DEFAULT current_timestamp, -- 등록 일시
+    salary_update_date   timestamp NULL           -- 수정 일시
+);
+
+-- 25. 근태
+CREATE TABLE m_attendance (
+    attendance_id        serial PRIMARY KEY,      -- 근태 ID (자동 증가)
+    employee_id          varchar(50) NOT NULL,    -- 직원 ID (외래키)
+    attendance_date      date NOT NULL,           -- 근태 날짜
+    check_in_time        timestamp NULL,          -- 출근 시간
+    check_out_time       timestamp NULL,          -- 퇴근 시간
+    total_hours_worked   decimal(5, 2) DEFAULT 0.00,  -- 근무 시간 (출퇴근 시간 차이)
+    overtime_hours       decimal(5, 2) DEFAULT 0.00,  -- 초과 근무 시간
+    attendance_status    varchar(20) NOT NULL,    -- 근태 상태 (출근, 결근, 휴가, 출장 등)
+    approval_status      varchar(20) NOT NULL DEFAULT 'Pending',  -- 승인 상태 (Pending, Approved, Rejected)
+    approver_id          varchar(50) NULL,        -- 승인자 ID (결재를 처리하는 상사)
+    approval_date        timestamp NULL,          -- 승인 또는 반려된 날짜
+    reason               text NULL,               -- 결재 사유 (휴가, 출장 등 신청 사유)
+    attendance_insert_date timestamp NOT NULL DEFAULT current_timestamp, -- 등록 일시
+    attendance_update_date timestamp NULL         -- 수정 일시
+);

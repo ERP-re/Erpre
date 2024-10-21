@@ -2,6 +2,7 @@ package com.project.erpre.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,14 +21,13 @@ import java.util.List;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Employee {
 
-    //    @GeneratedValue(strategy = GenerationType.IDENTITY) 직원id는 자동증가하는 값이 아님
+    // @GeneratedValue(strategy = GenerationType.IDENTITY) 직원id는 자동증가하는 값이 아님
     @Id
     @Column(name = "employee_id", length = 50, nullable = false)
     private String employeeId;
 
     @Column(name = "employee_pw", length = 50, nullable = false)
     private String employeePw;
-
 
     @Column(name = "employee_name", length = 50, nullable = false)
     private String employeeName;
@@ -37,9 +37,6 @@ public class Employee {
 
     @Column(name = "employee_tel", length = 20, nullable = false)
     private String employeeTel;
-
-    @Column(name = "employee_role", length = 20, nullable = false)
-    private String employeeRole;
 
     @Column(name = "employee_insert_date", nullable = false, updatable = false)
     private Timestamp employeeInsertDate;
@@ -53,6 +50,30 @@ public class Employee {
     @Column(name = "employee_delete_date")
     private Timestamp employeeDeleteDate; // 삭제 일시
 
+    @ManyToOne
+    @JoinColumn(name = "job_id", nullable = false)
+    @JsonIgnore
+    private Job job;
+
+    @ManyToOne
+    @JoinColumn(name = "department_id", nullable = false)  // 외래키 설정
+    @JsonIgnore
+    private Department department;
+
+    // 급여와의 관계 (하나의 직원은 여러 급여 내역을 가질 수 있음)
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Salary> salaries;
+
+    // 근태와의 관계 (하나의 직원은 여러 근태 기록을 가질 수 있음)
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Attendance> attendances;
+
+    // @ManyToOne
+    // @JoinColumn(name = "department_id")
+    // @JsonIgnore
+    // private Department department;
 
     // 하나의 직원이 여러 개의 주문을 가질 수 있다
     @ToString.Exclude
@@ -72,7 +93,6 @@ public class Employee {
 //    @OneToMany(mappedBy = "recipient", cascade = CascadeType.ALL)
 //    @JsonIgnore
 //    private List<Email> receivedEmail;
-
 
 
     @PrePersist

@@ -7,6 +7,7 @@ import org.springframework.web.servlet.config.annotation.ContentNegotiationConfi
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+// 웹 관련 설정
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 

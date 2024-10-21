@@ -16,7 +16,13 @@ function Layout({ currentMenu, children }) {
         <div className="container">
             <Header />
             <div className="main-container">
-                {location.pathname === "/email" ? <EmailSidebar currentMenu={currentMenu} /> : <Sidebar currentMenu={currentMenu} />}
+                {location.pathname === "/email" ||
+                    location.pathname === "/receivedMail" ||
+                    location.pathname === "/sentMail" ||
+                    location.pathname === "/draftMailBox" ||
+                    location.pathname === "/trashMailBox" ?
+                    <EmailSidebar currentMenu={currentMenu} /> :
+                    <Sidebar currentMenu={currentMenu} />}
 
                 {children}
                 <Toast /> {/* Toast 메세지 */}

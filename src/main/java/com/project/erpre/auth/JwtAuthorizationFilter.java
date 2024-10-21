@@ -1,6 +1,5 @@
-package com.project.erpre.config;
+package com.project.erpre.auth;
 
-import com.project.erpre.util.JwtUtil;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
