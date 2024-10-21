@@ -13,7 +13,7 @@ function Header() {
     };
 
     const handleEmailClick = () => {
-        window.location.href = '/email';
+        window.location.href = '/receivedMail';
     }
 
     return (

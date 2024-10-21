@@ -87,7 +87,7 @@ function EmailSidebar({ currentMenu }) {
             <ul className={`menu ${currentMenu}`}>
                 <li>
 
-                    <span className='mail-write-span' onClick={() => handleSubMenuClick('order', '/order')}>
+                    <span className={`mail-write-span ${currentMenu.startsWith('emailWrite') ? 'active' : ''}`} onClick={() => handleSubMenuClick('emailWrite', '/email')}>
                         <a className="mail-write" href="#" ><i className="bi bi-pencil-square"></i>메일 작성</a>
                     </span>
 
@@ -97,12 +97,12 @@ function EmailSidebar({ currentMenu }) {
                         <i className="bi bi-piggy-bank"></i>메일함
                     </span>
                     <ul className="submenu">
-                        <li className={currentMenu === 'order' ? 'active' : ''}>
-                            <a href="#" onClick={() => handleSubMenuClick('order', '/order')}>받은 메일함</a>
+                        <li className={currentMenu === 'receivedMail' ? 'active' : ''}>
+                            <a href="#" onClick={() => handleSubMenuClick('receivedMail', '/receivedMail')}>받은 메일함</a>
                         </li>
-                        <li className={currentMenu === 'orderList' ? 'active' : ''}>
+                        <li className={currentMenu === 'sentMail' ? 'active' : ''}>
                             <a href="#"
-                                onClick={() => handleSubMenuClick('orderList', role === 'admin' ? '/orderList?mode=Assigned' : '/orderList')}>
+                                onClick={() => handleSubMenuClick('orderList', role === 'admin' ? 'sentMail' : '/sentMail')}>
                                 보낸 메일함
                             </a>
                         </li>
@@ -114,22 +114,22 @@ function EmailSidebar({ currentMenu }) {
                         <i className="bi bi-cart-check"></i>메일 관리
                     </span>
                     <ul className="submenu">
-                        <li className={currentMenu === 'productCategory' ? 'active' : ''}>
-                            <a href="#" onClick={() => handleSubMenuClick('productCategory', '/productCategory')}>임시 보관함</a>
+                        <li className={currentMenu === 'draftMailBox' ? 'active' : ''}>
+                            <a href="#" onClick={() => handleSubMenuClick('draftMailBox', '/draftMailBox')}>임시 보관함</a>
                         </li>
-                        <li className={currentMenu === 'productList' ? 'active' : ''}>
-                            <a href="#" onClick={() => handleSubMenuClick('productList', '/productList')}>휴지통</a>
+                        <li className={currentMenu === 'trashMailBox' ? 'active' : ''}>
+                            <a href="#" onClick={() => handleSubMenuClick('trashMailBox', '/trashMailBox')}>휴지통</a>
                         </li>
                     </ul>
                 </li>
 
+                <hr className='mail-line' />
+
                 <li>
                     <ul className="submenu one">
-                        <li className={currentMenu === 'employee' ? 'active' : ''}>
-                            <a href="#" onClick={() => handleSubMenuClick('employeeList', '/employeeList')}>
-                                <i className="bi bi-arrow-return-left"></i>메인메뉴 이동
-                            </a>
-                        </li>
+                        <span className='menu-back'  onClick={() => handleSubMenuClick('productCategory', '/productCategory')}>
+                            <i className="bi bi-arrow-return-left"></i>메인메뉴 이동
+                        </span>
                     </ul>
                 </li>
             </ul>

@@ -33,4 +33,5 @@ public class MainController {
         // 페이지가 로그인 또는 메인 페이지가 아닌 경우에 대해 처리
         return "view";
     }
+
 }

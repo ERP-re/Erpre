@@ -22,7 +22,7 @@ public class EmailReceive {
     private Integer emailNmR;
 
     @Column(name = "email_id_r", nullable = false)
-    private String employeeIdR;  // 수신 직원 ID
+    private String emailIdR;  // 수신 직원 ID
 
     @Column(name = "email_addr_send_r", nullable = false)
     private String emailAddrSendR;  // 발신 직원 이메일
@@ -34,7 +34,7 @@ public class EmailReceive {
     private String emailContentR;
 
     @Column(name = "email_date_r", nullable = false, insertable = false, updatable = false)
-    private Timestamp emailSendDateR;
+    private Timestamp emailDateR;
 
     @Column(name = "email_status_r", nullable = false, columnDefinition = "VARCHAR(10) DEFAULT 'nr'")
     private String emailStatusR;

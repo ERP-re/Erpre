@@ -15,11 +15,11 @@ import java.util.List;
 public class EmailReceiveDTO {
 
     private Integer emailNmR;
-    private String employeeIdR;  // 수신 직원 ID
+    private String emailIdR;  // 수신 직원 ID
     private String emailAddrSendR;  // 발신 직원 이메일
     private String emailSubjectR;
     private String emailContentR;
-    private Timestamp emailSendDateR;
+    private Timestamp emailDateR;
     private String emailStatusR;  // 이메일 상태 (nr, r, nd, d) 기본값 'nr'
 
     private List<EmailFileReceiveDTO> receivedEmailFiles;  // 수신 첨부파일 리스트

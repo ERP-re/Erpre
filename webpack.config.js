@@ -33,7 +33,11 @@ module.exports = {
         employeeRegister: `${hrPath}EmployeeRegister.js`, // 직원 등록
 
         // email 관련 엔트리 포인트
-        email: `${email}Email.js`, // 이메일 
+        email: `${email}EmailWrite.js`, // 이메일 작성
+        receivedMail: `${email}ReceivedMail.js`, // 받은 메일함
+        sentMail: `${email}SentMail.js`,// 보낸 메일함
+        draftMailBox: `${email}DraftMailBox.js`, // 임시 보관함
+        TrashMailBox: `${email}TrashMailBox.js`,// 휴지통
 
     },
     devtool: 'sourcemaps', // 소스 맵 생성 설정
