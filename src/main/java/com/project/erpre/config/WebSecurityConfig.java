@@ -1,5 +1,6 @@
 package com.project.erpre.config;
 
+import com.project.erpre.auth.CustomUserDetailsService;
 import com.project.erpre.auth.JwtAuthorizationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,9 +21,11 @@ import org.springframework.web.servlet.resource.PathResourceResolver;
 @EnableWebSecurity // 시큐리티 설정파일을 시큐리티 필터에 등록
 public class WebSecurityConfig {
 
+    private final CustomUserDetailsService customUserDetailsService;
     private final JwtAuthorizationFilter jwtAuthorizationFilter;
 
-    public WebSecurityConfig(JwtAuthorizationFilter jwtAuthorizationFilter) {
+    public WebSecurityConfig(CustomUserDetailsService customUserDetailsService, JwtAuthorizationFilter jwtAuthorizationFilter) {
+        this.customUserDetailsService = customUserDetailsService;
         this.jwtAuthorizationFilter = jwtAuthorizationFilter;
     }
 
@@ -41,7 +44,7 @@ public class WebSecurityConfig {
                 .and()
                 .authorizeRequests()
                     .antMatchers("/static/**", "/bundle/**", "/img/**", "/css/**", "/fonts/**").permitAll()
-                    .antMatchers("/login", "/**").permitAll() // 로그인 앤드포인트는 인증 없이 접근 허용
+                    .antMatchers("/login", "/**").permitAll() // 로그인 앤드포인트는 인증 없이 접근 허용 (현재 모든 페이지 접근 허용! 이거 나중에 바꿔야 함)
                     .antMatchers("/user/**").hasAnyRole("staff", "admin")
                     .antMatchers("/admin/**").hasRole("admin")
                     .anyRequest().authenticated() // 그 외의 모든 요청은 인증 필요
