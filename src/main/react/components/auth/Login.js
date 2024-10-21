@@ -25,14 +25,14 @@ function Login() {
     const handleLogin = async (e) => {
         e.preventDefault(); // 폼 제출 방지
 
-        const captchaToken = window.grecaptcha.getResponse(); // CAPTCHA 토큰 가져오기
+        const captchaToken = window.grecaptcha.getResponse(); // reCAPTCHA 토큰을 받아옴
         if (!captchaToken) {
             setError('CAPTCHA를 풀어야 합니다.');
             return;
         }
 
         try {
-            console.log('Attempting login with:', { employeeId: id, employeePw: pw }); // 디버깅용 로그
+            console.log('로그인 시도:', { employeeId: id, employeePw: pw }); 
 
             const response = await fetch('/api/login', {
                 method: 'POST',
@@ -42,7 +42,7 @@ function Login() {
                 body: JSON.stringify({ employeeId: id, employeePw: pw }),
             });
 
-            console.log('Response status:', response.status); // 디버깅용 로그
+            console.log('응답 상태:', response.status); // 디버깅용 로그
 
             const result = await response.json();
 

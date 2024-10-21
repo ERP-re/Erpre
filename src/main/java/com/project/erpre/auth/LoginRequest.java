@@ -2,7 +2,6 @@ package com.project.erpre.auth;
 
 import lombok.*;
 
-@Data
 @Builder
 @Getter
 @Setter
