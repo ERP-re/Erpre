@@ -9,7 +9,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "m_chat_message")
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

@@ -26,7 +26,6 @@ public class EmployeeService {
         employee.setEmployeeName(employeeDTO.getEmployeeName());
         employee.setEmployeeEmail(employeeDTO.getEmployeeEmail());
         employee.setEmployeeTel(employeeDTO.getEmployeeTel());
-        employee.setEmployeeRole(employeeDTO.getEmployeeRole());
         employee.setEmployeeInsertDate(employeeDTO.getEmployeeInsertDate());
         employee.setEmployeeUpdateDate(employeeDTO.getEmployeeUpdateDate());
         employee.setEmployeeDeleteYn(employeeDTO.getEmployeeDeleteYn());
@@ -42,7 +41,6 @@ public class EmployeeService {
                 .employeeName(employee.getEmployeeName())
                 .employeeEmail(employee.getEmployeeEmail())
                 .employeeTel(employee.getEmployeeTel())
-                .employeeRole(employee.getEmployeeRole())
                 .employeeInsertDate(employee.getEmployeeInsertDate())
                 .employeeUpdateDate(employee.getEmployeeUpdateDate())
                 .employeeDeleteYn(employee.getEmployeeDeleteYn())
@@ -98,7 +96,6 @@ public class EmployeeService {
                 .employeeName(employeeDTO.getEmployeeName())
                 .employeeEmail(employeeDTO.getEmployeeEmail())
                 .employeeTel(employeeDTO.getEmployeeTel())
-                .employeeRole(employeeDTO.getEmployeeRole())
                 .employeeDeleteYn("N")  // 기본값 설정
                 .employeeInsertDate(new Timestamp(System.currentTimeMillis()))
                 .build();
@@ -114,7 +111,6 @@ public class EmployeeService {
             employee.setEmployeeName(employeeDTO.getEmployeeName());
             employee.setEmployeeEmail(employeeDTO.getEmployeeEmail());
             employee.setEmployeeTel(employeeDTO.getEmployeeTel());
-            employee.setEmployeeRole(employeeDTO.getEmployeeRole());
             employee.setEmployeeUpdateDate(new Timestamp(System.currentTimeMillis()));  // 수정일자 업데이트
             employeeRepository.save(employee);  // 수정된 정보 저장
         }

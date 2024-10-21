@@ -1,4 +1,4 @@
-package com.project.erpre.util;
+package com.project.erpre.auth;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
