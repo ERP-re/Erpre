@@ -1,9 +1,9 @@
 package com.project.erpre.controller;
 
-import com.project.erpre.model.dto.JwtResponse;
-import com.project.erpre.model.dto.LoginRequest;
-import com.project.erpre.service.CustomUserDetailsService;
-import com.project.erpre.util.JwtUtil;
+import com.project.erpre.auth.JwtResponse;
+import com.project.erpre.auth.LoginRequest;
+import com.project.erpre.auth.CustomUserDetailsService;
+import com.project.erpre.auth.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

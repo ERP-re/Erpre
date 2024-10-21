@@ -1,4 +1,4 @@
-package com.project.erpre.model.dto;
+package com.project.erpre.auth;
 
 import lombok.*;
 

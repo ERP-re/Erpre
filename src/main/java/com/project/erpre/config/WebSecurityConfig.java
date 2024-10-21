@@ -1,5 +1,6 @@
 package com.project.erpre.config;
 
+import com.project.erpre.auth.JwtAuthorizationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -14,6 +15,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.resource.PathResourceResolver;
 
+// 시큐리티 설정 및 CORS, 정적 리소스 핸들링 설정
 @Configuration
 @EnableWebSecurity // 시큐리티 설정파일을 시큐리티 필터에 등록
 public class WebSecurityConfig {
