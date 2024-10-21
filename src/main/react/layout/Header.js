@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import '../../resources/static/css/common/Header.css';
-import { FaEnvelope, FaBell, FaCommentDots, FaWindowClose } from 'react-icons/fa'; // React Icons를 사용
+import { FaEnvelope, FaBell, FaCommentDots } from 'react-icons/fa'; // React Icons를 사용
+import Messenger from '../components/messenger/Messenger';
+import '../../resources/static/css/messenger/Messenger.css'; // 메신저 관련 스타일 파일
+
 
 function Header() {
     const [isMessengerOpen, setMessengerOpen] = useState(false);
@@ -27,17 +30,8 @@ function Header() {
             </div>
             <div className="bottom-border"></div>
 
-            {/*메신저 슬라이드 패널*/}
-            <div className={`messenger-panel ${isMessengerOpen ? 'open' : ''}`}>
-                <div className="messenger-header">
-                    <h2>IKEA TALK</h2>
-                    <FaWindowClose className="messenger-close" title="닫기" onClick={toggleMessenger}></FaWindowClose>
-                </div>
-                <div className="messenger-content">
-                    {/*메신저메신저*/}
-                </div>
-            </div>
-
+            {/* 메신저 컴포넌트 */}
+            <Messenger isOpen={isMessengerOpen} toggleMessenger={toggleMessenger} />
         </header>
     );
 }
