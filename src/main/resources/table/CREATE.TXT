@@ -304,42 +304,44 @@ create table "m_email_file_receive" (
 	"email_file_del_date_r" timestamp null
 );
 
--- 22. 물류창고
-CREATE TABLE "m_warehouse" (
-	"warehouse__no"	SERIAL		NOT NULL,
-	"warehouse__name"	VARCHAR(100)		NOT NULL,
-	"warehouse__tel"	VARCHAR(20)		NULL,
-	"warehouse_representative_name"	VARCHAR(50)		NULL,
-	"warehouse__business_reg_no"	VARCHAR(20)		NOT NULL,
-	"warehouse_addr"	VARCHAR(200)		NULL,
-	"warehouse__fax_no"	VARCHAR(50)		NULL,
-	"warehouse__manager_name"	VARCHAR(50)		NULL,
-	"warehouse__manager_email"	VARCHAR(100)		NULL,
-	"warehouse__manager_tel"	VARCHAR(20)		NULL,
-	"warehouse__inventory"	VARCHAR(20)		NULL,
-	"warehouse_handled_items"	VARCHAR(500)		NULL,
-	"warehouse_e_tax_invoice_yn"	VARCHAR(1)		NULL,
-	"warehouse_transaction_start_date"	timestamp		NULL,
-	"warehouse_transaction_end_date"	timestamp		NULL,
-	"warehouse_insert_date"	timestamp	DEFAULT CURRENT_TIMESTAMP	NOT NULL,
-	"warehouse_update_date"	timestamp		NULL,
-	"warehouse_delete_yn"	VARCHAR(1)	DEFAULT 'N'	NULL,
-	"warehouse_delete_date"	timestamp		NULL
+-- 22. 출고창고
+create table m_warehouse (
+    warehouse_no serial primary key,
+    warehouse_name varchar(100) not null,
+    warehouse_tel varchar(20),
+    warehouse_representative_name varchar(50),
+    warehouse_business_reg_no varchar(20) not null,
+    warehouse_addr varchar(200),
+    warehouse_insert_date timestamp not null default current_timestamp,
+    order_d_no integer not null,
+    customer_no integer not null
 );
 
+
 -- 23. QR코드
-CREATE TABLE "m_qrcode" (
-	"qrcode_no"	SERIAL		NOT NULL,
-	"qrcode_data"	VARCHAR(100)		NOT NULL,
-	"qrcode_type"	VARCHAR(50)		NULL,
-	"qrcode_notes"	VARCHAR(20)		NOT NULL,
-	"qrcode_usage_purpose"	VARCHAR(200)		NULL,
-	"qrcode_expiration_date"	timestamp		NULL,
-	"qrcode_insert_date"	timestamp	DEFAULT CURRENT_TIMESTAMP	NOT NULL,
-	"qrcode_update_date"	timestamp		NULL,
-	"qrcode_delete_yn"	VARCHAR(1)	DEFAULT 'N'	NULL,
-	"qrcode_delete_date"	timestamp		NULL
+create extension if not exists "uuid-ossp"; -- uuid 확장 모듈 설치 (한 번만 실행)
+
+create table m_qr_code (
+    qr_code_id uuid primary key default uuid_generate_v4(),
+    qr_code_data varchar(300) not null,
+    qr_code_status varchar(20) not null,
+    qr_code_created timestamp,
+    qr_code_insert_date timestamp not null default current_timestamp,
+    qr_code_expiration_date timestamp,
+    qr_code_last_scanned timestamp,
+    qr_code_usage_count integer default 0 check (qr_code_usage_count >= 0),
+    qr_code_delete_yn char(1) default 'n' check (qr_code_delete_yn in ('y', 'n')),
+    qr_code_delete_date timestamp,
+    employee_id varchar(50) not null,
+    warehouse_no integer not null,
+    order_d_no integer not null
 );
+
+--uuid 확장 모듈 안될시
+--create extension if not exists pgcrypto;
+--create table m_qr_code (
+      qr_code_id uuid primary key default gen_random_uuid(),
+
 
 -- 24. 급여
 CREATE TABLE m_salary (
