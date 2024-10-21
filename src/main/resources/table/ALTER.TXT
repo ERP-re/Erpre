@@ -92,37 +92,51 @@ references "m_email_receive" (
 );
 
 
--- 출고창고 테이블 외래키 설정
-ALTER TABLE m_warehouse
-ADD CONSTRAINT fk_warehouse_order_d
-    FOREIGN KEY (order_d_no)
-    REFERENCES m_order_d(order_d_no);
+-- 출고 테이블 외래키 설정
+ALTER TABLE m_dispatch
+ADD CONSTRAINT FK_DISPATCH_CUSTOMER
+FOREIGN KEY (customer_no)
+REFERENCES m_customer (customer_no);
 
-ALTER TABLE m_warehouse
-ADD CONSTRAINT fk_warehouse_customer
-    FOREIGN KEY (customer_no)
-    REFERENCES m_customer(customer_no);
+ALTER TABLE m_dispatch
+ADD CONSTRAINT FK_DISPATCH_ORDER_H
+FOREIGN KEY (order_h_no)
+REFERENCES m_order_h (order_h_no);
+
+ALTER TABLE m_dispatch
+ADD CONSTRAINT FK_DISPATCH_ORDER_D
+FOREIGN KEY (order_d_no)
+REFERENCES m_order_d (order_d_no);
+
+ALTER TABLE m_dispatch
+ADD CONSTRAINT FK_DISPATCH_WAREHOUSE
+FOREIGN KEY (warehouse_no)
+REFERENCES m_warehouse (warehouse_no);
+
+ALTER TABLE m_dispatch
+ADD CONSTRAINT chk_dispatch_status
+CHECK (dispatch_status IN ('pending', 'in progress', 'complete')); -- dispatch_status CHECK 제약 조건 설정
 
 
 -- QR코드 테이블 외래키 설정
 ALTER TABLE m_qr_code
-ADD CONSTRAINT fk_qrcode_employee
-    FOREIGN KEY (employee_id)
-    REFERENCES m_employee(employee_id);
+ADD CONSTRAINT FK_QRCODE_WAREHOUSE
+FOREIGN KEY (warehouse_no)
+REFERENCES m_warehouse (warehouse_no);
 
 ALTER TABLE m_qr_code
-ADD CONSTRAINT fk_qrcode_warehouse
-    FOREIGN KEY (warehouse_no)
-    REFERENCES m_warehouse(warehouse_no);
+ADD CONSTRAINT FK_QRCODE_ORDER_D
+FOREIGN KEY (order_d_no)
+REFERENCES m_dispatch (order_d_no);
 
 ALTER TABLE m_qr_code
-ADD CONSTRAINT fk_qrcode_order_d
-    FOREIGN KEY (order_d_no)
-    REFERENCES m_order_d(order_d_no);
+ADD CONSTRAINT FK_QRCODE_EMPLOYEE
+FOREIGN KEY (employee_id)
+REFERENCES m_employee (employee_id);
 
 ALTER TABLE m_qr_code
-ADD CONSTRAINT chk_qrcode_status
-    CHECK (qr_code_status in ('active', 'inactive', 'expired')); -- qr_code_status CHECK 제약 조건 설정
+ADD CONSTRAINT chk_qr_code_status
+CHECK (qr_code_status IN ('active', 'inactive', 'expired')); -- qr_code_status CHECK 제약 조건 설정
 
 
 -- 급여테이블과 직원테이블과의 외래키 관계 설정

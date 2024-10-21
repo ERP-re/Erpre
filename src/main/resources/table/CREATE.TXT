@@ -305,36 +305,30 @@ create table "m_email_file_receive" (
 );
 
 -- 22. 출고창고
-create table m_warehouse (
-    warehouse_no serial primary key,
-    warehouse_name varchar(100) not null,
-    warehouse_tel varchar(20),
-    warehouse_representative_name varchar(50),
-    warehouse_business_reg_no varchar(20) not null,
-    warehouse_addr varchar(200),
-    warehouse_insert_date timestamp not null default current_timestamp,
-    order_d_no integer not null,
-    customer_no integer not null
+CREATE TABLE m_warehouse (
+    warehouse_no SERIAL PRIMARY KEY,
+    warehouse_name VARCHAR(30) NOT NULL,
+    warehouse_tel VARCHAR(30) NULL,
+    warehouse_addr VARCHAR(200) NULL,
+    warehouse_manager_name VARCHAR(30) NULL
 );
-
 
 -- 23. QR코드
 create extension if not exists "uuid-ossp"; -- uuid 확장 모듈 설치 (한 번만 실행)
 
-create table m_qr_code (
-    qr_code_id uuid primary key default uuid_generate_v4(),
-    qr_code_data varchar(300) not null,
-    qr_code_status varchar(20) not null,
-    qr_code_created timestamp,
-    qr_code_insert_date timestamp not null default current_timestamp,
-    qr_code_expiration_date timestamp,
-    qr_code_last_scanned timestamp,
-    qr_code_usage_count integer default 0 check (qr_code_usage_count >= 0),
-    qr_code_delete_yn char(1) default 'n' check (qr_code_delete_yn in ('y', 'n')),
-    qr_code_delete_date timestamp,
-    employee_id varchar(50) not null,
-    warehouse_no integer not null,
-    order_d_no integer not null
+CREATE TABLE m_qr_code (
+    qr_code_id UUID NOT NULL PRIMARY KEY,
+    qr_code_data VARCHAR(300) NOT NULL,
+    qr_code_status VARCHAR(20) NULL DEFAULT 'active',
+    qr_code_insert_date TIMESTAMP NULL DEFAULT current_timestamp,
+    qr_code_expiration_date TIMESTAMP NULL,
+    qr_code_last_scanned TIMESTAMP NULL,
+    qr_code_usage_count INTEGER NOT NULL DEFAULT 0,
+    qr_code_delete_yn CHAR(1) NULL DEFAULT 'n',
+    qr_code_delete_date TIMESTAMP NULL,
+    employee_id VARCHAR(50) NULL,
+    warehouse_no INTEGER NULL,
+    order_d_no INTEGER NULL
 );
 
 --uuid 확장 모듈 안될시
@@ -373,4 +367,29 @@ CREATE TABLE m_attendance (
     reason               text NULL,               -- 결재 사유 (휴가, 출장 등 신청 사유)
     attendance_insert_date timestamp NOT NULL DEFAULT current_timestamp, -- 등록 일시
     attendance_update_date timestamp NULL         -- 수정 일시
+);
+
+-- 26. 출고
+CREATE TABLE m_dispatch (
+    dispatch_no SERIAL PRIMARY KEY,
+    dispatch_status VARCHAR(100) NULL DEFAULT 'pending',
+    dispatch_start_date TIMESTAMP NULL DEFAULT current_timestamp,
+    dispatch_end_date TIMESTAMP NULL,
+    dispatch_qr_code VARCHAR(500) NULL,
+    dispatch_delete_yn CHAR(1) NULL DEFAULT 'n',
+    customer_no INTEGER NOT NULL,
+    order_h_no INTEGER NULL,
+    order_d_no INTEGER NULL,
+    warehouse_no INTEGER NOT NULL,
+    hq_name VARCHAR(20) NOT NULL
+);
+
+-- 27. 본사
+CREATE TABLE m_hq (
+    hq_name VARCHAR(20) NOT NULL,
+    hq_tel VARCHAR(30) NULL,
+    hq_representative_name VARCHAR(30) NULL,
+    hq_business_reg_no VARCHAR(50) NOT NULL,
+    hq_addr VARCHAR(200) NULL,
+    PRIMARY KEY (hq_name)
 );
