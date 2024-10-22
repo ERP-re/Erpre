@@ -39,6 +39,7 @@ module.exports = {
         sentMail: `${email}SentMail.js`,// 보낸 메일함
         draftMailBox: `${email}DraftMailBox.js`, // 임시 보관함
         TrashMailBox: `${email}TrashMailBox.js`,// 휴지통
+        emailViewer: `${email}EmailViewer.js`, // 
 
     },
     devtool: 'sourcemaps', // 소스 맵 생성 설정
