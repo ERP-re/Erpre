@@ -6,9 +6,6 @@ import lombok.*;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
-/**
- * 출고 엔티티
- */
 @Entity
 @Table(name = "m_dispatch")
 @Data
@@ -37,11 +34,6 @@ public class Dispatch {
     @Column(name = "dispatch_delete_yn", length = 1, nullable = true, columnDefinition = "CHAR(1) DEFAULT 'n'")
     private String dispatchDeleteYn; // 출고 삭제 여부
 
-    // 고객
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "customer_no", nullable = false)
-    private Customer customer;
-
     // 주문
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_h_no")
@@ -57,9 +49,9 @@ public class Dispatch {
     @JoinColumn(name = "warehouse_no", nullable = false)
     private Warehouse warehouse;
 
-    // 본사
+    // 출고 QR코드
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "hq_name", referencedColumnName = "hq_name", nullable = false)
-    private Hq hq;
+    @JoinColumn(name = "qr_code_id", referencedColumnName = "qr_code_id", nullable = false)
+    private QrCode qrCode;
 
 }

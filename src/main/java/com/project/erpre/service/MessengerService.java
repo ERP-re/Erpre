@@ -24,7 +24,7 @@ public class MessengerService {
 
     public List<EmployeeDTO> getEmployeesWithDept() {
         logger.info("메신저에서 직원 조회");
-        return employeeRepository.getEmployeesWithDept();
+        return employeeRepository.getEmployeesWithDept();p
     }
 
 }
