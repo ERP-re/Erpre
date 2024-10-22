@@ -50,6 +50,15 @@ public class Employee {
     @Column(name = "employee_delete_date")
     private Timestamp employeeDeleteDate; // 삭제 일시
 
+    @Column(name = "employee_status")
+    private String employeeStatus;
+
+    @Column(name = "employee_status_update_time")
+    private Timestamp employeeStatusUpdateTime;
+
+    @Column(name = "employee_status_message")
+    private String employeeStatusMessage;
+
     @ManyToOne
     @JoinColumn(name = "job_id", nullable = false)
     @JsonIgnore
@@ -80,20 +89,6 @@ public class Employee {
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Order> order;
-
-//    //이메일
-//    //발신된 이메일
-//    @ToString.Exclude
-//    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
-//    @JsonIgnore
-//    private List<Email> sentEmail; // 직원이 발신한 이메일 목록
-//
-//    //수신된 이메일
-//    @ToString.Exclude
-//    @OneToMany(mappedBy = "recipient", cascade = CascadeType.ALL)
-//    @JsonIgnore
-//    private List<Email> receivedEmail;
-
 
     @PrePersist
     protected void onCreate() {

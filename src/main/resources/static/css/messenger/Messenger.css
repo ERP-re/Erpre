@@ -1,6 +1,191 @@
-/* 메신저 슬라이드 패널*/
-.messenger-panel { position: fixed; top: 0; right: -400px; width: 400px; height: 100%; background-color:#fff; box-shadow: -2px  0 5px rgba(0, 0, 0, 0.2); transition: right 0.3s ease; z-index: 1000; }
-.messenger-panel.open { right: 0; }
-.messenger-header { height: 53.98px; display: flex; justify-content: center; align-items: center; padding: 10px; background-color: #0058a3; color: #fff; position: relative;}
-.messenger-header .messenger-close { position: absolute; right: 20px; cursor: pointer; color: rgb(255, 255, 255); font-size: 20px;}
-.messenger-content { padding: 10px; overflow-y: auto; height: calc(100% - 50px)}
+/* 왼쪽 사이드바 */
+.messenger-sidebar {
+    width: 80px;
+    height: 100%;
+    background-color: #f4f4f4;
+    position: fixed;
+    right: -450px;
+    top: 0;
+    box-shadow: -5px 0 5px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s ease;
+    z-index: 1000;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.messenger-sidebar.open {
+    right: 0;
+}
+
+.messenger-sidebar button {
+    margin-top: 20px;
+    background-color: transparent;
+    width: 80px;
+    height: 50px;
+    border: none;
+    margin-bottom: 20px;
+    font-size: 33px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.messenger-sidebar button.btn1 {
+    margin-top: 35px;
+}
+
+.messenger-sidebar button:hover {
+    color: #307cff;
+}
+
+/* 메신저 슬라이드 패널 */
+.messenger-panel {
+    position: fixed;
+    top: 0;
+    right: -450px;
+    width: 450px;
+    height: 100%;
+    background-color: #fff;
+    transition: right 0.3s ease;
+    z-index: 1000;
+}
+
+.messenger-panel.open {
+    right: 450px;
+}
+
+/* 패널이 열릴 때 오른쪽으로 이동 */
+.messenger-header {
+    height: 54px;
+    display: flex;
+    align-items: center;
+    padding: 3px 30px 8px 30px;
+    background-color: #ffffff;
+    color: #000;
+    position: relative;
+    font-size: 25px;
+    margin-top: 25px;
+}
+
+.messenger-header .messenger-close {
+    position: absolute;
+    right: 20px;
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+}
+
+/* 검색창 */
+.search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+    padding: 0 20px;
+}
+
+.search-input-container {
+    display: flex;
+    align-items: center;
+    background-color: #f4f4f4;
+    border-radius: 20px;
+    padding: 5px 10px;
+    width: 100%;
+    height: 35px;
+}
+
+.search-input-container .search-icon {
+    font-size: 30px;
+    color: #999;
+    margin-right: 10px;
+    margin-left: 5px;
+}
+
+.search-input-container input {
+    border: none;
+    margin-left: 5px;
+    background-color: transparent;
+    outline: none;
+    font-size: 18px;
+    color: #333;
+    width: 100%;
+}
+
+/* 유저 프로필*/
+.messenger-user {
+    padding: 10px;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.messenger-user img {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    float: left;
+    margin-top: 5px;
+}
+
+.messenger-user .info {
+    display: flex;
+    flex-direction: column;
+    padding: 0px 10px;
+    margin-left: 8px;
+}
+
+.info-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.messenger-user .user-name {
+    font-size: 22px;
+    font-weight: bold;
+    margin-right: 12px;
+}
+
+/* 상태변경*/
+.profile status {
+    display: flex;
+}
+
+.status-select-wrapper {
+    flex-grow: 1;
+    position: relative;
+    display: inline-block;
+    line-height: 100%;
+    vertical-align: middle;
+    border:none;
+    appearance: none;
+    outline: none;
+}
+
+.status-select-wrapper::after {
+    content: '▼';
+    font-size: 14px;
+    color: #333;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.messenger-user .status-message {
+    margin-top: 4px;
+    font-size: 19px;
+    width: 300px;
+    word-wrap: break-word;
+}
+
+/* 메신저 내용 */
+.messenger-content {
+    padding: 10px;
+    overflow-y: auto;
+    height: calc(100% - 120px);
+}

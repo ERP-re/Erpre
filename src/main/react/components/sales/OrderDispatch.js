@@ -45,7 +45,7 @@ function OrderDispatch() {
                                         name="filterType"
                                         value="pending"
                                         checked={filterType === 'pending'}
-
+                                        
                                     />
                                     <label htmlFor="pending">출고대기</label>
                                     <input
@@ -222,6 +222,7 @@ function OrderDispatch() {
 
             </main>
         </Layout>
+
     );
 }
 
