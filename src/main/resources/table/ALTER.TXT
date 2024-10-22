@@ -91,6 +91,23 @@ references "m_email_receive" (
     "email_nm_r"
 );
 
+-- 급여테이블과 직원테이블과의 외래키 관계 설정
+ALTER TABLE m_salary
+ADD CONSTRAINT fk_salary_employee
+FOREIGN KEY (employee_id) REFERENCES m_employee(employee_id);
+
+-- 근태테이블과 직원테이블과의 외래키 관계 설정
+ALTER TABLE m_attendance
+ADD CONSTRAINT fk_attendance_employee
+FOREIGN KEY (employee_id) REFERENCES m_employee(employee_id);
+
+-- 승인자(결재자)와의 외래키 관계 설정
+ALTER TABLE m_attendance
+ADD CONSTRAINT fk_approver_employee
+FOREIGN KEY (approver_id) REFERENCES m_employee(employee_id);
+
+
+---------------------여기까지 적용해놓음--------------------
 
 -- 출고 테이블 외래키 설정
 ALTER TABLE m_dispatch
@@ -139,18 +156,5 @@ ADD CONSTRAINT chk_qr_code_status
 CHECK (qr_code_status IN ('active', 'inactive', 'expired')); -- qr_code_status CHECK 제약 조건 설정
 
 
--- 급여테이블과 직원테이블과의 외래키 관계 설정
-ALTER TABLE m_salary
-ADD CONSTRAINT fk_salary_employee
-FOREIGN KEY (employee_id) REFERENCES m_employee(employee_id);
 
--- 근태테이블과 직원테이블과의 외래키 관계 설정
-ALTER TABLE m_attendance
-ADD CONSTRAINT fk_attendance_employee
-FOREIGN KEY (employee_id) REFERENCES m_employee(employee_id);
-
--- 승인자(결재자)와의 외래키 관계 설정
-ALTER TABLE m_attendance
-ADD CONSTRAINT fk_approver_employee
-FOREIGN KEY (approver_id) REFERENCES m_employee(employee_id);
 
