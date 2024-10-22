@@ -107,8 +107,6 @@ ADD CONSTRAINT fk_approver_employee
 FOREIGN KEY (approver_id) REFERENCES m_employee(employee_id);
 
 
----------------------여기까지 적용해놓음--------------------
-
 -- 출고 테이블 외래키 설정
 ALTER TABLE m_dispatch
 ADD CONSTRAINT FK_DISPATCH_CUSTOMER
@@ -119,11 +117,6 @@ ALTER TABLE m_dispatch
 ADD CONSTRAINT FK_DISPATCH_ORDER_H
 FOREIGN KEY (order_h_no)
 REFERENCES m_order_h (order_h_no);
-
-ALTER TABLE m_dispatch
-ADD CONSTRAINT FK_DISPATCH_ORDER_D
-FOREIGN KEY (order_d_no)
-REFERENCES m_order_d (order_d_no);
 
 ALTER TABLE m_dispatch
 ADD CONSTRAINT FK_DISPATCH_WAREHOUSE
@@ -144,7 +137,7 @@ REFERENCES m_warehouse (warehouse_no);
 ALTER TABLE m_qr_code
 ADD CONSTRAINT FK_QRCODE_ORDER_D
 FOREIGN KEY (order_d_no)
-REFERENCES m_dispatch (order_d_no);
+REFERENCES m_order_d (order_d_no);
 
 ALTER TABLE m_qr_code
 ADD CONSTRAINT FK_QRCODE_EMPLOYEE
