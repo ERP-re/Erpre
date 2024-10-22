@@ -1,17 +1,19 @@
 package com.project.erpre.repository;
 
 import com.project.erpre.model.entity.Employee;
+import com.project.erpre.model.entity.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface EmployeeRepository extends JpaRepository<Employee, String> {
+public interface EmployeeRepository extends JpaRepository<Employee, String>, EmployeeRepositoryCustom, QuerydslPredicateExecutor<Employee> {
 
     Optional<Employee> findById(String employeeId);
     Optional<Employee> findByEmployeeIdAndEmployeePw(String employeeId, String employeePw);

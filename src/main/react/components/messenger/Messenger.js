@@ -1,30 +1,64 @@
-import React, {useState} from 'react';
+import React, {Component, useState} from 'react';
 import {FaComments, FaInfoCircle, FaSearch, FaUserAlt, FaUserAltSlash, FaUtensils, FaWindowClose} from 'react-icons/fa';
 import {MdMeetingRoom, MdWork} from "react-icons/md";
 import {PiOfficeChairFill} from "react-icons/pi";
 import {BsEnvelope} from "react-icons/bs";
-import Select from 'react-select';
-import {SlOrganization} from "react-icons/sl";
-import { HTML5Backend } from 'react-dnd-html5-backend';
-import { Tree, NodeModel } from '@minoru/react-dnd-treeview';
-import { Menu, Item, useContextMenu } from 'react-contexify';
-import { DndProvider } from 'react-dnd';
+import {SlOrganization} from "react-icons/sl"; // react icon 사용
+import Select from 'react-select'; // react-select 라이브러리
+import Tree, {TreeNode} from "rc-tree"; // react-tree 라이브러리
+import "rc-tree/assets/index.css"
 
 
 function Messenger({isOpen, toggleMessenger}) {
 
+    // 🟣 상태(프로필) 관리
+    // 🔴
+
     const [isStatusMessageOpen, setStatusMessageOpen] = useState(false); // 대화명 모달
     const [statusMessage, setStatusMessage] = useState('대화명을 입력해주세요.');
-    // 유저 상태 (online, offline, eating(식사중), meeting(회의중), working(바쁨), absent(부재중))
+    // 🟣 유저 상태 (online, offline, eating(식사중), meeting(회의중), working(바쁨), absent(부재중))
     const [userStatus, setUserStatus] = useState('offline');
     // 활성화된 뷰를 관리
     const [activeView, setActiveView] = useState('home');
-    // 직원 목록
-    const [treeData, setTreeData] = useState([
-        { id: 1, parent: 0, droppable: true, text: 'CEO' },
-        { id: 2, parent: 1, droppable: true, text: '개발팀' },
-        { id: 3, parent: 2, droppable: false, text: '장원영' },
-    ]);
+    // 🔴 수신자 목록을 관리하는 state
+    const [selectedRecipients, setSelectedRecipients] = useState([]);
+
+    // 트리 데이터
+    const treeData = [
+        {
+            key: "1",
+            title: "Erpre",
+            icon: <span className="parent-icon">🍎</span>, // 아이콘 뒤에 띄어쓰기
+            children: [
+                {
+                    key: "1-1",
+                    title: "영업부",
+                    icon: <span>🤝</span>,
+                    children: [
+                        {key: "1-1-1", title: "안유진"},
+                        {key: "1-1-2", title: "김민주"}
+                    ]
+                },
+                {
+                    key: "1-2",
+                    title: "개발부",
+                    icon: <span>🖥️</span>,
+                    children: [
+                        {key: "1-2-1", title: "장원영"},
+                        {key: "1-2-2", title: "최예나"},
+                        {key: "1-2-3", title: "조유리"}
+                    ]
+                },
+                {
+                    key: "1-3",
+                    title: "인사부",
+                    icon: <span>📓</span>,
+                    isLeaf: false,
+                    children: []
+                }
+            ]
+        }
+    ];
 
     // 상태 정의
     const options = [
@@ -58,6 +92,7 @@ function Messenger({isOpen, toggleMessenger}) {
 
     }
 
+    // react-select 커스텀
     const customStyles = {
         control: (provided) => ({
             ...provided,
@@ -112,10 +147,10 @@ function Messenger({isOpen, toggleMessenger}) {
     };
 
     // 선택된 옵션에 아이콘 표시
-    const SingleValue = ({ children, ...props }) => (
+    const SingleValue = ({children, ...props}) => (
         <div className="single-value" {...props.innerProps}>
             {props.data.icon}
-            <span style={{ marginLeft: '8px' }}>{children}</span>
+            <span style={{marginLeft: '8px'}}>{children}</span>
         </div>
     );
 
@@ -137,17 +172,18 @@ function Messenger({isOpen, toggleMessenger}) {
         }
     };
 
-    const { show } = useContextMenu({
-        id: 'employee_menu',
-    });
+    // 🔴 수신자 목록 업데이트 함수
+    const handleCheck = (checkedKeys, { checkedNodes }) => {
+        const recipientNames = checkedNodes
+            .filter(node =>  !node.children) // 자식 노드만 필터링
+            .map(node => node.title); // 직원 이름 가져옴
 
-    const handleContextMenu = (data) => {
-        alert(`직원 정보: ${data.text}`);
-    };
+        console.log(recipientNames);
+
+        setSelectedRecipients(recipientNames);
+    }
 
     return (
-        <div>
-        <DndProvider backend={HTML5Backend} >
         <div>
             {/* 슬라이드 패널*/}
             <div className={`messenger-panel ${isOpen ? 'open' : ''}`}>
@@ -199,7 +235,7 @@ function Messenger({isOpen, toggleMessenger}) {
                                         onChange={handleStatusChange}
                                         options={options}
                                         styles={customStyles}
-                                        components={{ Option, SingleValue }}
+                                        components={{Option, SingleValue}}
                                         isSearchable={false}
                                     />
                                 </div>
@@ -211,34 +247,19 @@ function Messenger({isOpen, toggleMessenger}) {
                     </div>
                 </div>
 
-                {/* 직원 목록 트리 */}
+                {/* 메신저 조직도*/}
                 <div className="messenger-content">
                     <Tree
-                        tree={treeData}
-                        rootId={0}
-                        render={(node, { depth, isOpen, onToggle }) => (
-                            <div style={{ marginInlineStart: depth * 20 }}>
-                                    <span onContextMenu={(event) => show(event, { props: node })}>
-                                        {node.droppable ? (isOpen ? '📂' : '📁') : '📄'} {node.text}
-                                    </span>
-                            </div>
-                        )}
-                        dragPreviewRender={(monitorProps) => <div>{monitorProps.item.text}</div>}
-                        onDrop={(newTree) => setTreeData(newTree)}
+                        treeData={treeData}
+                        defaultExpandAll={true}  // 모든 노드를 기본적으로 확장
+                        checkable                // 체크박스 설정
+                        onCheck={handleCheck}    // 체크 시 이벤트
                     />
                 </div>
-
-                {/* Context 메뉴 */}
-                <Menu id="employee_menu">
-                    <Item onClick={({ props }) => handleContextMenu(props)}>
-                        직원 정보 보기
-                    </Item>
-                </Menu>
+                
             </div>
         </div>
-        </DndProvider>
-        </div>
-);
+    );
 }
 
 export default Messenger;

@@ -17,7 +17,7 @@
     top: 0;
     box-shadow: -5px 0 5px rgba(0, 0, 0, 0.1);
     transition: right 0.3s ease;
-
+    overflow: hidden;
 }
 
 .messenger-panel.open.sidebar button {
@@ -118,7 +118,7 @@
 /* 유저 프로필*/
 .messenger-user {
     padding: 10px;
-    margin-left: 10px;
+    margin-left: 15px;
     display: flex;
     align-items: center;
 }
@@ -130,6 +130,10 @@
     object-fit: cover;
     float: left;
     margin-top: 5px;
+}
+
+.info {
+    margin-left: 5px;
 }
 
 .messenger-user .info {
@@ -208,9 +212,30 @@
     color: black;
 }
 
-/* 메신저 내용 */
+/* 메신저 조직도*/
 .messenger-content {
-    padding: 10px;
+    padding: 23px 30px;
     overflow-y: auto;
     height: calc(100% - 120px);
+    color: black;
+    font-size: 16px;
+}
+
+.rc-tree-treenode {
+    padding: 2px 0;
+}
+
+.rc-tree-title {
+    margin-left: 5px;
+    display: flex;
+    line-height: 1.5;
+    align-items: center;
+}
+
+.rc-tree-title span {
+    margin-top: 2px;
+}
+
+.parent-icon {
+    font-size: 20px;
 }
