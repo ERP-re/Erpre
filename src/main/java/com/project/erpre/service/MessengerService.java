@@ -1,7 +1,6 @@
 package com.project.erpre.service;
 
 import com.project.erpre.model.dto.EmployeeDTO;
-import com.project.erpre.repository.EmployeeRepositoryCustom;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.project.erpre.repository.EmployeeRepository;
@@ -24,7 +23,7 @@ public class MessengerService {
 
     public List<EmployeeDTO> getEmployeesWithDept() {
         logger.info("메신저에서 직원 조회");
-        return employeeRepository.getEmployeesWithDept();p
+        return employeeRepository.getEmployeesWithDept();
     }
 
 }
