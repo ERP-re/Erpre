@@ -10,7 +10,12 @@ function OrderDispatch() {
 
     return (
 
-
+        <Layout currentMenu="orderDispatch">
+            <div className="order-dispatch-container">
+                <h3>Order Dispatch 페이지</h3>
+                
+            </div>
+        </Layout>
 
     );
 }
