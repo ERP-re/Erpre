@@ -380,17 +380,6 @@ CREATE TABLE m_dispatch (
     dispatch_delete_yn CHAR(1) NULL DEFAULT 'N',
     customer_no INTEGER NOT NULL,
     order_h_no INTEGER NULL,
-    order_d_no INTEGER NULL,
     warehouse_no INTEGER NOT NULL,
     hq_name VARCHAR(20) NOT NULL
-);
-
--- 27. 본사
-CREATE TABLE m_hq (
-    hq_name VARCHAR(20) NOT NULL,
-    hq_tel VARCHAR(30) NULL,
-    hq_representative_name VARCHAR(30) NULL,
-    hq_business_reg_no VARCHAR(50) NOT NULL,
-    hq_addr VARCHAR(200) NULL,
-    PRIMARY KEY (hq_name)
 );
