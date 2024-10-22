@@ -1,8 +1,12 @@
 package com.project.erpre.service;
 
+import com.project.erpre.model.entity.Department;
 import com.project.erpre.model.entity.Employee;
 import com.project.erpre.model.dto.EmployeeDTO;
+import com.project.erpre.model.entity.Job;
+import com.project.erpre.repository.DepartmentRepository;
 import com.project.erpre.repository.EmployeeRepository;
+import com.project.erpre.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,6 +22,12 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    @Autowired
+    private DepartmentRepository departmentRepository;
+
+    @Autowired
+    private JobRepository
+            jobRepository;
     // EmployeeDTO -> Employee 엔티티로 변환하는 메서드
     private Employee convertToEntity(EmployeeDTO employeeDTO) {
         Employee employee = new Employee();
@@ -26,10 +36,20 @@ public class EmployeeService {
         employee.setEmployeeName(employeeDTO.getEmployeeName());
         employee.setEmployeeEmail(employeeDTO.getEmployeeEmail());
         employee.setEmployeeTel(employeeDTO.getEmployeeTel());
+
+        // Department와 Job을 각각 조회해서 설정
+        Department department = departmentRepository.findById(employeeDTO.getDepartmentId()).orElse(null);
+        Job job = jobRepository.findById(employeeDTO.getJobId()).orElse(null);
+        employee.setDepartment(department);
+        employee.setJob(job);
+
         employee.setEmployeeInsertDate(employeeDTO.getEmployeeInsertDate());
         employee.setEmployeeUpdateDate(employeeDTO.getEmployeeUpdateDate());
         employee.setEmployeeDeleteYn(employeeDTO.getEmployeeDeleteYn());
         employee.setEmployeeDeleteDate(employeeDTO.getEmployeeDeleteDate());
+        employee.setEmployeeStatus(employeeDTO.getEmployeeStatus());
+        employee.setEmployeeStatusUpdateTime(employeeDTO.getEmployeeStatusUpdateTime());
+        employee.setEmployeeStatusMessage(employeeDTO.getEmployeeStatusMessage());
         return employee;
     }
 
@@ -41,10 +61,15 @@ public class EmployeeService {
                 .employeeName(employee.getEmployeeName())
                 .employeeEmail(employee.getEmployeeEmail())
                 .employeeTel(employee.getEmployeeTel())
+                .jobId(employee.getJob().getJobId()) // Job 엔티티에서 jobId를 추출
+                .departmentId(employee.getDepartment().getDepartmentId()) // Department 엔티티에서 departmentId 추출
                 .employeeInsertDate(employee.getEmployeeInsertDate())
                 .employeeUpdateDate(employee.getEmployeeUpdateDate())
                 .employeeDeleteYn(employee.getEmployeeDeleteYn())
                 .employeeDeleteDate(employee.getEmployeeDeleteDate())
+                .employeeStatus(employee.getEmployeeStatus())
+                .employeeStatusUpdateTime(employee.getEmployeeStatusUpdateTime())
+                .employeeStatusMessage(employee.getEmployeeStatusMessage())
                 .build();
     }
 
