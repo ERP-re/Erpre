@@ -102,6 +102,9 @@ function Sidebar({ currentMenu }) {
                         <li className={currentMenu === 'orderReport' ? 'active' : ''}>
                             <a href="#" onClick={() => handleSubMenuClick('orderReport', '/orderReport')}>주문 현황 보고서</a>
                         </li>
+                        <li className={currentMenu === 'orderDispatch' ? 'active' : ''}>
+                            <a href="#" onClick={() => handleSubMenuClick('orderDispatch', '/orderDispatch')}>주문 출고</a>
+                        </li>
                     </ul>
                 </li>
                 <li>

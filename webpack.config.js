@@ -19,6 +19,7 @@ module.exports = {
         order: `${salesPath}Order.js`, // 주문 등록or상세or수정
         orderList: `${salesPath}OrderList.js`, // 주문 목록 or 주문 등록 승인
         orderReport: `${salesPath}OrderReport.js`, // 영업실적 보고서
+        orderDispatch: `${salesPath}OrderDispatch.js`, //출고 관리
 
         // Product 관련 엔트리 포인트
         productList: `${productPath}ProductList.js`, // 상품 목록
