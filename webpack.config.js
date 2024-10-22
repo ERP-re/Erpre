@@ -30,8 +30,9 @@ module.exports = {
         customerList: `${customerPath}CustomerList.js`, // 고객사 목록
 
         // HR 관련 엔트리 포인트
-        employeeList: `${hrPath}EmployeeList.js`, // 직원 목록
-        employeeRegister: `${hrPath}EmployeeRegister.js`, // 직원 등록
+        employeeList: `${hrPath}EmployeeList.js`, // 직원 관리
+        employeeAttend: `${hrPath}EmployeeAttend.js`, // 근태 관리
+        employeeSalary: `${hrPath}EmployeeSalary.js`, // 급여 관리
 
         // email 관련 엔트리 포인트
         email: `${email}EmailWrite.js`, // 이메일 작성
@@ -39,13 +40,15 @@ module.exports = {
         sentMail: `${email}SentMail.js`,// 보낸 메일함
         draftMailBox: `${email}DraftMailBox.js`, // 임시 보관함
         TrashMailBox: `${email}TrashMailBox.js`,// 휴지통
+        emailViewer: `${email}EmailViewer.js`, // 
 
     },
     devtool: 'sourcemaps', // 소스 맵 생성 설정
     cache: true, // 캐싱 활성화
     output: {
         path: path.resolve(__dirname, 'src/main/resources/static/bundle'), // 출력 경로 설정
-        filename: '[name].bundle.js' // 번들 파일 이름 설정
+        filename: '[name].bundle.js', // 번들 파일 이름 설정
+        clean: true // 빌드 시 필요없는 파일 자동삭제해줌
     },
     mode: 'none', // Webpack 모드 설정 (none: 기본 설정)
     module: {
