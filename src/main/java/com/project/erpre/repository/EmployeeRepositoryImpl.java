@@ -1,12 +1,10 @@
 package com.project.erpre.repository;
 
 import com.project.erpre.model.dto.EmployeeDTO;
-import com.project.erpre.model.entity.Employee;
 import com.project.erpre.model.entity.QDepartment;
 import com.project.erpre.model.entity.QEmployee;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import org.slf4j.ILoggerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
