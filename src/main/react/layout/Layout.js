@@ -20,6 +20,7 @@ function Layout({ currentMenu, children }) {
                     location.pathname === "/receivedMail" ||
                     location.pathname === "/sentMail" ||
                     location.pathname === "/draftMailBox" ||
+                    location.pathname === "/emailViewer" ||
                     location.pathname === "/trashMailBox" ?
                     <EmailSidebar currentMenu={currentMenu} /> :
                     <Sidebar currentMenu={currentMenu} />}

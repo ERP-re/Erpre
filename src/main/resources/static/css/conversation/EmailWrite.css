@@ -84,39 +84,9 @@
   background-color: #e9f5fb;
 }
 
-/* 툴바 스타일 */
-.toolbar {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 15px;
-}
-
-.toolbar button {
-  background-color: #f4f4f4;
-  border: 1px solid #ddd;
-  padding: 5px;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-.toolbar button:hover {
-  background-color: #e1e1e1;
-}
-
-/* 이메일 본문 편집기 */
-.email-editor {
-  min-height: 300px;
-  border: 1px solid #ddd;
-  padding: 15px;
-  font-size: 14px;
-  line-height: 1.6;
-  border-radius: 4px;
-  background-color: #fff;
-}
-
-.email-editor:focus {
-  border-color: #007CC1;
-  outline: none;
+.email-textBody {
+  width: 100%;
+  height: 400px;
 }
 
 /* 하단 메뉴 */

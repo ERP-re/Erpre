@@ -94,7 +94,7 @@ function EmailSidebar({ currentMenu }) {
                     <hr className='mail-line' />
 
                     <span className={currentMenu.startsWith('order') ? 'active' : ''}>
-                        <i className="bi bi-piggy-bank"></i>메일함
+                        <i className="bi bi-envelope"></i>메일함
                     </span>
                     <ul className="submenu">
                         <li className={currentMenu === 'receivedMail' ? 'active' : ''}>
@@ -111,7 +111,7 @@ function EmailSidebar({ currentMenu }) {
                 </li>
                 <li>
                     <span className={currentMenu.startsWith('product') ? 'active' : ''}>
-                        <i className="bi bi-cart-check"></i>메일 관리
+                        <i className="bi bi-inboxes"></i>메일 관리
                     </span>
                     <ul className="submenu">
                         <li className={currentMenu === 'draftMailBox' ? 'active' : ''}>

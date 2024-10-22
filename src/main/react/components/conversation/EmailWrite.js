@@ -3,6 +3,8 @@ import { BrowserRouter } from "react-router-dom";
 import ReactDOM from 'react-dom/client';
 import '../../../resources/static/css/conversation/EmailWrite.css'
 import Layout from "../../layout/Layout";
+import ReactQuill from "react-quill"; // 본문 글 편집기
+import 'react-quill/dist/quill.snow.css'; // 편집기 기본 스타일
 
 // 컴포넌트
 function EmailWrite() {
@@ -10,77 +12,48 @@ function EmailWrite() {
   return (
     <Layout currentMenu="emailWrite">
 
-<div className="email-compose-container">
       <div className="email-compose-container">
-        {/* 상단 메뉴 */}
-        <div className="email-header">
-          <div>
-            <a href="#">보내기</a>
-            <a href="#">미리보기</a>
-            <a href="#">저장하기</a>
+        <div className="email-compose-container">
+          {/* 상단 메뉴 */}
+          <div className="email-header">
+            <div>
+              <a href="#"><i class="bi bi-send"></i>보내기</a>
+              <a href="#">저장하기</a>
+            </div>
           </div>
-          <div>
-            <a href="#">옵션</a>
+
+          {/* 받는 사람, 제목 */}
+          <div className="email-field">
+            <label htmlFor="to">받는 사람</label>
+            <button><i class="bi bi-person-plus"></i></button>
+            <input
+              type="text"
+              id="to"
+            />
           </div>
-        </div>
 
-        {/* 받는 사람, 참조, 제목 입력 필드 */}
-        <div className="email-field">
-          <label htmlFor="to">받는 사람</label>
-          <input
-            type="text"
-            id="to"
-            placeholder="메일 주소 사이에 ,(콤마) 또는 ;(세미콜론)으로 구분하여 입력하세요"
-          />
-        </div>
+          <div className="email-field">
+            <label htmlFor="subject">제목</label>
+            <input
+              type="text"
+              id="subject"
+              placeholder=""
+            />
+          </div>
 
-        <div className="email-field">
-          <label htmlFor="cc">참조</label>
-          <input
-            type="text"
-            id="cc"
-            placeholder=""
-          />
-        </div>
+          {/* 파일 첨부 */}
+          <div className="file-attachment">
+            <label htmlFor="file-upload" className="file-label">
+              파일 첨부
+            </label>
+            <input type="file" id="file-upload" style={{ display: 'none' }} />
+            <div>여기로 파일을 끌어놓으세요</div>
+          </div>
 
-        <div className="email-field">
-          <label htmlFor="subject">제목</label>
-          <input
-            type="text"
-            id="subject"
-            placeholder=""
-          />
+          {/* 이메일 본문 + 편집기  */}
+          <ReactQuill className='email-textBody' />
+          
         </div>
-
-        {/* 파일 첨부 영역 */}
-        <div className="file-attachment">
-          <label htmlFor="file-upload" className="file-label">
-            파일 첨부
-          </label>
-          <input type="file" id="file-upload" style={{ display: 'none' }} />
-          <div>여기로 파일을 끌어놓으세요</div>
-        </div>
-
-        {/* 이메일 본문 편집기 */}
-        <div className="toolbar">
-          <button><i className="bi bi-type-bold"></i></button>
-          <button><i className="bi bi-type-italic"></i></button>
-          <button><i className="bi bi-text-paragraph"></i></button>
-          <button><i className="bi bi-align-left"></i></button>
-          <button><i className="bi bi-align-center"></i></button>
-          <button><i className="bi bi-align-right"></i></button>
-        </div>
-
-        <div className="email-editor" contentEditable="true">
-          <p>여기에 이메일 본문을 입력하세요...</p>
-        </div>
-
-        {/* 하단 메뉴 */}
-        <div className="email-footer">
-          <button>보내기</button>
-          <button>저장하기</button>
-        </div>
-      </div>
 
       </div>
     </Layout>
