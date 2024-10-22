@@ -1,0 +1,24 @@
+/* src/main/resources/static/css/conversation/EmailViewer.css */
+.email-viewer-container { padding: 20px; width: 100%; height: 100%; } 
+
+.email-actions { display: flex; gap: 10px; margin-bottom: 15px; } 
+
+.email-actions .action-link { color: #0073e6; text-decoration: none; padding: 5px 10px; border: 1px solid #ddd; border-radius: 4px; } 
+
+.email-actions .action-link:hover { background-color: #e3e3e3; } 
+
+.email-title { font-size: 24px; margin: 10px 0; } 
+
+.email-meta { font-size: 12px; color: #888; margin-bottom: 15px; } 
+
+.email-info { margin-bottom: 15px; font-size: 14px; } 
+
+.email-info p { margin: 5px 0; } 
+
+.email-info .email-address a { color: #0073e6; text-decoration: none; } 
+
+.email-info .add-contact { color: #0073e6; text-decoration: underline; margin-left: 10px; } 
+
+.email-content { padding: 15px; border-radius: 4px; border-top: 1px solid #e3e3e3; } 
+
+.email-content p { margin: 10px 0; } 

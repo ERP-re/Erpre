@@ -1,0 +1,17 @@
+/* src/main/resources/static/css/conversation/TrashMailBox.css */
+/* 🔴 개별 열 너비 지정 */
+.menu_mail .table_wrap table th:nth-child(1),
+.menu_mail .table_wrap table td:nth-child(1) { width: 5%; text-align: center; /* 체크박스 */ } 
+.menu_mail .table_wrap table th:nth-child(2),
+.menu_mail .table_wrap table td:nth-child(2) { width: 20%; /* 이름 */ } 
+.menu_mail .table_wrap table th:nth-child(3),
+.menu_mail .table_wrap table td:nth-child(3) { width: 60%; /* 제목 + 내용 */ } 
+.menu_mail .table_wrap table th:nth-child(4),
+.menu_mail .table_wrap table td:nth-child(4) { width: 15%; /* 일자 */ } 
+/* 🔴 padding 조절 */
+.menu_mail .table_wrap table th,
+.menu_mail .table_wrap table td { padding: 12px 8px; text-align: left; } 
+
+/* 검색창 너비 지정 */
+.mail-search .mail-search-box { width: 97% !important} 
+
