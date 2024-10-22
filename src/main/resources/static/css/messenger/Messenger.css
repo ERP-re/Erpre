@@ -4,7 +4,7 @@
     height: 100%;
     background-color: #f4f4f4;
     position: fixed;
-    right: 450px;
+    right: -450px;
     top: 0;
     box-shadow: -5px 0 5px rgba(0, 0, 0, 0.1);
     transition: right 0.3s ease;
@@ -12,6 +12,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.messenger-sidebar.open {
+    right: 0;
 }
 
 .messenger-sidebar button {
@@ -49,7 +53,7 @@
 }
 
 .messenger-panel.open {
-    right: 0;
+    right: 450px;
 }
 
 /* 패널이 열릴 때 오른쪽으로 이동 */

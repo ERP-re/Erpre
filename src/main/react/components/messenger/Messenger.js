@@ -69,6 +69,7 @@ function Messenger({ isOpen, toggleMessenger }) {
 
     return (
         <div>
+            {/* 슬라이드 패널*/}
             <div className={`messenger-panel ${isOpen ? 'open' : ''}`}>
                 {/* 왼쪽 사이드바 */}
                 <div className="messenger-sidebar">
@@ -96,10 +97,11 @@ function Messenger({ isOpen, toggleMessenger }) {
                         <input type="text" placeholder="이름, 부서를 입력해주세요"/>
                     </div>
                 </div>
+
                 {/* 유저 프로필*/}
                 <div className="messenger-user">
                     <div className="erpre-logo">
-                        <img src="./erpre.jpg" alt="회사 로고"/>
+                        <img src="../../resources/static/img/erpre.jpg'" alt="회사 로고"/>
                     </div>
                     <div className="info">
                         <div className="info-wrapper">
@@ -108,11 +110,11 @@ function Messenger({ isOpen, toggleMessenger }) {
                             {/* 상태변경*/}
                             <div className={`profile status ${userStatus.value}`}>
                                 <div className="status-select-wrapper">
-                                    <Select
-                                        options={options}
+                                    <select
+                                        options={statusIcon()}
                                         value={userStatus}
                                         onChange={handleStatusChange}>
-                                    </Select>
+                                    </select>
                                 </div>
                             </div>
                         </div>
