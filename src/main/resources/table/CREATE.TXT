@@ -106,8 +106,9 @@ create table m_employee (
     employee_delete_date   timestamp        null,     -- 삭제 일시
     employee_status        varchar(20)      null default 'offline',
     employee_status_update_time   timestamp null default current_timestamp,
+    employee_status_message varchar(50)     null,
     department_id          int              not null, -- 부서 아이디
-    job_id                 int              not null  -- 직급 아이디
+    job_id                 int              not null,  -- 직급 아이디
     primary key (employee_id) -- 기본 키 설정
 );
 
@@ -137,7 +138,7 @@ CREATE TABLE m_message_recipient (
 
 -- 10. 쪽지 첨부파일 (발신)
 CREATE TABLE m_message_file (
-    message_attachment_id SERIAL PRIMARY KEY
+    message_attachment_id SERIAL PRIMARY KEY,
     message_no INTEGER NOT NULL,
     message_file_name VARCHAR(255),
     message_file_url VARCHAR(255) NOT NULL,
@@ -324,7 +325,7 @@ CREATE TABLE m_qr_code (
     qr_code_expiration_date TIMESTAMP NULL,
     qr_code_last_scanned TIMESTAMP NULL,
     qr_code_usage_count INTEGER NOT NULL DEFAULT 0,
-    qr_code_delete_yn CHAR(1) NULL DEFAULT 'n',
+    qr_code_delete_yn CHAR(1) NULL DEFAULT 'N',
     qr_code_delete_date TIMESTAMP NULL,
     employee_id VARCHAR(50) NULL,
     warehouse_no INTEGER NULL,
@@ -334,7 +335,7 @@ CREATE TABLE m_qr_code (
 --uuid 확장 모듈 안될시
 --create extension if not exists pgcrypto;
 --create table m_qr_code (
-      qr_code_id uuid primary key default gen_random_uuid(),
+--      qr_code_id uuid primary key default gen_random_uuid(),
 
 
 -- 24. 급여
@@ -376,7 +377,7 @@ CREATE TABLE m_dispatch (
     dispatch_start_date TIMESTAMP NULL DEFAULT current_timestamp,
     dispatch_end_date TIMESTAMP NULL,
     dispatch_qr_code VARCHAR(500) NULL,
-    dispatch_delete_yn CHAR(1) NULL DEFAULT 'n',
+    dispatch_delete_yn CHAR(1) NULL DEFAULT 'N',
     customer_no INTEGER NOT NULL,
     order_h_no INTEGER NULL,
     order_d_no INTEGER NULL,
