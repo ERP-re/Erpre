@@ -1,51 +1,53 @@
 /* 왼쪽 사이드바 */
-.messenger-sidebar {
-    width: 80px;
+.messenger-panel.sidebar {
+    position: fixed;
+    right: -350px;
+}
+
+.messenger-panel.open.sidebar {
+    position: fixed;
+    right: 350px;
+    z-index: 1000;
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+    width: 55px;
     height: 100%;
     background-color: #f4f4f4;
-    position: fixed;
-    right: -450px;
     top: 0;
     box-shadow: -5px 0 5px rgba(0, 0, 0, 0.1);
     transition: right 0.3s ease;
-    z-index: 1000;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+
 }
 
-.messenger-sidebar.open {
-    right: 0;
-}
-
-.messenger-sidebar button {
+.messenger-panel.open.sidebar button {
     margin-top: 20px;
     background-color: transparent;
     width: 80px;
-    height: 50px;
+    height: 40px;
     border: none;
     margin-bottom: 20px;
-    font-size: 33px;
+    font-size: 25px;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.messenger-sidebar button.btn1 {
-    margin-top: 35px;
+.messenger-panel.open.sidebar button.btn1 {
+    margin-top: 25px;
 }
 
-.messenger-sidebar button:hover {
-    color: #307cff;
+.messenger-panel.open.sidebar button:hover {
+    color: #007CC1;
 }
 
 /* 메신저 슬라이드 패널 */
 .messenger-panel {
     position: fixed;
     top: 0;
-    right: -450px;
-    width: 450px;
+    right: -350px;
+    width: 350px;
     height: 100%;
     background-color: #fff;
     transition: right 0.3s ease;
@@ -53,7 +55,7 @@
 }
 
 .messenger-panel.open {
-    right: 450px;
+    right: 0;
 }
 
 /* 패널이 열릴 때 오른쪽으로 이동 */
@@ -66,15 +68,15 @@
     color: #000;
     position: relative;
     font-size: 25px;
-    margin-top: 25px;
+    margin-top: 20px;
 }
 
 .messenger-header .messenger-close {
     position: absolute;
     right: 20px;
     cursor: pointer;
-    color: rgb(255, 255, 255);
-    font-size: 20px;
+    color: rgb(0, 0, 0);
+    font-size: 25px;
 }
 
 /* 검색창 */
@@ -97,7 +99,7 @@
 }
 
 .search-input-container .search-icon {
-    font-size: 30px;
+    font-size: 20px;
     color: #999;
     margin-right: 10px;
     margin-left: 5px;
@@ -108,7 +110,7 @@
     margin-left: 5px;
     background-color: transparent;
     outline: none;
-    font-size: 18px;
+    font-size: 15px;
     color: #333;
     width: 100%;
 }
@@ -122,8 +124,8 @@
 }
 
 .messenger-user img {
-    height: 80px;
-    width: 80px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
     object-fit: cover;
     float: left;
@@ -134,53 +136,76 @@
     display: flex;
     flex-direction: column;
     padding: 0px 10px;
-    margin-left: 8px;
 }
 
 .info-wrapper {
     display: flex;
     align-items: center;
-    justify-content: space-between;
 }
 
 .messenger-user .user-name {
-    font-size: 22px;
+    font-size: 18px;
     font-weight: bold;
-    margin-right: 12px;
+    line-height: 1;
+    margin: 0;
+    width: 100%;
 }
 
 /* 상태변경*/
-.profile status {
+.profile {
     display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.profile.status {
+    display: flex;
+    align-items: center;
+    height: 30px;
 }
 
 .status-select-wrapper {
-    flex-grow: 1;
-    position: relative;
-    display: inline-block;
-    line-height: 100%;
-    vertical-align: middle;
-    border:none;
-    appearance: none;
-    outline: none;
+    display: flex;
+    align-items: center;
+    height: 40px;
+    margin-left: auto;
 }
 
-.status-select-wrapper::after {
-    content: '▼';
-    font-size: 14px;
-    color: #333;
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
+.Select__control {
+    min-height: 40px;
+    height: 40px;
+}
+
+.custom-option {
+    display: flex;
+    align-items: center;
+    color: black !important;
+    padding: 3px !important;
+    margin-left: 2px !important;
+}
+
+.css-1hqnu8h {
+    padding: 2px 0px 2px 23px !important;
+    overflow: visible !important;
+}
+
+.css-1xc3v61-indicatorContainer {
+    padding: 2px !important;
+}
+
+.single-value {
+    display: flex;
+    align-items: center;
+    color: black;
 }
 
 .messenger-user .status-message {
-    margin-top: 4px;
-    font-size: 19px;
-    width: 300px;
+    margin-top: 5px;
+    font-size: 16px;
+    width: 200px;
     word-wrap: break-word;
+    color: black;
 }
 
 /* 메신저 내용 */
