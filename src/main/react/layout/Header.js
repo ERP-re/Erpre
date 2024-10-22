@@ -8,8 +8,9 @@ import '../../resources/static/css/messenger/Messenger.css'; // 메신저 관련
 function Header() {
     const [isMessengerOpen, setMessengerOpen] = useState(false);
 
+    // 메신저 열림/닫힘 반전
     const toggleMessenger = () => {
-        setMessengerOpen(!isMessengerOpen); // isMessengerOpen의 현재 값 반전
+        setMessengerOpen(!isMessengerOpen);
     };
 
     const handleEmailClick = () => {
