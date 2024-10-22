@@ -328,8 +328,7 @@ CREATE TABLE m_qr_code (
     qr_code_delete_yn CHAR(1) NULL DEFAULT 'N',
     qr_code_delete_date TIMESTAMP NULL,
     employee_id VARCHAR(50) NULL,
-    warehouse_no INTEGER NULL,
-    order_d_no INTEGER NULL
+    warehouse_no INTEGER NULL
 );
 
 --uuid 확장 모듈 안될시
@@ -376,10 +375,8 @@ CREATE TABLE m_dispatch (
     dispatch_status VARCHAR(100) NULL DEFAULT 'pending',
     dispatch_start_date TIMESTAMP NULL DEFAULT current_timestamp,
     dispatch_end_date TIMESTAMP NULL,
-    dispatch_qr_code VARCHAR(500) NULL,
     dispatch_delete_yn CHAR(1) NULL DEFAULT 'N',
-    customer_no INTEGER NOT NULL,
-    order_h_no INTEGER NULL,
     warehouse_no INTEGER NOT NULL,
-    hq_name VARCHAR(20) NOT NULL
+    qr_code_id UUID NOT NULL,
+    order_d_no INTEGER NOT NULL
 );

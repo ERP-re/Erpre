@@ -109,19 +109,19 @@ FOREIGN KEY (approver_id) REFERENCES m_employee(employee_id);
 
 -- 출고 테이블 외래키 설정
 ALTER TABLE m_dispatch
-ADD CONSTRAINT FK_DISPATCH_CUSTOMER
-FOREIGN KEY (customer_no)
-REFERENCES m_customer (customer_no);
-
-ALTER TABLE m_dispatch
-ADD CONSTRAINT FK_DISPATCH_ORDER_H
-FOREIGN KEY (order_h_no)
-REFERENCES m_order_h (order_h_no);
+ADD CONSTRAINT FK_DISPATCH_ORDER_D
+FOREIGN KEY (order_d_no)
+REFERENCES m_order_d (order_d_no);
 
 ALTER TABLE m_dispatch
 ADD CONSTRAINT FK_DISPATCH_WAREHOUSE
 FOREIGN KEY (warehouse_no)
 REFERENCES m_warehouse (warehouse_no);
+
+ALTER TABLE m_dispatch
+ADD CONSTRAINT FK_DISPATCH_QRCODE
+FOREIGN KEY (qr_code_id)
+REFERENCES m_qr_code (qr_code_id);
 
 ALTER TABLE m_dispatch
 ADD CONSTRAINT chk_dispatch_status
@@ -133,11 +133,6 @@ ALTER TABLE m_qr_code
 ADD CONSTRAINT FK_QRCODE_WAREHOUSE
 FOREIGN KEY (warehouse_no)
 REFERENCES m_warehouse (warehouse_no);
-
-ALTER TABLE m_qr_code
-ADD CONSTRAINT FK_QRCODE_ORDER_D
-FOREIGN KEY (order_d_no)
-REFERENCES m_order_d (order_d_no);
 
 ALTER TABLE m_qr_code
 ADD CONSTRAINT FK_QRCODE_EMPLOYEE
