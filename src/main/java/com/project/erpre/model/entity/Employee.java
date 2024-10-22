@@ -50,6 +50,15 @@ public class Employee {
     @Column(name = "employee_delete_date")
     private Timestamp employeeDeleteDate; // 삭제 일시
 
+    @Column(name = "employee_status")
+    private String employeeStatus;
+
+    @Column(name = "employee_status_update_time")
+    private Timestamp employeeStatusUpdateTime;
+
+    @Column(name = "employee_status_message")
+    private String employeeStatusMessage;
+
     @ManyToOne
     @JoinColumn(name = "job_id", nullable = false)
     @JsonIgnore

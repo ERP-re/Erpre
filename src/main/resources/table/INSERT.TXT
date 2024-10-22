@@ -1,97 +1,195 @@
-INSERT INTO m_customer (
-    customer_name,
-    customer_tel,
-    customer_representative_name,
-    customer_business_reg_no,
-    customer_addr,
-    customer_fax_no,
-    customer_manager_name,
-    customer_manager_email,
-    customer_manager_tel,
-    customer_country_code,
-    customer_type,
-    customer_e_tax_invoice_yn,
-    customer_transaction_start_date,
-    customer_transaction_end_date
-)
-VALUES
--- 1
-('삼성', '02-2053-3000', '이재용', '123-45-67890', '서울특별시 서초구 서초대로 129', '02-2053-3001', '김철수', 'manager1@samsung.com', '010-1234-5678', 'KR', '01', 'Y', '2018-01-01', '2023-01-01'),
--- 2
-('SK', '02-2121-5114', '최태원', '234-56-78901', '서울특별시 종로구 종로 26', '02-2121-5115', '박영수', 'manager2@sk.com', '010-2345-6789', 'JP', '02', 'N', '2019-01-01', '2020-01-01'),
--- 3
-('현대자동차', '02-3464-1111', '정의선', '345-67-89012', '서울특별시 서초구 헌릉로 12', '02-3464-1112', '이민수', 'manager3@hyundai.com', '010-3456-7890', 'KR', '03', 'Y', '2020-01-01', '2023-01-01'),
--- 4
-('LG', '02-3777-1114', '구광모', '456-78-90123', '서울특별시 영등포구 여의대로 128', '02-3777-1115', '최영민', 'manager4@lg.com', '010-4567-8901', 'CN', '04', 'N', '2017-07-01', '2022-07-01'),
--- 5
-('포스코', '054-220-0114', '최정우', '567-89-01234', '경상북도 포항시 남구 동해안로 6261', '054-220-0115', '박준영', 'manager5@posco.com', '010-5678-9012', 'KR', '01', 'Y', '2016-01-01', '2021-01-01'),
--- 6
-('롯데', '02-3668-3114', '신동빈', '678-90-12345', '서울특별시 중구 남대문로 81', '02-3668-3115', '김영호', 'manager6@lotte.net', '010-6789-0123', 'US', '02', 'N', '2015-01-01', '2020-01-01'),
--- 7
-('한화', '02-729-1140', '김승연', '789-01-23456', '서울특별시 중구 청계천로 86', '02-729-1141', '이수진', 'manager7@hanwha.com', '010-7890-1234', 'JP', '03', 'Y', '2014-01-01', '2019-01-01'),
--- 8
-('지에스', '02-2005-1114', '허태수', '890-12-34567', '서울특별시 강남구 강남대로 508', '02-2005-1115', '장민호', 'manager8@gs.com', '010-8901-2345', 'CN', '04', 'N', '2013-01-01', '2018-01-01'),
--- 9
-('농협', '02-2080-5114', '이성희', '901-23-45678', '서울특별시 중구 통일로 120', '02-2080-5115', '김민주', 'manager9@nonghyup.com', '010-9012-3456', 'KR', '01', 'Y', '2012-01-01', '2017-01-01'),
--- 10
-('신세계', '02-727-1114', '정용진', '012-34-56789', '서울특별시 중구 소공로 63', '02-727-1115', '최지훈', 'manager10@shinsegae.com', '010-0123-4567', 'US', '02', 'N', '2011-01-01', '2016-01-01'),
--- 11
-('신세계백화점', '02-310-1234', '차정호', '123-45-67890', '서울특별시 중구 소공로 63', '02-310-1235', '이하은', 'manager11@shinsegae.com', '010-1234-5678', 'KR', '03', 'Y', '2020-01-01', NULL),
--- 12
-('CJ', '02-3277-1114', '이재현', '234-56-78901', '서울특별시 중구 소공로 70', '02-3277-1115', '박서연', 'manager12@cj.net', '010-2345-6789', 'JP', '04', 'Y', '2019-06-01', '2024-06-01'),
--- 13
-('KT', '02-734-6114', '구현모', '345-67-89012', '서울특별시 종로구 세종대로 178', '02-734-6115', '김준수', 'manager13@kt.com', '010-3456-7890', 'CN', '01', 'Y', '2018-03-01', '2023-03-01'),
--- 14
-('카카오', '1577-3321', '홍은택', '456-78-90123', '경기도 성남시 분당구 판교역로 235', '031-1234-5678', '이예진', 'manager14@kakao.com', '010-4567-8901', 'KR', '02', 'Y', '2017-05-01', NULL),
--- 15
-('한진', '02-726-6114', '조원태', '567-89-01234', '서울특별시 중구 남대문로 63', '02-726-6115', '박수현', 'manager15@hanjin.co.kr', '010-5678-9012', 'US', '03', 'N', '2016-07-01', '2021-07-01'),
--- 16
-('두산', '02-3398-1114', '박정원', '678-90-12345', '서울특별시 중구 장충단로 275', '02-3398-1115', '김동현', 'manager16@doosan.com', '010-6789-0123', 'JP', '04', 'Y', '2015-09-01', '2020-09-01'),
--- 17
-('HMM', '02-3706-5114', '배재훈', '789-01-23456', '서울특별시 종로구 새문안로 68', '02-3706-5115', '정민아', 'manager17@hmm21.com', '010-7890-1234', 'CN', '01', 'N', '2014-11-01', '2019-11-01'),
--- 18
-('영풍', '02-3789-1114', '최창걸', '890-12-34567', '서울특별시 중구 세종대로 136', '02-3789-1115', '최민정', 'manager18@ypgroup.co.kr', '010-8901-2345', 'KR', '02', 'Y', '2013-02-01', NULL),
--- 19
-('효성', '02-707-7000', '조현준', '901-23-45678', '서울특별시 마포구 마포대로 109', '02-707-7001', '김영민', 'manager19@hyosung.com', '010-9012-3456', 'JP', '03', 'Y', '2012-04-01', '2017-04-01'),
--- 20
-('하림', '063-540-1000', '김홍국', '012-34-56789', '전라북도 익산시 망성면 망성로 14', '063-540-1001', '박지훈', 'manager20@harim.com', '010-0123-4567', 'CN', '04', 'Y', '2011-06-01', '2016-06-01'),
--- 21
-('한국타이어', '080-022-8272', '조현범', '123-45-67890', '서울특별시 서초구 테헤란로 133', '02-2222-3333', '이민정', 'manager21@hankooktire.com', '010-1234-5678', 'KR', '01', 'N', '2010-08-01', '2015-08-01'),
--- 22
-('삼천리', '031-710-3114', '이만득', '234-56-78901', '경기도 성남시 분당구 서현로 170', '031-710-3115', '최동욱', 'manager22@samhcholri.co.kr', '010-2345-6789', 'JP', '02', 'Y', '2009-10-01', '2014-10-01'),
--- 23
-('금호석유화학', '02-6961-0000', '박찬구', '345-67-89012', '서울특별시 종로구 새문안로 68', '02-6961-0001', '김수현', 'manager23@kkpc.com', '010-3456-7890', 'CN', '03', 'Y', '2008-12-01', '2013-12-01');
+-- 1. 부서 (m_department 테이블에 데이터를 먼저 삽입)
+INSERT INTO m_department (department_id, department_name, department_location, department_tel)
+VALUES 
+(1, 'HR Department', 'Seoul HQ', '02-1234-5678'),
+(2, 'IT Department', 'Busan Branch', '051-8765-4321'),
+(3, 'Sales Department', 'Incheon Office', '032-7654-3210');
 
+-- 2. 직급 (m_job 테이블에 데이터 삽입)
+INSERT INTO m_job (job_id, job_name, min_years_of_service, min_salary, grade_incentive_rate, job_role)
+VALUES 
+(1, 'Admin', 5, 50000000, 10.00, 'Admin'),
+(2, 'Assistant Manager', 3, 30000000, 5.00, 'Assistant Manager'),
+(3, 'Staff', 0, 25000000, 2.00, 'Staff');
 
-INSERT INTO m_category (category_level, parent_category_no, category_nm)
-VALUES
-(1, NULL, '가구'),
-(2, 1, '의자'),
-(3, 2, '사무용 의자');
+-- 3. 직원 (부서와 직급 데이터가 있는 상태에서 m_employee 테이블에 삽입)
+INSERT INTO m_employee (employee_id, employee_pw, employee_name, employee_email, employee_tel, department_id, job_id)
+VALUES 
+('E001', 'password123', 'John Employee', 'john.employee@company.com', '010-1234-5678', 1, 1),
+('E002', 'password456', 'Alice Employee', 'alice.employee@company.com', '010-2345-6789', 2, 2),
+('E003', 'password789', 'Bob Employee', 'bob.employee@company.com', '010-3456-7890', 3, 3);
 
+-- 4. 고객사 (m_customer 테이블에 데이터 삽입)
+INSERT INTO m_customer (customer_no, customer_name, customer_tel, customer_representative_name, customer_business_reg_no, customer_addr, customer_fax_no, customer_manager_name, customer_manager_email, customer_manager_tel, customer_country_code, customer_type, customer_e_tax_invoice_yn, customer_transaction_start_date, customer_transaction_end_date)
+VALUES 
+(1, 'ABC Corp', '010-1234-5678', 'John Doe', '123-45-67890', 'Seoul, Korea', '02-1234-5678', 'Jane Manager', 'jane.manager@abc.com', '010-9876-5432', 'KR', 'Supplier', 'Y', '2023-01-01', NULL),
+(2, 'XYZ Ltd', '02-8765-4321', 'Alice Lee', '234-56-78901', 'Busan, Korea', '051-8765-4321', 'Paul Manager', 'paul.manager@xyz.com', '010-1122-3344', 'KR', 'Client', 'N', '2022-05-01', NULL),
+(3, 'Tech Innovators', '031-7654-3210', 'Michael Kim', '345-67-89012', 'Incheon, Korea', '032-7654-3210', 'David Manager', 'david.manager@tech.com', '010-2233-4455', 'KR', 'Partner', 'Y', '2021-10-15', '2023-10-01');
+
+-- 5. 상품 카테고리 (m_category 테이블에 데이터 삽입)
+INSERT INTO m_category (category_no, category_level, parent_category_no, category_nm)
+VALUES 
+(1, 1, NULL, 'Electronics'),
+(2, 2, 1, 'Computers'),
+(3, 2, 1, 'Mobile Devices');
+
+-- 6. 상품 (m_product 테이블에 데이터 삽입)
 INSERT INTO m_product (product_cd, category_no, product_nm, product_price)
-VALUES
-('P0001', 3, '의자 블랙 A', 10000);
+VALUES 
+('P001', 2, 'Laptop', 1500000.00),
+('P002', 3, 'Smartphone', 800000.00),
+('P003', 2, 'Tablet', 600000.00);
 
+-- 7. 고객사별 상품 가격 (m_price 테이블에 데이터 삽입)
 INSERT INTO m_price (customer_no, product_cd, price_customer, price_start_date, price_end_date)
-VALUES
-(1, 'P0001', 10000.00, '2023-01-01', '2023-01-31'),
-(1, 'P0001', 20000.00, '2023-02-01', '2023-02-28');
+VALUES 
+(1, 'P001', 1450000.00, '2023-01-01', NULL),
+(2, 'P002', 780000.00, '2022-06-01', NULL),
+(3, 'P003', 580000.00, '2021-11-01', '2023-09-30');
 
-INSERT INTO m_employee (employee_id, employee_pw, employee_name, employee_email, employee_tel, employee_role)
-VALUES
-('adin', 'admin', '관리자', 'emp1@company.com', '010-1111-1111', 'admin'),
-('emp02', 'pw02', '매니저', 'emp2@company.com', '010-2222-2222', 'manager'),
-('emp03', 'pw03', '스태프', 'emp3@company.com', '010-3333-3333', 'staff');
+-- 8. 주문 (직원과 고객사 데이터가 있는 후에 삽입)
+INSERT INTO m_order_h (order_h_no, customer_no, employee_id, order_h_total_price, order_h_status)
+VALUES 
+(1, 1, 'E001', 3000000.00, 'approved'),
+(2, 2, 'E002', 1600000.00, 'ing'),
+(3, 3, 'E003', 580000.00, 'denied');
 
-INSERT INTO m_order_h (customer_no, employee_id, order_h_total_price, order_h_status)
-VALUES
-(1, 'emp02', 100000.00, 'ing'),
-(2, 'emp02', 200000.00, 'approved'),
-(3, 'emp02', 300000.00, 'denied');
+-- 9. 주문 상세 (m_order_d 테이블에 데이터 삽입)
+INSERT INTO m_order_d (order_d_no, order_h_no, product_cd, order_d_price, order_d_qty, order_d_total_price, order_d_delivery_request_date)
+VALUES 
+(1, 1, 'P001', 1450000.00, 2, 2900000.00, '2023-02-01'),
+(2, 2, 'P002', 800000.00, 1, 800000.00, '2023-03-01'),
+(3, 3, 'P003', 600000.00, 1, 600000.00, '2023-04-01');
 
-INSERT INTO m_order_d (order_h_no, product_cd, order_d_price, order_d_qty, order_d_total_price, order_d_delivery_request_date)
-VALUES
-(1, 'P0001', 10000.00, 10, 100000.00, '2023-01-01'),
-(2, 'P0001', 20000.00, 5, 100000.00, '2023-02-01'),
-(3, 'P0001', 30000.00, 3, 90000.00, '2023-03-01');
+-- 10. 출고 창고 (m_warehouse 테이블에 데이터 삽입)
+INSERT INTO m_warehouse (warehouse_no, warehouse_name, warehouse_tel, warehouse_addr, warehouse_manager_name)
+VALUES 
+(1, 'Seoul Warehouse', '02-7654-3210', '123 Seoul Street, Korea', 'Warehouse Manager A'),
+(2, 'Busan Warehouse', '051-7654-3210', '456 Busan Street, Korea', 'Warehouse Manager B'),
+(3, 'Incheon Warehouse', '032-7654-3210', '789 Incheon Street, Korea', 'Warehouse Manager C');
+
+-- 11. QR 코드 (m_qr_code 테이블에 데이터 삽입)
+INSERT INTO m_qr_code (qr_code_id, qr_code_data, qr_code_status, warehouse_no, employee_id)
+VALUES 
+(uuid_generate_v4(), 'QR123456', 'active', 1, 'E001'),
+(uuid_generate_v4(), 'QR789012', 'inactive', 2, 'E002'),
+(uuid_generate_v4(), 'QR345678', 'expired', 3, 'E003');
+
+-- 12. 출고 (m_dispatch 테이블에 데이터 삽입)
+INSERT INTO m_dispatch (dispatch_status, warehouse_no, qr_code_id, order_d_no)
+VALUES 
+('pending', 1, (SELECT qr_code_id FROM m_qr_code WHERE qr_code_data = 'QR123456'), 1),
+('in progress', 2, (SELECT qr_code_id FROM m_qr_code WHERE qr_code_data = 'QR789012'), 2),
+('complete', 3, (SELECT qr_code_id FROM m_qr_code WHERE qr_code_data = 'QR345678'), 3);
+
+-- 13. 급여 (m_salary 테이블에 데이터 삽입)
+INSERT INTO m_salary (employee_id, base_salary, bonus, performance_incentive_rate, total_salary, salary_date)
+VALUES 
+('E001', 5000000, 500000, 10.00, 5500000, '2023-10-10'),
+('E002', 4000000, 300000, 5.00, 4300000, '2023-10-10'),
+('E003', 3000000, 200000, 2.00, 3100000, '2023-10-10');
+
+-- 14. 근태 (m_attendance 테이블에 데이터 삽입)
+INSERT INTO m_attendance (employee_id, attendance_date, check_in_time, check_out_time, total_hours_worked, overtime_hours, attendance_status)
+VALUES 
+('E001', '2023-10-20', '2023-10-20 09:00', '2023-10-20 18:00', 9.00, 1.00, '출근'),
+('E002', '2023-10-20', '2023-10-20 09:30', '2023-10-20 18:30', 8.50, 0.50, '출근'),
+('E003', '2023-10-20', '2023-10-20 10:00', '2023-10-20 17:30', 7.50, 0.00, '출근');
+
+-- 15. 쪽지 (발신)
+INSERT INTO m_message (message_sender_id, message_content)
+VALUES 
+('E001', 'Hello, this is a test message.'),
+('E002', 'Reminder for tomorrow''s meeting.'),
+('E003', 'Please review the attached file.');
+
+-- 16. 쪽지 수신
+INSERT INTO m_message_recipient (message_no, recipient_id, recipient_read_yn)
+VALUES 
+(1, 'E002', 'N'),
+(2, 'E001', 'Y'),
+(3, 'E003', 'N');
+
+-- 17. 쪽지 첨부파일 (발신)
+INSERT INTO m_message_file (message_no, message_file_name, message_file_url, message_file_size, message_file_type)
+VALUES 
+(1, 'report.pdf', '/files/report.pdf', 102400, 'pdf'),
+(2, 'meeting.pptx', '/files/meeting.pptx', 204800, 'pptx'),
+(3, 'attachment.docx', '/files/attachment.docx', 51200, 'docx');
+
+-- 18. 채팅방 (m_chat 테이블에 데이터 삽입)
+INSERT INTO m_chat (chat_create_id, chat_title)
+VALUES 
+('E001', 'Project Discussion'),
+('E002', 'Team Meeting'),
+('E003', 'Client Feedback');
+
+-- 19. 채팅방 참여자 (m_chat_participant 테이블에 데이터 삽입)
+INSERT INTO m_chat_participant (chat_no, participant_id)
+VALUES 
+(1, 'E002'),
+(2, 'E001'),
+(3, 'E003');
+
+-- 20. 채팅 메세지 (발신)
+INSERT INTO m_chat_message (chat_no, chat_sender_id, chat_message_content)
+VALUES 
+(1, 'E001', 'Let''s discuss the project progress.'),
+(2, 'E002', 'Tomorrow''s meeting is at 10 AM.'),
+(3, 'E003', 'I have received the client''s feedback.');
+
+-- 21. 채팅 메세지 수신 (m_chat_message_read 테이블에 데이터 삽입)
+INSERT INTO m_chat_message_read (chat_message_no, chat_message_recipient_id)
+VALUES 
+(1, 'E002'),
+(2, 'E001'),
+(3, 'E003');
+
+-- 22. 채팅 첨부파일 (발신) 
+INSERT INTO M_CHAT_FILE (chat_message_no, chat_file_name, chat_file_url, chat_file_size, chat_file_type)
+VALUES 
+(1, 'progress.pdf', '/files/chat/progress.pdf', 204800, 'pdf'),
+(2, 'schedule.xlsx', '/files/chat/schedule.xlsx', 102400, 'xlsx'),
+(3, 'feedback.docx', '/files/chat/feedback.docx', 51200, 'docx');
+
+-- 23. 채팅 첨부파일 (수신)
+INSERT INTO M_CHAT_MESSAGE_READ_FILE (chat_message_no, chat_message_recipient_id, chat_attachment_id)
+VALUES 
+(1, 'E002', 1),
+(2, 'E001', 2),
+(3, 'E003', 3);
+
+-- 24. 이메일 (발신)
+INSERT INTO "m_email_send" ("email_id_s", "email_addr_receive_s", "email_subject_s", "email_content_s")
+VALUES 
+('E001', 'client@company.com', 'Project Proposal', 'Please find attached the project proposal.'),
+('E002', 'manager@company.com', 'Meeting Agenda', 'The agenda for tomorrow''s meeting is attached.'),
+('E003', 'ceo@company.com', 'Quarterly Report', 'Attached is the quarterly report.');
+
+-- 25. 이메일 (수신)
+INSERT INTO "m_email_receive" ("email_id_r", "email_addr_send_r", "email_subject_r", "email_content_r")
+VALUES 
+('E001', 'client@company.com', 'Feedback on Proposal', 'The client has provided feedback on the proposal.'),
+('E002', 'manager@company.com', 'Updated Agenda', 'The meeting agenda has been updated.'),
+('E003', 'ceo@company.com', 'Approval of Report', 'The quarterly report has been approved.');
+
+-- 26. 이메일 첨부파일 (발신)
+INSERT INTO "m_email_file_send" ("email_nm_s", "email_file_name_s", "email_file_url_s", "email_file_size_s", "email_file_type_s")
+VALUES 
+(1, 'proposal.pdf', '/files/email/proposal.pdf', 102400, 'pdf'),
+(2, 'agenda.pdf', '/files/email/agenda.pdf', 51200, 'pdf'),
+(3, 'report.xlsx', '/files/email/report.xlsx', 204800, 'xlsx');
+
+-- 27. 이메일 첨부파일 (수신)
+INSERT INTO "m_email_file_receive" ("email_nm_r", "email_file_name_r", "email_file_url_r", "email_file_size_r", "email_file_type_r")
+VALUES 
+(1, 'feedback.pdf', '/files/email/feedback.pdf', 102400, 'pdf'),
+(2, 'updated_agenda.pdf', '/files/email/updated_agenda.pdf', 51200, 'pdf'),
+(3, 'approved_report.pdf', '/files/email/approved_report.pdf', 204800, 'pdf');
+
+-- 28. 쪽지 첨부파일 (수신)
+INSERT INTO m_message_rectpient_file (message_no, recipient_id, message_attachment_id)
+VALUES 
+(1, 'E002', 1),
+(2, 'E001', 2),
+(3, 'E003', 3);

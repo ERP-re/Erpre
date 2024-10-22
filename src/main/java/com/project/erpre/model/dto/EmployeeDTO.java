@@ -24,4 +24,7 @@ public class EmployeeDTO {
     private Timestamp employeeUpdateDate;
     private String employeeDeleteYn; // 삭제 여부 기본값 'N'
     private Timestamp employeeDeleteDate; // 삭제 일시
+    private String employeeStatus;
+    private Timestamp employeeStatusUpdateTime;
+    private String employeeStatusMessage;
 }

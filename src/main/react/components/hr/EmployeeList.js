@@ -53,6 +53,7 @@ function EmployeeList() {
         employeeEmail: '',
         employeeTel: '',
         employeeRole: ''
+
     });
 
     //    const handleRegiClick = () => {
@@ -361,7 +362,7 @@ function EmployeeList() {
         <Layout currentMenu="employee"> {/* 레이아웃 컴포넌트, currentMenu는 현재 선택된 메뉴를 나타냄 */}
             <main className="main-content menu_employee">
                 <div className="menu_title">
-                    <div className="sub_title">직원 관리</div>
+                    <div className="sub_title">인사 관리</div>
                     <div className="main_title">직원 목록</div>
                 </div>
                 <div className="menu_content">
@@ -442,8 +443,8 @@ function EmployeeList() {
                                     <th>아이디</th>
                                     <th>이름</th>
                                     <th>연락처</th>
-                                    {/*<th>이메일</th>*/}
-                                    <th>권한</th>
+                                    <th>직급</th>
+                                    <th>부서</th>
                                     <th>등록일시</th>
                                     <th>수정일시</th>
                                     <th>삭제일시</th>
