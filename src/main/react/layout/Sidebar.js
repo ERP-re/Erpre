@@ -74,7 +74,7 @@ function Sidebar({ currentMenu }) {
                     <div className="user-name">
                         {employee ? (
                             <>
-                                {employee.employeeName} ({employee.employeeRole.toUpperCase()})
+                                {employee && employee.job && employee.job.jobRole ? employee.job.jobRole : '없는 권한'}
                             </>
                         ) : (
                             'LOADING'

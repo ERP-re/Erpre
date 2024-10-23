@@ -39,10 +39,10 @@ public class AuthController {
                     });
 
             // 직원 정보 확인
-            System.out.println("찾은 직원: " + employee.toString());
+            System.out.println("조회 직원: " + employee.toString());
 
             // 비밀번호 일치 여부 확인
-            if (!passwordEncoder.matches(loginRequest.getEmployeePw(), employee.getEmployeePw())) {
+            if (!loginRequest.getEmployeePw().equals(employee.getEmployeePw())) {
                 System.out.println("비밀번호가 일치하지 않습니다: " + loginRequest.getEmployeeId());
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                         .body(Collections.singletonMap("message", "비밀번호가 일치하지 않습니다."));
