@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../../resources/static/css/common/Sidebar.css';
 import { useLocation } from 'react-router-dom';
+import axios from "axios";
 
 function Sidebar({ currentMenu }) {
     const [activeSubMenu, setActiveSubMenu] = useState(() => {
@@ -9,7 +10,6 @@ function Sidebar({ currentMenu }) {
     });
     const [loginTime, setLoginTime] = useState('시간 정보 없음');
     const [employee, setEmployee] = useState(null);
-    const [role, setRole] = useState('');
     const location = useLocation();
 
     useEffect(() => {
@@ -21,11 +21,14 @@ function Sidebar({ currentMenu }) {
     useEffect(() => {
         const fetchEmployee = async () => {
             try {
-                const response = await fetch('/api/employee', { credentials: 'include' });
-                if (response.ok) {
-                    const data = await response.json();
+                const response = await axios.get('/api/employee', {
+                    withCredentials: true
+                });
+
+                if (response.status === 200) {
+                    const data = response.data;
+                    console.log('직원 데이터:', data);
                     setEmployee(data);
-                    setRole(data.employeeRole);
                 } else {
                     console.error('사용자 정보를 가져오는 데 실패했습니다.');
                 }
@@ -74,7 +77,7 @@ function Sidebar({ currentMenu }) {
                     <div className="user-name">
                         {employee ? (
                             <>
-                                {employee && employee.job && employee.job.jobRole ? employee.job.jobRole : '없는 권한'}
+                                {employee.jobName === 'Admin' ? '관리자' : ''} {employee.employeeName} ({employee.departmentName})
                             </>
                         ) : (
                             'LOADING'

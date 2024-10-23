@@ -225,10 +225,6 @@ function Messenger({isOpen, toggleMessenger}) {
 
                             {/* 상태 아이콘 및 변경 */}
                             <div className="profile status">
-                                <div className="status-icon">
-                                    {/* 현재 상태에 맞는 아이콘 표시 */}
-                                    {getStatusIcon()}
-                                </div>
                                 <div className="status-select-wrapper">
                                     <Select
                                         value={options.find((option) => option.value === userStatus)}

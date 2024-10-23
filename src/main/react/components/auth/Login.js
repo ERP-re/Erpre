@@ -1,61 +1,73 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client'; // ReactDOM을 사용하여 React 컴포넌트를 DOM에 렌더링
 import '../../../resources/static/css/common/Layout.css';
-import '../../../resources/static/css/common/Login.css'; // 개별 CSS 스타일 적용
+import '../../../resources/static/css/common/Login.css';
+import axios from "axios"; // 개별 CSS 스타일 적용
 
 function Login() {
     const [id, setId] = useState('');
     const [pw, setPw] = useState('');
     const [error, setError] = useState('');
 
-    // useEffect(() => {
-    //     const loadRecaptchaScript = () => {
-    //         const script = document.createElement('script');
-    //         script.src = 'https://www.google.com/recaptcha/api.js';
-    //         script.async = true;
-    //         script.defer = true;
-    //         script.onload = () => {
-    //             console.log('reCAPTCHA script loaded');
-    //         };
-    //         document.body.appendChild(script);
-    //     };
-    //     loadRecaptchaScript();
-    // }, []);
-
+    // 로그인 요청시 병렬 요청 처리 (검증, 메신저)
     const handleLogin = async (e) => {
         e.preventDefault(); // 폼 제출 방지
 
-        // const captchaToken = window.grecaptcha.getResponse(); // reCAPTCHA 토큰을 받아옴
-        // if (!captchaToken) {
-        //     setError('CAPTCHA를 풀어야 합니다.');
-        //     return;
-        // }
-
         try {
-            console.log('로그인 시도:', { employeeId: id, employeePw: pw }); 
+            const loginData = {
+                employeeId: id,  // id 변수에 올바른 값이 있는지 확인
+                employeePw: pw   // pw 변수에 올바른 값이 있는지 확인
+            };
 
-            const response = await fetch('/api/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ employeeId: id, employeePw: pw }),
-                credentials: 'include' // 쿠키를 포함하여 서버로 전송
+            console.log('로그인 요청 데이터:', loginData);
+
+            // 1. 로그인 요청
+            const loginResponse = await axios.post('/api/login', {
+                employeeId: id,
+                employeePw: pw
+            }, {
+                headers: { 'Content-Type': 'application/json' },
+                withCredentials: true
             });
 
-            if (response.ok) {
-                const result = await response.json();
-                console.log('로그인 성공:', result); // 디버깅용 로그
-                location.href = "/main"; // 메인 페이지로 리다이렉트
+            if (loginResponse.status === 200) {
+                const result = loginResponse.data;
+                console.log('로그인 성공:', result);
+                console.log('사용자 권한', result.role);
+
+                if (result.role === 'Admin') {
+                    // 관리자 권한일 때 처리
+                    console.log("관리자 접근");
+                } else if (result.role === 'Staff') {
+                    // 일반 사원 권한일 때 처리
+                    console.log("일반 사원 접근");
+                }
+
+                // 2. 메신저 직원 목록 조회
+                const employeeResponse = await axios.get('/api/messengers/employeeList', {
+                    withCredentials: true
+                });
+
+                if (employeeResponse.status === 200) {
+                    console.log('직원 조회 성공:', employeeResponse.data);
+
+                    // 직원 조회 성공 시 메인 페이지로 리다이렉트
+                    location.href = "/main";
+                } else {
+                    console.error('직원 조회 실패');
+                    setError('직원 조회에 실패했습니다.');
+                }
+
             } else {
-                const result = await response.json();
-                console.log('로그인 실패', result)
-                setError(result.message || '로그인에 실패했습니다.');
+                console.log('로그인 실패', loginResponse.data)
+                setError(loginResponse.data.message || '로그인에 실패했습니다.');
             }
+
         } catch (err) {
             console.error('로그인 중 오류 발생:', err);
             setError('서버와의 연결에 실패했습니다.');
         }
+
     };
 
     return (
@@ -91,9 +103,6 @@ function Login() {
 
                     {error && <p className="error-message">{error}</p>}
 
-                    {/*<div className="recaptcha-container">*/}
-                    {/*    <div className="g-recaptcha" data-sitekey="6Lf6TlAqAAAAAD4ezvbWZJj2TGc8_WusXNm9D2f7"></div>*/}
-                    {/*</div>*/}
                         <button type="submit" className="login-btn">로그인</button>
                 </form>
                 <div className="login-footer">

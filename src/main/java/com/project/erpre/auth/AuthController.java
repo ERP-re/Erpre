@@ -7,14 +7,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class AuthController {
@@ -53,6 +53,7 @@ public class AuthController {
 
 
             // 로그인 성공 시 세션에 사용자 정보 저장
+            session.setAttribute("employeeId", employee.getEmployeeId());
             session.setAttribute("employee", employee);
 
             // HTTP-only 쿠키 설정 (세션ID를 쿠키에 설정)
@@ -68,8 +69,12 @@ public class AuthController {
             // 로그인 성공
             System.out.println("로그인 성공: " + loginRequest.getEmployeeId());
 
-            // 로그인 성공시 응답으로 성공 메시지를 반환
-            return ResponseEntity.ok(Collections.singletonMap("message", "로그인 성공"));
+            // 로그인 성공시 응답으로 메시지와 권한 정보를 함께 반환
+            Map<String, Object> responseMap = new HashMap<>();
+            responseMap.put("message", "로그인 성공");
+            responseMap.put("role", employee.getJob().getJobRole()); // 권한 정보 추가
+
+            return ResponseEntity.ok(responseMap);
         } catch (RuntimeException e) {
             // 특정 예외 처리
             System.out.println("런타임 예외 발생: " + e.getMessage());
