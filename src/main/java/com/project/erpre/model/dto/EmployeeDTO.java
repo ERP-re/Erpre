@@ -22,7 +22,10 @@ public class EmployeeDTO {
     private String jobName;
     private String jobRole;
     private Integer departmentId;
-    private String departmentName;
+
+    private String jobName;  // 직급 이름 (읽기용)
+    private String departmentName;  // 부서 이름 (읽기용)
+
     private Timestamp employeeInsertDate;
     private Timestamp employeeUpdateDate;
     private String employeeDeleteYn; // 삭제 여부 기본값 'N'
