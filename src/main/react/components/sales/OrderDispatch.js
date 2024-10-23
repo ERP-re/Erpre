@@ -4,6 +4,7 @@ import '../../../resources/static/css/common/Main.css'; // 공통 CSS 파일
 import Layout from "../../layout/Layout"; // 공통 레이아웃 컴포넌트를 임포트 (헤더, 푸터 등)
 import { BrowserRouter } from "react-router-dom";
 import '../../../resources/static/css/sales/OrderDispatch.css';
+import { Modal, Table, Input, Button } from 'antd';
 
 // 날짜 포맷팅 함수
 const formatDateTime = (dateString) => {
@@ -18,6 +19,139 @@ const formatDateTime = (dateString) => {
 };
 
 //출고지시 모달창
+const DispatchInstructionModal = ({ show, onClose, onSave, warehouseData }) => {
+    const [form, setForm] = useState({
+      //고객사
+      customerName: '', // 고객사 이름 - customer
+      customerAddr: '', // 고객사 주소(납품지주소) - customer 
+      //출하창고
+      warehouseName: '', //창고명 - warehouse 
+      orderDDeliveryRequestDate: '', //납품요청일 - orderD
+      //상품
+      productNm: '', //품목명 - product
+      orderDPrice: '', //출고단가 - orderD
+      orderDQty: '', //수량(단위포함) - orderD
+      orderDTotalPrice: '', //총금액(orderD
+    });
+  
+    const columns = [
+      {
+        title: '상품',
+        dataIndex: 'productNm',
+        key: 'productNm',
+      },
+      {
+        title: '품목명',
+        dataIndex: 'productNm',
+        key: 'productNm',
+      },
+      {
+        title: '출고단가',
+        dataIndex: 'orderDPrice',
+        key: 'orderDPrice',
+        render: (price) => `${price.toLocaleString()} 원`,
+      },
+      {
+        title: '수량(단위포함)',
+        dataIndex: 'orderDQty',
+        key: 'orderDQty',
+      },
+      {
+        title: '총금액',
+        dataIndex: 'orderDTotalPrice',
+        key: 'orderDTotalPrice',
+        render: (totalPrice) => `${totalPrice.toLocaleString()} 원`,
+      },
+    ];
+  
+    const handleInputChange = (e) => {
+      const { name, value } = e.target;
+      setForm({ ...form, [name]: value });
+    };
+  
+    const handleSave = () => {
+      onSave(form);
+    };
+  
+    return (
+      <Modal
+        title="출고지시 모달"
+        visible={show}
+        onCancel={onClose}
+        footer={[
+          <Button key="cancel" onClick={onClose}>취소</Button>,
+          <Button key="save" type="primary" onClick={handleSave}>저장</Button>,
+        ]}
+        width={800}
+      >
+        <div className="form-fields">
+          <Input
+            placeholder="고객사 이름"
+            name="customerName"
+            value={form.customerName}
+            onChange={handleInputChange}
+            style={{ marginBottom: '10px' }}
+          />
+          <Input
+            placeholder="고객사 주소"
+            name="customerAddr"
+            value={form.customerAddr}
+            onChange={handleInputChange}
+            style={{ marginBottom: '10px' }}
+          />
+          <Input
+            placeholder="출하창고"
+            name="warehouseName"
+            value={form.warehouseName}
+            onChange={handleInputChange}
+            style={{ marginBottom: '10px' }}
+          />
+          <Input
+            placeholder="납품요청일"
+            name="orderDDeliveryRequestDate"
+            value={form.orderDDeliveryRequestDate}
+            onChange={handleInputChange}
+            style={{ marginBottom: '10px' }}
+          />
+          <Input
+            placeholder="상품명"
+            name="productNm"
+            value={form.productNm}
+            onChange={handleInputChange}
+            style={{ marginBottom: '10px' }}
+          />
+          <Input
+            placeholder="출고단가"
+            name="orderDPrice"
+            value={form.orderDPrice}
+            onChange={handleInputChange}
+            style={{ marginBottom: '10px' }}
+          />
+          <Input
+            placeholder="수량(단위포함)"
+            name="orderDQty"
+            value={form.orderDQty}
+            onChange={handleInputChange}
+            style={{ marginBottom: '10px' }}
+          />
+          <Input
+            placeholder="총금액"
+            name="orderDTotalPrice"
+            value={form.orderDTotalPrice}
+            onChange={handleInputChange}
+            style={{ marginBottom: '10px' }}
+          />
+        </div>
+  
+        <Table
+          dataSource={warehouseData}
+          columns={columns}
+          pagination={false}
+          rowKey={(record) => record.orderNo}
+        />
+      </Modal>
+    );
+  };
 
 //창고배정 모달창
 function WarehouseAssignmentModal({ show, onClose, warehouse, onSave, onDelete }) {
@@ -247,10 +381,6 @@ function OrderDispatch() { //주문번호1-상품번호1-상품 한 행1-출고1
     //로딩 상태 추가
     const [loading, setLoading] = useState(false);
 
-    //페이지
-    const [itemsPerPage] = useState(20); // 페이지당 항목 수
-    const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 번호
-
     // 출고 데이터 가져오기
     useEffect(() => {
         fetchData();
@@ -426,7 +556,7 @@ function OrderDispatch() { //주문번호1-상품번호1-상품 한 행1-출고1
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    {/* 페이지네이션 추가*/}
+                                    
                                     <td>
                                         <div className="btn_group">
                                         <button className="box small" >창고배정</button>
@@ -438,60 +568,7 @@ function OrderDispatch() { //주문번호1-상품번호1-상품 한 행1-출고1
                              </div>
                         </div>
                         
-                    <div className="pagination-container">
-                        <div>
-                            <button className="box" onClick={handleDeleteAll}>
-                                <i className="bi bi-trash3"></i> 선택 삭제
-                            </button>
-                        </div>
-                        {/* 가운데: 페이지네이션 */}
-                        <div className="pagination">
-                            {/* '처음' 버튼 */}
-                            {/* {currentPage > 1 && (
-                                <button className="box icon first" onClick={() => setCurrentPage(1)}>
-                                    <i className="bi bi-chevron-double-left"></i>
-                                </button>
-                            )} */}
-
-                            {/* '이전' 버튼 */}
-                            {/* {currentPage > 1 && (
-                                <button className="box icon left" onClick={() => setCurrentPage(currentPage - 1)}>
-                                    <i className="bi bi-chevron-left"></i>
-                                </button>
-                            )} */}
-
-                            {/* 페이지 번호 블록 */}
-                            {/* {Array.from({ length: Math.min(5, totalPages) }, (_, index) => {
-                                const startPage = Math.floor((currentPage - 1) / 5) * 5 + 1;
-                                const page = startPage + index;
-                                return (
-                                    page <= totalPages && (
-                                        <button
-                                            key={page}
-                                            onClick={() => setCurrentPage(page)}
-                                            className={currentPage === page ? 'box active' : 'box'}
-                                        >
-                                            {page}
-                                        </button>
-                                    )
-                                );
-                            })} */}
-
-                            {/* '다음' 버튼 */}
-                            {/* {currentPage < totalPages && (
-                                <button className="box icon right" onClick={() => setCurrentPage(currentPage + 1)}>
-                                    <i className="bi bi-chevron-right"></i>
-                                </button>
-                            )} */}
-
-                            {/* '끝' 버튼 */}
-                            {/* {currentPage < totalPages && (
-                                <button className="box icon last" onClick={() => setCurrentPage(totalPages)}>
-                                    <i className="bi bi-chevron-double-right"></i>
-                                </button>
-                            )} */}
-                        </div>
-                    </div>
+    
                   
             </main>
         </Layout>
