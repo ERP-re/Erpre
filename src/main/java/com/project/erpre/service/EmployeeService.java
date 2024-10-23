@@ -7,6 +7,7 @@ import com.project.erpre.model.entity.Job;
 import com.project.erpre.repository.DepartmentRepository;
 import com.project.erpre.repository.EmployeeRepository;
 import com.project.erpre.repository.JobRepository;
+import com.querydsl.core.Tuple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService {
@@ -70,6 +72,9 @@ public class EmployeeService {
                 .employeeStatus(employee.getEmployeeStatus())
                 .employeeStatusUpdateTime(employee.getEmployeeStatusUpdateTime())
                 .employeeStatusMessage(employee.getEmployeeStatusMessage())
+                .jobRole(employee.getJob().getJobRole())
+                .jobName(employee.getJob().getJobName())
+                .departmentName(employee.getDepartment().getDepartmentName())
                 .build();
     }
 
@@ -170,6 +175,20 @@ public class EmployeeService {
     // 최근 한달간 은퇴한 직원수 가져오기
     public long countDeletedEmployeesLast30Days() {
         return employeeRepository.countDeletedEmployeesLast30Days();
+    }
+
+    // 메신저 직원 조회 (조직도)
+    public List<EmployeeDTO> getEmployeesWithDept() {
+        List<Employee> employees = employeeRepository.getEmployeesWithDept();
+        return employees.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    // 현재 로그인한 직원 조회
+    public EmployeeDTO getLoginEmployee(String employeeId) {
+        Employee employee = employeeRepository.getLoginEmployee(employeeId);
+        return convertToDTO(employee);
     }
 
 }
