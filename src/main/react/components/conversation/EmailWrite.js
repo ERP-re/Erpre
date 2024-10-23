@@ -42,17 +42,17 @@ function EmailWrite() {
           </div>
 
           {/* 파일 첨부 */}
-          <div className="file-attachment">
-            <label htmlFor="file-upload" className="file-label">
+          <label htmlFor="file-upload" className="file-label"> {/*htmlFor: file-upload라는 id의 input과 연결됨*/}
+            <div className="file-attachment">
               파일 첨부
-            </label>
-            <input type="file" id="file-upload" style={{ display: 'none' }} />
-            <div>여기로 파일을 끌어놓으세요</div>
-          </div>
+              <input type="file" id="file-upload" accept='image/png, image/jpeg' className='file-upload-input' />
+              <div>여기로 파일을 끌어놓으세요</div>
+            </div>
+          </label>
 
           {/* 이메일 본문 + 편집기  */}
           <ReactQuill className='email-textBody' />
-          
+
         </div>
 
       </div>
