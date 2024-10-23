@@ -8,7 +8,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -21,9 +22,10 @@ public class WebSecurityConfig {
         this.customUserDetailsService = customUserDetailsService;
     }
 
+    // 회원가입이 생략되어 평문 비밀번호를 사용하고 있으므로 BCryptPasswordEncoder 제거
     @Bean
-    public BCryptPasswordEncoder encoder() {
-        return new BCryptPasswordEncoder();
+    public PasswordEncoder passwordEncoder() {
+        return NoOpPasswordEncoder.getInstance();
     }
 
     @Bean
@@ -35,9 +37,9 @@ public class WebSecurityConfig {
                     .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED) // 세션 기반으로 설정
                 .and()
                 .authorizeRequests()
-                    .antMatchers("/api/login", "/static/**", "/bundle/**", "/img/**", "/css/**", "/fonts/**").permitAll()
+                    .antMatchers("/",  "/static/**", "/bundle/**", "/img/**", "/css/**", "/fonts/**", "/index.html").permitAll()
                     .antMatchers("/login", "/**").permitAll() // 로그인 앤드포인트 허용 (현재 모든 페이지 접근 허용! 이거 나중에 바꿔야 함)
-                    .antMatchers("/user/**").hasAnyRole("Staff", "Admin")
+                    .antMatchers("/user/**").hasAnyRole("Staff", "Admin", "Assistant Manager", "Executive", "Director", "Manager")
                     .antMatchers("/admin/**").hasRole("Admin")
                     .anyRequest().authenticated() // 그 외의 모든 요청은 인증 필요
                 .and()

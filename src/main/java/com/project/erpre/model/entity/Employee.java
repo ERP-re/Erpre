@@ -13,9 +13,9 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "m_employee")
-@ToString
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -62,21 +62,25 @@ public class Employee {
     @ManyToOne
     @JoinColumn(name = "job_id", nullable = false)
     @JsonIgnore
+    @ToString.Exclude
     private Job job;
 
     @ManyToOne
     @JoinColumn(name = "department_id", nullable = false)  // 외래키 설정
     @JsonIgnore
+    @ToString.Exclude
     private Department department;
 
     // 급여와의 관계 (하나의 직원은 여러 급여 내역을 가질 수 있음)
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
     @JsonIgnore
+    @ToString.Exclude
     private List<Salary> salaries;
 
     // 근태와의 관계 (하나의 직원은 여러 근태 기록을 가질 수 있음)
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
     @JsonIgnore
+    @ToString.Exclude
     private List<Attendance> attendances;
 
     // @ManyToOne
