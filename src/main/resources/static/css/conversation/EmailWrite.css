@@ -1,112 +1,39 @@
-.email-compose-wrapper {
-  display: flex;
-  justify-content: center; 
-  align-items: center;
-  height: 100vh;    
-  padding: 20px;     
-  background-color: #f5f5f5; 
-}
+.email-compose-wrapper { display: flex; justify-content: center; align-items: center; height: 100vh; padding: 20px; background-color: #f5f5f5; } 
 
 
 /* 이메일 작성 페이지 컨테이너 */
-.email-compose-container {
-  width: 100%; 
-  height: 100%;
-  max-width: 1800px; 
-  margin: 0 auto;
-  padding: 10px;
-  background-color: white; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px; 
-}
+.email-compose-container { width: 100%; height: 100%; max-width: 1800px; margin: 0 auto; padding: 10px; background-color: white; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 8px; } 
 
 /* 상단 메뉴 스타일링 */
-.email-header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  font-size: 14px;
-}
+.email-header { display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 14px; } 
 
-.email-header a {
-  color: #007CC1;
-  margin-right: 15px;
-  text-decoration: none;
-  font-weight: 500;
-}
+.email-header a { color: #007CC1; margin-right: 15px; text-decoration: none; font-weight: 500; } 
 
-.email-header a:hover {
-  text-decoration: underline;
-}
+.email-header a:hover { text-decoration: underline; } 
 
 /* 이메일 필드 (받는 사람, 참조, 제목) */
-.email-field {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-}
+.email-field { display: flex; align-items: center; margin-bottom: 15px; } 
 
-.email-field label {
-  width: 100px;
-  font-weight: bold;
-}
+.email-field label { width: 100px; font-weight: bold; } 
 
-.email-field input {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
-}
+.email-field input { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; } 
 
-.email-field input:focus {
-  border-color: #007CC1;
-  outline: none;
-}
+.email-field input:focus { border-color: #007CC1; outline: none; } 
 
 /* 파일 첨부 영역 */
-.file-attachment {
-  padding: 10px;
-  margin-bottom: 20px;
-  background-color: #f9f9f9;
-  border: 1px dashed #ddd;
-  text-align: center;
-  border-radius: 4px;
-  cursor: pointer;
-}
+.file-attachment { padding: 10px; margin-bottom: 20px; background-color: #f9f9f9; border: 1px dashed #ddd; text-align: center; border-radius: 4px; cursor: pointer; } 
 
-.file-label {
-  color: #007CC1;
-  font-weight: bold;
-}
+.file-label { color: #007CC1; /* font-weight: bold; */}
 
-.file-attachment:hover {
-  background-color: #e9f5fb;
-}
+.file-upload-input { display: none; } 
 
-.email-textBody {
-  width: 100%;
-  height: 400px;
-}
+.file-attachment:hover { background-color: #e9f5fb; } 
+
+.email-textBody { width: 100%; height: 400px; } 
 
 /* 하단 메뉴 */
-.email-footer {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 20px;
-}
+.email-footer { display: flex; justify-content: flex-end; margin-top: 20px; } 
 
-.email-footer button {
-  background-color: #007CC1;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  font-size: 14px;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-left: 10px;
-}
+.email-footer button { background-color: #007CC1; color: white; border: none; padding: 10px 15px; font-size: 14px; border-radius: 4px; cursor: pointer; margin-left: 10px; } 
 
-.email-footer button:hover {
-  background-color: #005f99;
-}
+.email-footer button:hover { background-color: #005f99; } 
