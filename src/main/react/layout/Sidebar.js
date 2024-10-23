@@ -30,7 +30,7 @@ function Sidebar({ currentMenu }) {
                     console.log('직원 데이터:', data);
                     setEmployee(data);
                 } else {
-                    console.error('사용자 정보를 가져오는 데 실패했습니다.');
+                    console.error('사용자 정보를 가져오는데 실패했습니다.');
                 }
             } catch (error) {
                 console.error('사용자 정보를 가져오는 중 오류 발생:', error);
@@ -98,7 +98,7 @@ function Sidebar({ currentMenu }) {
                         </li>
                         <li className={currentMenu === 'orderList' ? 'active' : ''}>
                             <a href="#"
-                                onClick={() => handleSubMenuClick('orderList', role === 'admin' ? '/orderList?mode=Assigned' : '/orderList')}>
+                                onClick={() => handleSubMenuClick('orderList', '/orderList')}>
                                 주문 목록
                             </a>
                         </li>

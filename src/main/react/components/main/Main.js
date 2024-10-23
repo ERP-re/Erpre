@@ -28,6 +28,7 @@ function Main() {
         settlementDeadline: '',
     });
     const [deletedEmployees, setDeletedEmployees] = useState(0);
+    const [currentUser, setCurrentUser] = useState(null); // 로그인한 사용자
 
     useEffect(() => {
         const fetchData = async () => {
