@@ -17,7 +17,7 @@ function EmailWrite() {
           {/* 상단 메뉴 */}
           <div className="email-header">
             <div>
-              <a href="#"><i class="bi bi-send"></i>보내기</a>
+              <a href="#"><i className="bi bi-send"></i>보내기</a>
               <a href="#">저장하기</a>
             </div>
           </div>
@@ -25,7 +25,7 @@ function EmailWrite() {
           {/* 받는 사람, 제목 */}
           <div className="email-field">
             <label htmlFor="to">받는 사람</label>
-            <button><i class="bi bi-person-plus"></i></button>
+            <button><i className="bi bi-person-plus"></i></button>
             <input
               type="text"
               id="to"
