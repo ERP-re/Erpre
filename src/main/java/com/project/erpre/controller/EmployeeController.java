@@ -25,51 +25,11 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-//    // 로그인 엔드포인트
-//    @PostMapping("/login")
-//    public ResponseEntity<?> login(@RequestBody Map<String, String> loginRequest, HttpSession session) {
-//        String employeeId = loginRequest.get("employeeId");
-//        String employeePw = loginRequest.get("employeePw");
-//
-//        // 리캡차 응답을 받지만 검증하지 않음
-//        String recaptchaResponse = loginRequest.get("recaptchaResponse");
-//        // 아이디와 비밀번호 검증
-//        Employee employee = employeeRepository.findByEmployeeIdAndEmployeePw(employeeId, employeePw).orElse(null);
-//
-//        if (employee != null) {
-//            session.setAttribute("employee", employee);
-//
-//            // 로그인 성공 시 사용자 정보와 함께 응답
-//            Map<String, Object> response = new HashMap<>();
-//            response.put("message", "로그인 성공");
-//            response.put("employee", employee); // 사용자 정보 포함
-//
-//            return ResponseEntity.ok(response);
-//        } else {
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "아이디 또는 비밀번호가 올바르지 않습니다."));
-//        }
-//    }
-
     // 로그아웃 엔드포인트
     @PostMapping("/logout")
     public ResponseEntity<?> logout(HttpSession session) {
         session.invalidate(); // 세션 무효화
         return ResponseEntity.ok().build(); // 성공적으로 로그아웃
-    }
-
-    // 현재 로그인한 직원 정보 조회
-    @GetMapping("/employee")
-    public ResponseEntity<Employee> getEmployee(HttpSession session) {
-        Employee employee = (Employee) session.getAttribute("employee");
-        if (employee != null) {
-            return ResponseEntity.ok(employee);
-        } else {
-//            개발중 임시 코드(admin 기본 로그인)
-//            Employee employeeTmp = employeeRepository.findByEmployeeIdAndEmployeePw("admin", "admin").orElse(null);
-//            session.setAttribute("employee", employeeTmp);
-//            return ResponseEntity.ok(employeeTmp);
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
     }
 
     // 전체 직원 목록 조회
@@ -165,6 +125,25 @@ public class EmployeeController {
     @GetMapping("/employeeCountDeleted")
     public long getCountOfDeletedEmployeesLast30Days() {
         return employeeService.countDeletedEmployeesLast30Days();
+    }
+
+
+    // 현재 로그인한 직원 정보 조회
+    @GetMapping("/employee")
+    public ResponseEntity<EmployeeDTO> getLoginEmployee(HttpSession session) {
+
+        // 세션에 로그인된 직원의 ID
+        String employeeId = (String) session.getAttribute("employeeId");
+
+        if (employeeId == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+        }
+
+        // 직원 정보 조회
+        EmployeeDTO employeeDTO = employeeService.getLoginEmployee(employeeId);
+
+        // 조회된 직원 정보 반환
+        return ResponseEntity.ok(employeeDTO);
     }
 
 

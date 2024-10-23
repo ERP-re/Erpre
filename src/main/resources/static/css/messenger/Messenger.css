@@ -68,7 +68,7 @@
     color: #000;
     position: relative;
     font-size: 25px;
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 .messenger-header .messenger-close {
@@ -76,7 +76,7 @@
     right: 20px;
     cursor: pointer;
     color: rgb(0, 0, 0);
-    font-size: 25px;
+    font-size: 20px;
 }
 
 /* 검색창 */

@@ -8,6 +8,7 @@ const productPath = './components/product/';
 const customerPath = './components/customer/';
 const hrPath = './components/hr/';
 const email = './components/conversation/';
+const messenger = './components/messenger/';
 
 module.exports = {
     context: path.resolve(__dirname, 'src/main/react'), // 기본 디렉토리 설정
@@ -40,10 +41,12 @@ module.exports = {
         sentMail: `${email}SentMail.js`,// 보낸 메일함
         draftMailBox: `${email}DraftMailBox.js`, // 임시 보관함
         TrashMailBox: `${email}TrashMailBox.js`,// 휴지통
-        emailViewer: `${email}EmailViewer.js`, // 
+        emailViewer: `${email}EmailViewer.js`, //
 
+        // messenger 관련 엔트리 포인트
+        messenger: `${messenger}Messenger`, // 메신저 메인
     },
-    devtool: 'sourcemaps', // 소스 맵 생성 설정
+    devtool: 'source-map', // 소스 맵 생성 설정
     cache: true, // 캐싱 활성화
     output: {
         path: path.resolve(__dirname, 'src/main/resources/static/bundle'), // 출력 경로 설정
