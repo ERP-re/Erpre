@@ -1,10 +1,20 @@
+h3 {
+    color: black;
+}
+
+.tr_empty {
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
+
 /* 왼쪽 사이드바 */
-.messenger-panel.sidebar {
+.messenger-panel .sidebar {
     position: fixed;
     right: -350px;
 }
 
-.messenger-panel.open.sidebar {
+.messenger-panel.open .sidebar {
     position: fixed;
     right: 350px;
     z-index: 1000;
@@ -20,7 +30,7 @@
     overflow: hidden;
 }
 
-.messenger-panel.open.sidebar button {
+.messenger-panel.open .sidebar button {
     margin-top: 20px;
     background-color: transparent;
     width: 80px;
@@ -34,11 +44,11 @@
     align-items: center;
 }
 
-.messenger-panel.open.sidebar button.btn1 {
+.messenger-panel.open .sidebar button.btn1 {
     margin-top: 25px;
 }
 
-.messenger-panel.open.sidebar button:hover {
+.messenger-panel.open .sidebar button:hover {
     color: #007CC1;
 }
 

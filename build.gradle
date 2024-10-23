@@ -52,8 +52,8 @@ dependencies {
 	// Spring Security 5버전 (Spring Boot 2버전)
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5' // 타임리프에서 사용
-	testImplementation 'org.springframework.security:spring-security-test' // 테스트ㅇ
-
+	testImplementation 'org.springframework.security:spring-security-test' // 테스트
+	implementation 'org.springframework.boot:spring-boot-starter-websocket' // 웹소켓 의존성 추가
 }
 
 tasks.named('test') {
