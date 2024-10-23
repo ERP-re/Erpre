@@ -23,6 +23,7 @@
   "dependencies": {
     "@minoru/react-dnd-treeview": "^3.4.4",
     "@remix-run/router": "^1.20.0",
+    "antd": "^5.21.5",
     "axios": "^1.7.7",
     "body-parser": "^1.20.2",
     "chart.js": "^4.4.4",
