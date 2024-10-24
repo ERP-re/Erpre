@@ -166,21 +166,13 @@ CREATE TABLE m_message_rectpient_file (
 -- 12. 채팅방
 CREATE TABLE m_chat (
     chat_no SERIAL PRIMARY KEY,
-    chat_create_id VARCHAR(50) NOT NULL REFERENCES m_employee (employee_id),
-    chat_title VARCHAR(50) NOT NULL,
-    chat_create_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    chat_update_date TIMESTAMP,
-    chat_delete_yn VARCHAR(1) NOT NULL DEFAULT 'N',
-    chat_delete_date TIMESTAMP
 );
 
 -- 13. 채팅방 참여자
 CREATE TABLE m_chat_participant (
     chat_no INTEGER NOT NULL REFERENCES m_chat (chat_no),
     participant_id VARCHAR(50) NOT NULL REFERENCES m_employee (employee_id),
-    participant_join_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    participant_delete_yn VARCHAR(1) NOT NULL DEFAULT 'N',
-    participant_exit_date TIMESTAMP,
+    chat_title VARCHAR(50) NOT NULL,
     PRIMARY KEY (chat_no, participant_id)
 );
 
