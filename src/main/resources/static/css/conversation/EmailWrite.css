@@ -25,7 +25,7 @@
 .email-field input:focus { border-color: #007CC1; outline: none; } 
 
 /* 파일 첨부 영역 */
-.file-attachment { padding: 10px; margin-bottom: 20px; background-color: #f9f9f9; border: 1px dashed #ddd; text-align: center; border-radius: 4px; cursor: pointer; } 
+.file-attachment { padding: 10px; margin-bottom: 20px; background-color: #f9f9f9; border: 1px dashed #ddd; text-align: center; border-radius: 4px; cursor: pointer; user-select: none;} 
 
 .file-label { color: #007CC1; /* font-weight: bold; */}
 
