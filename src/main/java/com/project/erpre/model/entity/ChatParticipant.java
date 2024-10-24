@@ -17,6 +17,9 @@ public class ChatParticipant {
     @EmbeddedId
     private ChatParticipantId chatParticipantId;
 
+    @Column(nullable = false, length = 50)
+    private String chatTitle;
+
     @ManyToOne
     @MapsId("chatNo")
     @JoinColumn(name = "chat_no", nullable = false)
@@ -27,11 +30,4 @@ public class ChatParticipant {
     @JoinColumn(name = "participant_id", nullable = false)
     private Employee employee;
 
-    @Column(nullable = false)
-    private LocalDateTime participantJoinDate;
-
-    @Column(nullable = false, length = 10)
-    private String participantDeleteYn = "n";
-
-    private LocalDateTime participantExitDate;
 }

@@ -124,24 +124,24 @@ export const useHooksList = () => {
       try {
         const response = await axios.get('/api/category/all');
         const categories = response.data;
-        console.log("전체 카테고리 데이터:", categories);
+        // console.log("전체 카테고리 데이터:", categories);
 
         setAllCategories(categories);
 
         const top = categories.filter(cat => !cat.parentCategoryNo);
         setTopCategories(top);
-        console.log("대분류:", top);
+        // console.log("대분류:", top);
 
         const mid = categories.filter(cat => cat.parentCategoryNo && top.some(topCate => topCate.categoryNo === cat.parentCategoryNo));
         setMidCategories(mid);
-        console.log("중분류:", mid);
+        // console.log("중분류:", mid);
 
         const low = categories.filter(cat => {
           const middleCate = mid.find(m => m.categoryNo === cat.parentCategoryNo);
           return middleCate && top.some(topCate => topCate.categoryNo === middleCate.parentCategoryNo);
         });
         setLowCategories(low);
-        console.log("소분류:", low);
+        // console.log("소분류:", low);
 
       } catch (error) {
         console.error('모든 카테고리 가져오기 실패:', error);
@@ -153,11 +153,11 @@ export const useHooksList = () => {
 
   // 🟡 대분류 변경 시 중분류 필터링
   useEffect(() => {
-    console.log("대분류 변경 시 selectedCategory.top:", selectedCategory.top);
+    // console.log("대분류 변경 시 selectedCategory.top:", selectedCategory.top);
     if (selectedCategory.top) {
       // selectedCategory.top을 숫자로 변환
       const filteredMiddle = allCategories.filter(cat => cat.parentCategoryNo === selectedCategory.top);
-      console.log("필터링된 중분류:", filteredMiddle);
+      // console.log("필터링된 중분류:", filteredMiddle);
       setMidCategories(filteredMiddle);
     } else {
       setMidCategories([]);

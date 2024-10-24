@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../../resources/static/css/common/Sidebar.css';
 import { useLocation } from 'react-router-dom';
+import axios from "axios";
 
 function EmailSidebar({ currentMenu }) {
     const [activeSubMenu, setActiveSubMenu] = useState(() => {
@@ -9,7 +10,7 @@ function EmailSidebar({ currentMenu }) {
     });
     const [loginTime, setLoginTime] = useState('시간 정보 없음');
     const [employee, setEmployee] = useState(null);
-    const [role, setRole] = useState('');
+
     const location = useLocation();
 
     useEffect(() => {
@@ -21,13 +22,16 @@ function EmailSidebar({ currentMenu }) {
     useEffect(() => {
         const fetchEmployee = async () => {
             try {
-                const response = await fetch('/api/employee', { credentials: 'include' });
-                if (response.ok) {
-                    const data = await response.json();
+                const response = await axios.get('/api/employee', {
+                    withCredentials: true
+                });
+
+                if (response.status === 200) {
+                    const data = response.data;
+                    console.log('직원 데이터:', data);
                     setEmployee(data);
-                    setRole(data.employeeRole);
                 } else {
-                    console.error('사용자 정보를 가져오는 데 실패했습니다.');
+                    console.error('사용자 정보를 가져오는데 실패했습니다.');
                 }
             } catch (error) {
                 console.error('사용자 정보를 가져오는 중 오류 발생:', error);
@@ -74,7 +78,7 @@ function EmailSidebar({ currentMenu }) {
                     <div className="user-name">
                         {employee ? (
                             <>
-                                {employee.employeeName} ({employee.employeeRole.toUpperCase()})
+                                 {employee.jobName === 'Admin' ? '관리자' : ''} {employee.employeeName} ({employee.departmentName})
                             </>
                         ) : (
                             'LOADING'
@@ -87,9 +91,11 @@ function EmailSidebar({ currentMenu }) {
             <ul className={`menu ${currentMenu}`}>
                 <li>
 
-                    <span className={`mail-write-span ${currentMenu.startsWith('emailWrite') ? 'active' : ''}`} onClick={() => handleSubMenuClick('emailWrite', '/email')}>
-                        <a className="mail-write" href="#" ><i className="bi bi-pencil-square"></i>메일 작성</a>
-                    </span>
+                    <div className={`mail-write-span ${currentMenu.startsWith('emailWrite') ? 'active' : ''}`} onClick={() => handleSubMenuClick('emailWrite', '/email')}>
+                        <button className="mail-write" href="#" >
+                            <i className="bi bi-pencil-square"></i>메일 작성
+                        </button>
+                    </div>
 
                     <hr className='mail-line' />
 
@@ -102,7 +108,7 @@ function EmailSidebar({ currentMenu }) {
                         </li>
                         <li className={currentMenu === 'sentMail' ? 'active' : ''}>
                             <a href="#"
-                                onClick={() => handleSubMenuClick('orderList', role === 'admin' ? 'sentMail' : '/sentMail')}>
+                                onClick={() => handleSubMenuClick('sentMail', '/sentMail')}>
                                 보낸 메일함
                             </a>
                         </li>
@@ -127,7 +133,7 @@ function EmailSidebar({ currentMenu }) {
 
                 <li>
                     <ul className="submenu one">
-                        <span className='menu-back'  onClick={() => handleSubMenuClick('productCategory', '/productCategory')}>
+                        <span className='menu-back' onClick={() => handleSubMenuClick('productCategory', '/productCategory')}>
                             <i className="bi bi-box-arrow-in-left"></i>메인메뉴 이동
                         </span>
                     </ul>

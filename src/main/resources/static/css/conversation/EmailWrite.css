@@ -9,7 +9,11 @@
 
 .email-header a { color: #007CC1; margin-right: 15px; text-decoration: none; font-weight: 500; } 
 
+.email-header button { color: #007CC1; margin-right: 15px; text-decoration: none; font-weight: 500; } 
+
 .email-header a:hover { text-decoration: underline; } 
+
+.email-header button:hover { text-decoration: underline; } 
 
 /* 이메일 필드 (받는 사람, 참조, 제목) */
 .email-field { display: flex; align-items: center; margin-bottom: 15px; } 
@@ -21,7 +25,7 @@
 .email-field input:focus { border-color: #007CC1; outline: none; } 
 
 /* 파일 첨부 영역 */
-.file-attachment { padding: 10px; margin-bottom: 20px; background-color: #f9f9f9; border: 1px dashed #ddd; text-align: center; border-radius: 4px; cursor: pointer; } 
+.file-attachment { padding: 10px; margin-bottom: 20px; background-color: #f9f9f9; border: 1px dashed #ddd; text-align: center; border-radius: 4px; cursor: pointer; user-select: none;} 
 
 .file-label { color: #007CC1; /* font-weight: bold; */}
 
