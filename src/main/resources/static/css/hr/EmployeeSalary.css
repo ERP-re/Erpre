@@ -1,0 +1,211 @@
+/* 테이블 */
+.employee-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.employee-table th, .employee-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    box-sizing: border-box;
+    padding: 11px 8px !important;
+}
+
+.employee-table th {
+    background-color: #f2f2f2;
+}
+
+.employee-table tr:hover {
+    background-color: #ffdb0036;
+}
+
+.employee-table a {
+    color: blue;
+    text-decoration: underline;
+}
+
+/* 버튼 스타일 */
+.filter-button {
+    background-color: #007CC1;
+    color: white;
+    padding: 6px 15px;
+    margin: 5px;
+    margin-right: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.filter-button:hover {
+    background-color: #005a91;
+}
+
+/* 개별 열 너비 지정 */
+.menu_employee .table_wrap table th:nth-child(1),
+.menu_employee .table_wrap table td:nth-child(1) {
+    width: 3%;
+    text-align: center; /* 체크박스 */
+}
+
+.menu_employee .table_wrap table th:nth-child(2),
+.menu_employee .table_wrap table td:nth-child(2) {
+    width: 5%; /* 번호 */
+}
+
+.menu_employee .table_wrap table th:nth-child(3),
+.menu_employee .table_wrap table td:nth-child(3) {
+    width: 12%; /* 직원명 */
+}
+
+.menu_employee .table_wrap table th:nth-child(4),
+.menu_employee .table_wrap table td:nth-child(4) {
+    width: 10%; /* 기본 급여 */
+}
+
+.menu_employee .table_wrap table th:nth-child(5),
+.menu_employee .table_wrap table td:nth-child(5) {
+    width: 10%; /* 인센티브 */
+}
+
+.menu_employee .table_wrap table th:nth-child(6),
+.menu_employee .table_wrap table td:nth-child(6) {
+    width: 10%; /* 세금 공제 */
+}
+
+.menu_employee .table_wrap table th:nth-child(7),
+.menu_employee .table_wrap table td:nth-child(7) {
+    width: 10%; /* 총 지급액 */
+}
+
+.menu_employee .table_wrap table th:nth-child(8),
+.menu_employee .table_wrap table td:nth-child(8) {
+    width: 15%; /* 지급일 */
+}
+
+/* 모달 */
+.modal_overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal_container {
+    background-color: white;
+    width: 500px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.modal_container .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+}
+
+.modal_container .header .btn_close {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.modal_container .edit_wrap {
+    margin-top: 20px;
+}
+
+.modal_container .edit_form {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal_container .field_wrap {
+    margin-bottom: 15px;
+}
+
+.modal_container .field_wrap label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.modal_container .field_wrap input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.modal_container .modal-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.modal_container .modal-actions .box {
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.modal-actions .box.blue {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.modal-actions .box.red {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.modal-actions .box.blue:hover {
+    background-color: #0056b3;
+}
+
+.modal-actions .box.red:hover {
+    background-color: #c82333;
+}
+
+/* 로딩 애니메이션 */
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+}
+
+.loading span {
+    width: 10px;
+    height: 10px;
+    margin: 0 3px;
+    border-radius: 50%;
+    background-color: #007bff;
+    animation: bounce 0.6s infinite alternate;
+}
+
+.loading span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.loading span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+    to {
+        opacity: 0.3;
+        transform: translateY(-10px);
+    }
+}
