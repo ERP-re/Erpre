@@ -9,7 +9,11 @@
 
 .email-header a { color: #007CC1; margin-right: 15px; text-decoration: none; font-weight: 500; } 
 
+.email-header button { color: #007CC1; margin-right: 15px; text-decoration: none; font-weight: 500; } 
+
 .email-header a:hover { text-decoration: underline; } 
+
+.email-header button:hover { text-decoration: underline; } 
 
 /* 이메일 필드 (받는 사람, 참조, 제목) */
 .email-field { display: flex; align-items: center; margin-bottom: 15px; } 
