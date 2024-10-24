@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, {useContext} from 'react';
 import '../../resources/static/css/common/Header.css';
-import { FaEnvelope, FaBell, FaCommentDots } from 'react-icons/fa'; // React Icons를 사용
+import {FaBell, FaCommentDots, FaEnvelope} from 'react-icons/fa'; // React Icons를 사용
 import Messenger from '../components/messenger/Messenger';
+import {MessengerContext} from '../../react/context/MessengerContext';
 import '../../resources/static/css/messenger/Messenger.css'; // 메신저 관련 스타일 파일
 
 
 function Header() {
-    const [isMessengerOpen, setMessengerOpen] = useState(false);
+    const {isMessengerOpen, setMessengerOpen} = useContext(MessengerContext);
 
     // 메신저 열림/닫힘 반전
     const toggleMessenger = () => {
@@ -26,13 +27,13 @@ function Header() {
                 <div className="header-icons">
                     <FaEnvelope className="header-icon mail" title="메일" onClick={handleEmailClick}/>
                     <FaCommentDots className="header-icon messenger" title="메신저" onClick={toggleMessenger}/>
-                    <FaBell className="header-icon alarm" title="알림" />
+                    <FaBell className="header-icon alarm" title="알림"/>
                 </div>
             </div>
             <div className="bottom-border"></div>
 
             {/* 메신저 컴포넌트 */}
-            <Messenger isOpen={isMessengerOpen} toggleMessenger={toggleMessenger} />
+            <Messenger isOpen={isMessengerOpen} toggleMessenger={toggleMessenger}/>
         </header>
     );
 }

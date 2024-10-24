@@ -1,6 +1,7 @@
 package com.project.erpre.model.dto;
 
 import lombok.*;
+import net.bytebuddy.asm.Advice;
 
 import java.time.LocalDateTime;
 
@@ -13,11 +14,16 @@ import java.time.LocalDateTime;
 public class ChatDTO {
 
     private Long chatNo;
-    private String chatCreatorId;
+
     private String chatTitle;
-    private LocalDateTime chatCreateDate;
-    private LocalDateTime chatUpdateDate;
-    private String chatDeleteYn;
-    private LocalDateTime chatDeleteDate;
+    private String participantId;
+    private String employeeName;
+    private String chatMessageContent;
+    private LocalDateTime chatSendDate;
+    private String chatFilename;
+
+    // 1. 현재 참여하고 있는 채팅 목록 조회 및 검색 생성자 (기본 생성자)
+
+
 
 }

@@ -122,11 +122,6 @@ public class Employee {
     @ToString.Exclude
     @OneToMany(mappedBy = "employee")
     @JsonIgnore
-    private List<Chat> chats;
-
-    @ToString.Exclude
-    @OneToMany(mappedBy = "employee")
-    @JsonIgnore
     private List<ChatMessage> chatMessages;
 
     @ToString.Exclude

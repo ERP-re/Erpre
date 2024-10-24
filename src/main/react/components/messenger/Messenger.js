@@ -9,8 +9,10 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import axios from "axios";
 import {useMessengerHooks} from "./useMessengerHooks";
+import ChatList from "./ChatList";
 
-// ⭐ 뷰 컴포넌트: Home, InfoView, Chat, Message
+
+// ⭐ 뷰 컴포넌트: Home, InfoView, Message, ChatList
 const Home = ({treeData, expandedKeys, handleCheck}) => (
     <div className="messenger-content">
         <Tree
@@ -27,13 +29,6 @@ const InfoView = () => (
     <div>
         <h3>유저정보 화면</h3>
         {/* 유저정보 UI*/}
-    </div>
-);
-
-const Chat = () => (
-    <div>
-        <h3>채팅 화면</h3>
-        {/* 채팅 UI*/}
     </div>
 );
 
@@ -64,6 +59,12 @@ function Messenger({isOpen, toggleMessenger}) {
         statusMessage,
         setStatusMessage,
         handleStatusMessageChange,
+
+        // 🔴 채팅
+        chatList,
+
+        // 🟢 공통
+        formatDate,
 
     } = useMessengerHooks();
 
@@ -200,7 +201,6 @@ function Messenger({isOpen, toggleMessenger}) {
 
     }
 
-
     // 선택된 옵션에 아이콘 표시
     const SingleValue = ({children, ...props}) => (
         <div className="single-value" {...props.innerProps}>
@@ -232,8 +232,8 @@ function Messenger({isOpen, toggleMessenger}) {
                     <div className="messenger-btn top">
                         <button className="btn1" onClick={() => setActiveView('home')}><SlOrganization/></button>
                         <button className="btn2" onClick={() => setActiveView('info')}><FaInfoCircle/></button>
-                        <button className="btn3" onClick={() => setActiveView('chat')}><FaComments/></button>
                         <button className="btn4" onClick={() => setActiveView('message')}><BsEnvelope/></button>
+                        <button className="btn3" onClick={() => setActiveView('chatList')}><FaComments/></button>
                     </div>
                     {/* 사이드바 하단*/}
                     <div className="button bottom"></div>
@@ -253,53 +253,88 @@ function Messenger({isOpen, toggleMessenger}) {
                 ) : (
                     <>
                         {/* 메신저 헤더 */}
-                        <div className="messenger-header">
-                            <h3>ERPRE</h3>
+                        <div className="messenger-header"><h3>
+                            {activeView === 'home' && 'ERPRE'}
+                            {activeView === 'info' && 'MY'}
+                            {activeView === 'message' && '받은 쪽지'}
+                            {activeView === 'chatList' && '채팅'}
+                        </h3>
                             <FaWindowClose className="messenger-close" title="닫기" onClick={toggleMessenger}/>
                         </div>
 
                         {/* 검색창 */}
-                        <div className="search-bar">
-                            <div className="search-input-container">
-                                <FaSearch className="search-icon"/>
-                                <input type="text" placeholder="이름, 부서를 입력해주세요"/>
+                        {activeView !== 'info' && (
+                            <div className="search-bar">
+                                <div className="search-input-container">
+                                    <FaSearch className="search-icon"/>
+                                    <input
+                                        type="text"
+                                        placeholder={
+                                            activeView === 'home' && '이름, 부서를 입력해주세요' ||
+                                            activeView === 'message' && '보낸 사람, 내용을 입력해주세요' ||
+                                            activeView === 'chatList' && '참여자 및 채팅방 명을 입력해주세요'
+                                        }
+                                        onChange={(e) => {
+                                            if (activeView === 'home') {
+                                                // 이름, 부서 검색 로직 추가
+                                                console.log('조직도 검색:', e.target.value);
+                                            } else if (activeView === 'message') {
+                                                // 보낸 사람, 내용 검색 로직 추가
+                                                console.log('이름 또는 부서 검색:', e.target.value);
+                                            } else if (activeView === 'chatList') {
+                                                // 참여자, 채팅방 이름 검색 로직 추가
+                                                console.log('참여자, 채팅방 검색:', e.target.value);
+                                            }
+                                        }}
+                                    />
+                                </div>
                             </div>
-                        </div>
+                        )}
 
                         {/* 유저 프로필*/}
-                        <div className="messenger-user">
-                            <div className="erpre-logo">
-                                <img src="/img/erpre.png" alt="회사 로고"/>
-                            </div>
-                            <div className="info">
-                                <div className="info-wrapper">
-                                    <div className="user-name">{user?.employeeName || '사용자 정보 없음'}</div>
-                                    {/* 상태 아이콘 및 변경 */}
-                                    <div className="profile status">
-                                        <div className="status-select-wrapper">
-                                            <Select
-                                                value={userIcon.find((option) => option.value === status)}
-                                                onChange={handleStatusChange}
-                                                options={userIcon}
-                                                styles={customStyles}
-                                                components={{Option, SingleValue}}
-                                                isSearchable={false}
-                                            />
+                        {(activeView === 'home' || activeView === 'info') && (
+                            <div className="messenger-user">
+                                <div className="erpre-logo">
+                                    <img src="/img/erpre.png" alt="회사 로고" />
+                                </div>
+                                <div className="info">
+                                    <div className="info-wrapper">
+                                        <div className="user-name">{user?.employeeName || '사용자 정보 없음'}</div>
+                                        {/* 상태 아이콘 및 변경 */}
+                                        <div className="profile status">
+                                            <div className="status-select-wrapper">
+                                                <Select
+                                                    value={userIcon.find((option) => option.value === status)}
+                                                    onChange={handleStatusChange}
+                                                    options={userIcon}
+                                                    styles={customStyles}
+                                                    components={{ Option, SingleValue }}
+                                                    isSearchable={false}
+                                                />
+                                            </div>
                                         </div>
                                     </div>
+                                    {/* SweetAlert로 상태 변경 확인 및 저장 버튼 */}
+                                    <button className="status-message" onClick={handleStatusMessageSave}>
+                                        {user?.statusMessage || '상태메세지 없음'}
+                                    </button>
                                 </div>
-                                {/* SweetAlert로 상태 변경 확인 및 저장 버튼 */}
-                                <button className="status-message" onClick={handleStatusMessageSave}>
-                                    {user?.statusMessage || '상태메세지 없음'}
-                                </button>
                             </div>
-                        </div>
+                        )}
 
                         {/* 메신저 본문 동적 뷰*/}
                         {activeView === 'home' &&
-                            <Home treeData={treeData} expandedKeys={expandedKeys} handleCheck={handleCheck}/>}
+                            <Home
+                                treeData={treeData}
+                                expandedKeys={expandedKeys}
+                                handleCheck={handleCheck}
+                            />}
                         {activeView === 'info' && <InfoView/>}
-                        {activeView === 'chat' && <Chat/>}
+                        {activeView === 'chatList' &&
+                            <ChatList
+                                chatList={chatList}
+                                formatDate={formatDate}
+                            />}
                         {activeView === 'message' && <Message/>}
                     </>
                 )}

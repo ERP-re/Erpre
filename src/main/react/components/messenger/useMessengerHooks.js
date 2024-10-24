@@ -3,12 +3,15 @@ import { UserContext } from '../../context/UserContext';
 import {FaUserAlt, FaUserAltSlash, FaUtensils} from "react-icons/fa";
 import {MdMeetingRoom, MdWork} from "react-icons/md";
 import {PiOfficeChairFill} from "react-icons/pi";
+import axios from "axios";
 
 export const useMessengerHooks = () => {
 
     /////////////////////////////////////////////////////////////////////////
     // ⭐ 동적 뷰
     // 🔵 유저
+    // 🔴 채팅
+    // 🟢 공통
     /////////////////////////////////////////////////////////////////////////
 
     // ⭐ 활성화된 뷰 관리
@@ -111,7 +114,45 @@ export const useMessengerHooks = () => {
         }
     }, [user]);
 
+    // 🔴 채팅 목록 저장 state
+    const [chatList, setChatList] = useState([]);
 
+    // 🔴 activeView가 chatList로 변경될 때 채팅 목록 API 호출 useEffect
+    useEffect(() => {
+        if (activeView === 'chatList') {
+            setIsLoading(true);
+            axios.get('/api/messengers/chatList')
+                .then((response) => {
+                    setChatList(response.data);
+                    setIsLoading(false);
+
+                    console.log("불러온 채팅 목록:", response.data); // 디버깅용
+                })
+                .catch((error) => {
+                    console.error('채팅 목록 조회 실패:', error);
+                    setIsLoading(false);
+                });
+            }
+    }, [activeView]);
+    
+    // 🟢 날짜 변환 함수
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+
+        // 날짜가 유효하지 않으면 기본값 반환
+        if (isNaN(date.getTime())) {
+            return "유효하지 않은 날짜";
+        }
+
+        // 원하는 형식: 일-월-년 시:분
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = String(date.getFullYear()).slice(2);
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+
+        return `${day}-${month}-${year} ${hours}:${minutes}`;
+    };
 
 
 
@@ -133,6 +174,13 @@ export const useMessengerHooks = () => {
         statusMessage,
         setStatusMessage,
         handleStatusMessageChange,
-    };
 
+        // 🔴 채팅
+        chatList,
+
+        // 🟢 공통
+        formatDate,
+
+
+    };
 };
