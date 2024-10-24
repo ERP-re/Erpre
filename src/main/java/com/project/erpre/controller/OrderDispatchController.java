@@ -1,13 +1,14 @@
 package com.project.erpre.controller;
 
-import com.project.erpre.model.entity.Dispatch;
+
+import com.project.erpre.model.dto.DispatchDTO;
 import com.project.erpre.service.OrderDispatchService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,11 +21,40 @@ public class OrderDispatchController {
     @Autowired
     private OrderDispatchService orderDispatchService;
 
-    //전체 출고정보 조회
-    @GetMapping("/getList")
-    public List<Dispatch> getList() {
-        logger.info("전체 출고 목록 조회");
-        return orderDispatchService.getList();
+    // 페이징해서 pending 목록 보여주기
+    @GetMapping("/pending")
+    public ResponseEntity<Page<DispatchDTO>> getPendingList(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "20") int size) {
+        Page<DispatchDTO> dispatchPage = orderDispatchService.getPagePending(page, size);
+        return ResponseEntity.ok(dispatchPage);
     }
+
+    //페이징해서 in progress 목록 보여주기
+    @GetMapping("/inProgress")
+    public ResponseEntity<Page<DispatchDTO>> getInProgressList(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "20") int size) {
+        Page<DispatchDTO> dispatchPage = orderDispatchService.getPageInProgress(page, size);
+        return ResponseEntity.ok(dispatchPage);
+    }
+
+    //페이징해서 complete 목록 보여주기
+    @GetMapping("/complete")
+    public ResponseEntity<Page<DispatchDTO>> getCompleteList(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "20") int size) {
+        Page<DispatchDTO> dispatchPage = orderDispatchService.getPageComplete(page, size);
+        return ResponseEntity.ok(dispatchPage);
+    }
+
+    //목록화면에서 체크된 직원 logical 삭제
+    @PostMapping("/delete")
+    public ResponseEntity<?> deleteDispatches(@RequestBody List<Integer> no) {
+        orderDispatchService.deleteDispatches(no);
+        return ResponseEntity.ok("Dispatches deleted successfully");
+    }
+
+
 
 }

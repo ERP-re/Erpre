@@ -11,6 +11,7 @@ import java.sql.Timestamp;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Dispatch {
 
@@ -37,12 +38,12 @@ public class Dispatch {
     // 주문
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_h_no")
-    private Order orderheader;
+    private Order order;
 
     // 주문 상세
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_d_no")
-    private OrderDetail orderdetail;
+    private OrderDetail orderDetail;
 
     // 창고
     @ManyToOne(fetch = FetchType.LAZY)

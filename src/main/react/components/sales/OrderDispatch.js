@@ -358,18 +358,25 @@ function ConfirmationModal({ message, onConfirm, onCancel }) {
 
 //주문 출고
 function OrderDispatch() { //주문번호1-상품번호1-상품 한 행1-출고1
+    //로딩 상태 추가
+    const [loading, setLoading] = useState(false);
 
     //정보 저장
-    const [warehouses, setWarehouses] = useState([]); // 전체 출고 리스트
+    const [dispatches, setDispatches] = useState([]); // 전체 출고 리스트
+    const [selectedDispatches, setSelectedDispatches] = useState(null); // 선택된 출고 정보 전체
+    const [selectedDispatch, setSelectedDispatch] = useState([]); // 선택된 출고 번호 리스트(삭제처리를 위한)
 
-    const [selectedWarehouse, setSelectedWarehouse] = useState(null); // 선택된 출고 정보 전체
-    const [selectedWarehouses, setSelectedWarehouses] = useState([]); // 선택된 출고 번호 리스트(삭제처리)
-
+    //페이지
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
+    
     //검색어 필터
-    const [filter, setFilter] = useState('');
-
+    const [currentView, setCurrentView] = useState('dispatchesN');
+    const [search, setSearch] = useState();
+    const [SearchedDispatch, setSearchedDispatch] = useState([]); //검색한 사항을 배열로 저장
+    
     //창고배정 모달창
-    const [showWarehouseAssignmentModal, setWarehouseAssignmentModal] = useState(false);
+    const [warehouseAssignmentModal, setWarehouseAssignmentModal] = useState(false);
 
     // 출고 상태(출고 대기, 출고 요청, 출고 완료) 구분
     const [filterType, setFilterType] = useState('pending'); 
@@ -378,10 +385,8 @@ function OrderDispatch() { //주문번호1-상품번호1-상품 한 행1-출고1
     const [sortColumn, setSortColumn] = useState('orderDDeliveryRequestDate'); // 기본적으로 정렬 열 orderDDeliveryRequestDate 설정
     const [sortOrder, setSortOrder] = useState('asc'); // 기본 정렬은 오름차순
 
-    //로딩 상태 추가
-    const [loading, setLoading] = useState(false);
-
-    // 출고 데이터 가져오기
+ 
+    // 출고 데이터 가져오기 - 초기화면은 pending만
     useEffect(() => {
         fetchData();
     }, []);
@@ -403,15 +408,110 @@ function OrderDispatch() { //주문번호1-상품번호1-상품 한 행1-출고1
             });
     };
 
-    //상태(출고 대기, 출고 요청, 출고 완료)
-    const showPending = () => { // 출고 대기 표시 함수
+    //상태
+    //출고 대기
+    const pending = (page) => { // 
         setFilterType('pending');
+        setLoading(true); //로딩시작
+        axios.get(`/api/pending?page=${page}&size=20`)
+        .then(response => {
+            console.log('응답 데이터:', response.data);
+            setDispatches(response.data.content);
+            setTotalPages(response.data.totalPages);
+            setSelectedDispatches(new Array(response.data.content.length).fill(false));
+            setLoading(false); // 로딩 종료
+        })
     };
-    const showInProgress = () => { // 출고 요청 표시 함수
-        setFilterType('in progress')
+    //출고 요청
+    const inProgress = (page) => {
+        setFilterType('inProgress')
+        setLoading(true); //로딩시작
+        axios.get(`/api/inProgress?page=${page}&size=20`)
+        .then(response => {
+            console.log('응답 데이터:', response.data);
+            setDispatches(response.data.content);
+            setTotalPages(response.data.totalPages);
+            setSelectedDispatches(new Array(response.data.content.length).fill(false));
+            setLoading(false); // 로딩 종료
+        })
     };
-    const showComplete = () => { // 출고 완료 표시 함수
+    //출고 완료
+    const complete = (page) => {
         setFilterType('complete')
+        setLoading(true); //로딩시작
+        axios.get(`/api/complete?page=${page}&size=20`)
+        .then(response => {
+            console.log('응답 데이터:', response.data);
+            setDispatches(response.data.content);
+            setTotalPages(response.data.totalPages);
+            setSelectedDispatches(new Array(response.data.content.length).fill(false));
+            setLoading(false); // 로딩 종료
+        })
+    };
+
+    //전체 체크박스
+    const handleSelectAll = () => {
+        const newSelectAll = !selectAll;
+        setSelectAll(newSelectAll);
+        setSelectedEmployees(new Array(Dispatches.length).fill(newSelectAll));
+    };
+
+      //개별 체크박스
+      const handleSelect = (index) => {
+        const updatedSelection = [...selectedDispatches];
+        updatedSelection[index] = !updatedSelection[index];
+        setSelectedDispatches(updatedSelection);
+
+        if (updatedSelection.includes(false)) {
+            setSelectAll(false);
+        } else {
+            setSelectAll(true);
+        }
+    };
+
+    
+    //페이지바뀔때 상태 바뀜
+    const PageChange = (newPage) => {
+        if (newPage >= 1 && newPage <= totalPages) {
+            setPage(newPage);
+            if (currentView === 'pending') {
+                pagepending(newPage);  // 출고 대기만 보기
+            } else if (currentView === 'inProgress') {
+                pageinProgress(newPage);  // 출고 요청만 보기
+            } else if (currentView === 'complete') {
+                pagecomplete(newPage);  // 출고 완료만 보기
+            }
+        }
+    };
+
+    // 체크된 것만 삭제
+    const delect = () => {
+        const selectedNo = dispatches
+            .filter((_, index) => selectedDispatch[index])  // 선택된 출보정보만 필터링
+            .map(dispatch => dispatch.dispatchNo);  // 선택된 출고정보의 번호를 추출
+
+        if (selectedNo.length === 0) {
+            // 체크된 항목이 없을 때는 바로 경고 메시지 표시
+            window.showToast("삭제할 출고 항목을 선택해주세요.", 'error');
+            return;  // 더 이상 진행하지 않음
+        }
+
+        // 선택된 항목이 있을 때만 삭제 확인을 물음
+        window.confirmDispatch('선택한 출고 사항을 삭제하시겠습니까?').then(result => {
+            if (result) {
+                // 서버로 삭제 요청 보내기
+                axios.post('/api/delete', selectedNo)
+                    .then(response => {
+                        window.showToast("삭제가 완료 되었습니다.");
+                        pageDispatches(1);  // 삭제 후 페이지 갱신
+                    })
+                    .catch(error => {
+                        console.error('삭제 중 발생된 에러 : ', error);
+                    });
+
+                console.log('삭제한 출고정보 No : ', selectedNo);  // 선택된 출고정보 번호 로그 출력
+            }
+        });
     };
 
 
