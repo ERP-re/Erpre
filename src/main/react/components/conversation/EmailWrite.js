@@ -5,6 +5,7 @@ import '../../../resources/static/css/conversation/EmailWrite.css'
 import Layout from "../../layout/Layout";
 import ReactQuill from "react-quill"; // 본문 글 편집기
 import 'react-quill/dist/quill.snow.css'; // 편집기 기본 스타일
+import axios from 'axios';
 
 
 // 컴포넌트
@@ -39,8 +40,35 @@ function EmailWrite() {
     formData.append('to', to); // append : 폼데이터에 ('to'라는 키 추가, to라는 현재의 상태값)
     formData.append('title', title);
     formData.append('content', content);
-  }
 
+    //파일 첨부 처리 반복문으로 폼데이타에 저장 / 첨부파일은 여러개
+    for (let i = 0; i < files.length; i++) {
+      formData.append('files', files[i])
+    }
+
+    // try 구문 안에
+    // 어웨이트를 포스트 방식으로 전송('/엔드포인트 url', 데이터 , 폼데이터를 보냄{
+    // 헤더 안에 컨텐츠 타입을 설정함 : 첨부파일의 방식 / 폼데이터
+    // 성공처리 알람
+    // 오류 처리 알람
+    // 로딩상태 아래꺼 가져오기
+
+    try {
+      const response = await axios.post('/sent-mail', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data' // 여러 텍스트, 파일 전송 가능한 타입
+        }
+      });
+      alert("메일 전송이 완료되었습니다.")
+    } catch (error) {
+      console.log("메일 전송에 실패했습니다.", error);
+      alert("메일 전송에 실패했습니다");
+    } finally {
+      setLoading(false);   // 이메일 전송 후 로딩 상태값 변경
+    }
+
+
+  }
 
   return (
     <Layout currentMenu="emailWrite">
@@ -58,7 +86,7 @@ function EmailWrite() {
                 <i className="bi bi-send"></i>
                 {loading ? '메일 전송중 ..' : '보내기'}
               </button>
-              <a href="#">저장하기</a>
+              <a href="#">임시저장</a>
             </div>
           </div>
 
@@ -71,7 +99,7 @@ function EmailWrite() {
               id="to"
               value={to}
               onChange={(e) => setTo(e.target.value)}
-              placeholder='받는 사람 이메일'
+              placeholder='수신자'
               required // 필수
             />
           </div>
@@ -81,7 +109,7 @@ function EmailWrite() {
             <input
               type="text"
               id="title"
-              placeholder="제목을 입력하세요"
+              placeholder="제목"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
