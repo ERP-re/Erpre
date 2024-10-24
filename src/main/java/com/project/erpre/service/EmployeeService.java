@@ -30,6 +30,7 @@ public class EmployeeService {
     @Autowired
     private JobRepository
             jobRepository;
+            
     // EmployeeDTO -> Employee 엔티티로 변환하는 메서드
     private Employee convertToEntity(EmployeeDTO employeeDTO) {
         Employee employee = new Employee();
@@ -57,14 +58,31 @@ public class EmployeeService {
 
     // Employee 엔티티 -> EmployeeDTO로 변환하는 메서드
     private EmployeeDTO convertToDTO(Employee employee) {
+
+        Integer jobId = null;
+        String jobName = null;
+        if (employee.getJob() != null) {
+            jobId = employee.getJob().getJobId();
+            jobName = employee.getJob().getJobName();
+        }
+
+        Integer departmentId = null;
+        String departmentName = null;
+        if (employee.getDepartment() != null) {
+            departmentId = employee.getDepartment().getDepartmentId();
+            departmentName = employee.getDepartment().getDepartmentName();
+        }
+
         return EmployeeDTO.builder()
                 .employeeId(employee.getEmployeeId())
                 .employeePw(employee.getEmployeePw())
                 .employeeName(employee.getEmployeeName())
                 .employeeEmail(employee.getEmployeeEmail())
                 .employeeTel(employee.getEmployeeTel())
-                .jobId(employee.getJob().getJobId()) // Job 엔티티에서 jobId를 추출
-                .departmentId(employee.getDepartment().getDepartmentId()) // Department 엔티티에서 departmentId 추출
+                .jobId(employee.getJob().getJobId())
+                .jobName(employee.getJob().getJobName())
+                .departmentId(employee.getDepartment().getDepartmentId())
+                .departmentName(employee.getDepartment().getDepartmentName())
                 .employeeInsertDate(employee.getEmployeeInsertDate())
                 .employeeUpdateDate(employee.getEmployeeUpdateDate())
                 .employeeDeleteYn(employee.getEmployeeDeleteYn())
@@ -83,22 +101,25 @@ public class EmployeeService {
 //        return employeeRepository.findAll();
 //    }
 
-    //재직자만
-    public Page<Employee> getPageEmployees(int page, int size) {
+    //재직자
+    public Page<EmployeeDTO> getPageEmployees(int page, int size) {
         Pageable pageable = PageRequest.of(page -1 , size);
-        return employeeRepository.findByEmployeeDeleteYn("N", pageable);
+        Page<Employee> employeePage = employeeRepository.findByEmployeeDeleteYn("N", pageable);
+        return employeePage.map(this::convertToDTO);
     }
 
-    //퇴직자까지
-    public Page<Employee> getAllPageEmployees(int page, int size) {
-        Pageable pageable = PageRequest.of(page-1, size);
-        return employeeRepository.findAll(pageable); // 필터 없이 전체 조회
+    //전체직원
+    public Page<EmployeeDTO> getAllPageEmployees(int page, int size) {
+        Pageable pageable = PageRequest.of(page -1 , size);
+        Page<Employee> employeePage = employeeRepository.findAll(pageable);
+        return employeePage.map(this::convertToDTO);
     }
 
-    //퇴직자조회
-    public Page<Employee> getPageEmployeesY(int page, int size) {
-        Pageable pageable = PageRequest.of(page-1, size);
-        return employeeRepository.findByEmployeeDeleteYn("Y", pageable);
+    //퇴직자만
+    public Page<EmployeeDTO> getPageEmployeesY(int page, int size) {
+        Pageable pageable = PageRequest.of(page -1 , size);
+        Page<Employee> employeePage = employeeRepository.findByEmployeeDeleteYn("Y", pageable);
+        return employeePage.map(this::convertToDTO);
     }
 
 //    public Page<Employee> getPageEmployees(int page, int size) {

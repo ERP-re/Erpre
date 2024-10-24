@@ -51,6 +51,9 @@ function Login() {
                 if (employeeResponse.status === 200) {
                     console.log('직원 조회 성공:', employeeResponse.data);
 
+                    // 직원 목록을 localStorage에 저장
+                    localStorage.setItem('employeeList', JSON.stringify(employeeResponse.data));
+
                     // 직원 조회 성공 시 메인 페이지로 리다이렉트
                     location.href = "/main";
                 } else {

@@ -1,6 +1,6 @@
 /* 테이블 */
 .employee-table { width: 100%; border-collapse: collapse; margin-top: 20px; } 
-.employee-table th, .employee-table td { border: 1px solid #ddd; padding: 8px; text-align: left; } 
+.employee-table th, .employee-table td { border: 1px solid #ddd; padding: 8px; text-align: left; box-sizing: border-box; padding: 11px 8px !important;} 
 .employee-table th { background-color: #f2f2f2; } 
 .employee-table tr:hover { background-color: #f1f1f1; background-color: #ffdb0036; } 
 .employee-table a { color: blue; text-decoration: underline; } 
@@ -10,22 +10,25 @@
 
 /* 🔴 개별 열 너비 지정 */
 .menu_employee .table_wrap table th:nth-child(1),
-.menu_employee .table_wrap table td:nth-child(1) { width: 45px; text-align: center; /* 체크박스 */ } 
+.menu_employee .table_wrap table td:nth-child(1) { width: 3%; text-align: center; /* 체크박스 */ } 
 .menu_employee .table_wrap table th:nth-child(2),
-.menu_employee .table_wrap table td:nth-child(2) { width: 80px; /* 번호 */ } 
-/* .menu_employee .table_wrap table th:nth-child(3),
-.menu_employee .table_wrap table td:nth-child(3) { width: 12%; 직원 아이디 } */
+.menu_employee .table_wrap table td:nth-child(2) { width: 5%; /* 번호 */ } 
+.menu_employee .table_wrap table th:nth-child(3),
+.menu_employee .table_wrap table td:nth-child(3) { width: 7%; /*직원 아이디*/ } 
 .menu_employee .table_wrap table th:nth-child(4),
-.menu_employee .table_wrap table td:nth-child(4) { width: 13%; /* 이름 */ } 
+.menu_employee .table_wrap table td:nth-child(4) { width: 8%; /* 이름 */ } 
 .menu_employee .table_wrap table th:nth-child(5),
-.menu_employee .table_wrap table td:nth-child(5) { width: 13%; /* 연락처 */ } 
+.menu_employee .table_wrap table td:nth-child(5) { width: 10%; /* 연락처 */ } 
 .menu_employee .table_wrap table th:nth-child(6),
-.menu_employee .table_wrap table td:nth-child(6) { width: 13%; /* 권한 */ } 
+.menu_employee .table_wrap table td:nth-child(6) { width: 8%; /* 직급 */ } 
 .menu_employee .table_wrap table th:nth-child(7),
-.menu_employee .table_wrap table td:nth-child(7), 
+.menu_employee .table_wrap table td:nth-child(7) { width: 8%; /* 부서 */ } 
 .menu_employee .table_wrap table th:nth-child(8),
 .menu_employee .table_wrap table td:nth-child(8),
 .menu_employee .table_wrap table th:nth-child(9),
-.menu_employee .table_wrap table td:nth-child(9) { width: 165px; /* 등록/수정/삭제일시 */ } 
+.menu_employee .table_wrap table td:nth-child(9), 
 .menu_employee .table_wrap table th:nth-child(10),
-.menu_employee .table_wrap table td:nth-child(10) { width: 100px; /* 액션 */ } 
+.menu_employee .table_wrap table td:nth-child(10) { width: 15%; /* 등록/수정/삭제일시 */ }  
+.menu_employee .table_wrap table th:nth-child(11),
+.menu_employee .table_wrap table td:nth-child(11) { width: 6%;} /* 액션 */
+

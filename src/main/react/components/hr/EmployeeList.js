@@ -56,15 +56,6 @@ function EmployeeList() {
 
     });
 
-    //    const handleRegiClick = () => {
-    //        window.location.href = "/employeeRegister";
-    //    }; 페이지이동,, 이제는 안씀
-
-    //    const showTwentyEmployees = () => {
-    //        pageEmployees(page);
-    //
-    //    }; 조회버튼을 눌러야 조회,, 이제는 안씀
-
     // 재직자만
     const pageEmployeesN = (page) => {
         setLoading(true); // 로딩 시작
@@ -182,18 +173,7 @@ function EmployeeList() {
 
     //정보수정모달열기
     const openModifyModal = (employee) => {
-        // const selectedIndex = selectedEmployees.findIndex(selected => selected);
-        // if (selectedIndex === -1) {
-        //     window.showToast('수정할 직원을 선택해주세요.', 'error');
-        //     return;
-        // }
 
-        // const employeeToModify = employees[selectedIndex];
-        //        if(!employee) {
-        //            console.error('선택된 직원정보가 없습니다');
-        //            return;
-        //        }
-        //        console.log(employee)
         setSelectedEmployee(employee);
         setShowModifyModal(true);
     };
@@ -448,7 +428,7 @@ function EmployeeList() {
                                     <th>등록일시</th>
                                     <th>수정일시</th>
                                     <th>삭제일시</th>
-                                    <th></th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
@@ -473,7 +453,7 @@ function EmployeeList() {
                                         </td>
                                     </tr>
                                 ) : (
-                                    //고객 리스트 표시
+                                    //직원 리스트 표시
                                     (searchEmployee ? filteredEmployees : employees).map((employee, index) => (
                                         <tr key={employee.employeeId}
                                             className={
@@ -509,8 +489,8 @@ function EmployeeList() {
                                             <td>{employee.employeeId}</td>
                                             <td>{employee.employeeName}</td>
                                             <td>{employee.employeeTel}</td>
-                                            <td>
-                                                {/* employeeRole에 따라 label 레벨을 다르게 적용 */}
+                                            {/* <td>
+                                                { employeeRole에 따라 label 레벨을 다르게 적용 }
                                                 {employee.employeeRole === 'admin' && (
                                                     <span className="label_level level-1">admin</span>
                                                 )}
@@ -520,7 +500,9 @@ function EmployeeList() {
                                                 {employee.employeeRole === 'staff' && (
                                                     <span className="label_level level-3">staff</span>
                                                 )}
-                                            </td>
+                                            </td> */}
+                                            <td>{employee.jobName}</td>
+                                            <td>{employee.departmentName}</td>
                                             <td>{employee.employeeInsertDate ? format(employee.employeeInsertDate, 'yyyy-MM-dd HH:mm') : '-'}</td>
                                             <td>{employee.employeeUpdateDate ? format(employee.employeeUpdateDate, 'yyyy-MM-dd HH:mm') : '-'}</td>
                                             <td>{employee.employeeDeleteDate ? format(employee.employeeDeleteDate, 'yyyy-MM-dd HH:mm') : '-'}</td>
